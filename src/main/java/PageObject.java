@@ -1,9 +1,11 @@
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.page;
+import com.codeborne.selenide.SelenideElement;
 
 public class PageObject {
-    public PageObject clickLogo(){
-        $("#logo").click();
-        return page(PageObject.class);
+
+    SelenideElement root;
+
+    public PageObject(SelenideElement root) {
+        this.root = root;
     }
+
 }
