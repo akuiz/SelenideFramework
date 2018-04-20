@@ -1,6 +1,10 @@
+package com.griddynamics.cto;
+
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import com.griddynamics.cto.models.CampaignModel;
+import com.griddynamics.cto.models.OfferModel;
 
 import java.util.ArrayList;
 
@@ -38,7 +42,7 @@ public class CampaignPageObject extends PageObject {
         super(root);
     }
 
-    public void setValues(CampaignModel campaign) {
+    public void setCampaignValues(CampaignModel campaign) {
         this.setName(campaign.getName());
         this.setStartDate(campaign.getStartDate());
         this.setEndDate(campaign.getEndDate());
@@ -63,23 +67,25 @@ public class CampaignPageObject extends PageObject {
     }
 
     public String getOfferName(int n){
-        OfferPageObject offerPageObject = new OfferPageObject(offerElements.get(n));
-        return offerPageObject.getName();
+        return getOffer(n).getName();
+    }
+
+    public OfferPageObject getOffer(int n){
+        return  new OfferPageObject(offerElements.get(n));
     }
 
     public String getOfferValue(int n){
-        OfferPageObject offerPageObject = new OfferPageObject(offerElements.get(n));
-        return offerPageObject.getValue();
+        return getOffer(n).getValue();
+
     }
 
     public String getOfferRule(int n){
-        OfferPageObject offerPageObject = new OfferPageObject(offerElements.get(n));
-        return offerPageObject.getRule();
+        return getOffer(n).getRule();
     }
 
     public String getOfferType(int n){
-        OfferPageObject offerPageObject = new OfferPageObject(offerElements.get(n));
-        return offerPageObject.getType();
+        return getOffer(n).getType();
+
     }
 
     public CampaignModel getCampaignModel() {

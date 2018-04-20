@@ -1,4 +1,7 @@
+package com.griddynamics.cto;
+
 import com.codeborne.selenide.SelenideElement;
+import com.griddynamics.cto.models.OfferModel;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;

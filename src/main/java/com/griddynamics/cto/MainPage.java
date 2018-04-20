@@ -1,14 +1,16 @@
+package com.griddynamics.cto;
+
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import com.griddynamics.cto.models.CampaignModel;
 
 import java.util.ArrayList;
+import static com.griddynamics.cto.assertions.CustomAssertions.assertThat;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-
-import static org.assertj.core.api.Assertions.*;
 
 public class MainPage {
 
@@ -29,10 +31,11 @@ public class MainPage {
     ElementsCollection campaignElements = $$(byXpath(XPATH_ALL_CAMPAIGNS));
 
     @Step("Add Campaign")
-    public void addCampaign(CampaignModel campaign) {
+    public CampaignPageObject addCampaign(CampaignModel campaign) {
         addCampaignButton.scrollTo().click();
         CampaignPageObject campaignPageObject = new CampaignPageObject(lastCampaignElement);
-        campaignPageObject.setValues(campaign);
+        campaignPageObject.setCampaignValues(campaign);
+        return campaignPageObject;
     }
 
     @Step("Check that all expected campaigns are on the page")
@@ -58,7 +61,7 @@ public class MainPage {
         for (int campaignNumber = 0; campaignNumber < actualCampaigns.getAmountOfCampaigns(); campaignNumber++) {
             CampaignModel actualCampaign = actualCampaigns.getCampaigns().get(campaignNumber);
             CampaignModel expectedCampaign = expectedCampaigns.getCampaigns().get(campaignNumber);
-            assertThat(actualCampaign).isEqualToComparingFieldByFieldRecursively(expectedCampaign);
+            assertThat(actualCampaign).isSameCampaignAs(expectedCampaign);
         }
     }
 }

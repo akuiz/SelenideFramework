@@ -1,4 +1,6 @@
-import io.qameta.allure.Step;
+import com.griddynamics.cto.CampaignListModel;
+import com.griddynamics.cto.MainPage;
+import com.griddynamics.cto.models.CampaignModel;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

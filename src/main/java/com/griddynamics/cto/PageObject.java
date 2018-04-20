@@ -1,3 +1,5 @@
+package com.griddynamics.cto;
+
 import com.codeborne.selenide.SelenideElement;
 
 public class PageObject {

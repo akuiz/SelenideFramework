@@ -1,3 +1,5 @@
+package com.griddynamics.cto.models;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

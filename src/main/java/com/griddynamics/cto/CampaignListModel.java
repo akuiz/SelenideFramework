@@ -1,10 +1,12 @@
+package com.griddynamics.cto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.griddynamics.cto.models.CampaignModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Builder(toBuilder = true)
