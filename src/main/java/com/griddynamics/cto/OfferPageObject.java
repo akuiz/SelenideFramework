@@ -13,6 +13,10 @@ public class OfferPageObject extends PageObject {
     static final String SELECTOR_OFFER_TYPE = ".at-offer-type";
     static final String SELECTOR_OFFER_VALUE = ".at-offer-value";
 
+    static final String SELECTOR_OFFER_EDIT = ".at-edit-offer";
+    static final String SELECTOR_OFFER_COPY = ".at-copy-offer";
+    static final String SELECTOR_OFFER_DELETE = ".at-delete-offer";
+
     static final String XPATH_OFFER_NAME = ".//input[@placeholder='Offer']";
     static final String XPATH_OFFER_VALUE = ".//input[@placeholder='']";
     static final String XPATH_OFFER_RULE = ".//input[@placeholder='Rule']";

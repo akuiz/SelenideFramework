@@ -14,13 +14,31 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class MainPage {
 
+    final static String SELECTOR_PROMOTION_PAGE = ".app-promotions-page";
+
     final static String SELECTOR_CREATE_FORECASTBUTTON = ".create-forecast-button";
     final static String SELECTOR_CANCEL_FORECAST_BUTTON = ".cancel-forecast-button";
     final static String SELECTOR__ADD_CAMPAIGN_BUTTON = ".add-campaign-icon";
 
+    final static String SELECTOR_PROMOTIONS_TAB = ".at-promotions-tab";
+    final static String SELECTOR_CAMPAIGNS_TAB = ".at-campaigns-tab";
+    final static String SELECTOR_FORECAST_TAB = ".at-forecast-tab";
+
     final static String XPATH_LAST_CAMPAIGN = "//mat-card[contains(@class, 'main-card')]/div[last()]";
     final static String XPATH_FIRST_CAMPAIGN = "//mat-card[contains(@class, 'main-card')]/div[1]";
     final static String XPATH_ALL_CAMPAIGNS = "//mat-card[contains(@class, 'main-card')]/div";
+
+    final static String SELECTOR_TAB_LINKS = ".mat-tab-link";
+
+    ElementsCollection navigationLinks = $$(SELECTOR_TAB_LINKS);
+
+    SelenideElement promotionsNavigationTab = navigationLinks.get(0);
+    SelenideElement campaignsNavigationTab = navigationLinks.get(0);
+    SelenideElement forecastNavigationTab = navigationLinks.get(0);
+
+    SelenideElement promotionsTabButton = $(byXpath(SELECTOR_PROMOTIONS_TAB));
+    SelenideElement campaignsTabButton = $(byXpath(SELECTOR_CAMPAIGNS_TAB));
+    SelenideElement forecastTabButton = $(byXpath(SELECTOR_FORECAST_TAB));
 
     SelenideElement firstCampaignElement = $(byXpath(XPATH_FIRST_CAMPAIGN));
     SelenideElement lastCampaignElement = $(byXpath(XPATH_LAST_CAMPAIGN));
@@ -29,6 +47,15 @@ public class MainPage {
     SelenideElement addCampaignButton = $(SELECTOR__ADD_CAMPAIGN_BUTTON);
 
     ElementsCollection campaignElements = $$(byXpath(XPATH_ALL_CAMPAIGNS));
+
+    SelenideElement createPromotionsPageObject = $(SELECTOR_PROMOTION_PAGE);
+
+    @Step("Navigate to createPromotions Tab")
+    public CreatePromotionsPageObject navigateToCreatePromotionsPage(){
+        promotionsNavigationTab.click();
+        System.out.println($("app-promotions-page").exists());
+        return new CreatePromotionsPageObject($("app-promotions-page"));
+    }
 
     @Step("Add Campaign")
     public CampaignPageObject addCampaign(CampaignModel campaign) {
@@ -63,5 +90,16 @@ public class MainPage {
             CampaignModel expectedCampaign = expectedCampaigns.getCampaigns().get(campaignNumber);
             assertThat(actualCampaign).isSameCampaignAs(expectedCampaign);
         }
+    }
+
+    static final String SELECTOR_ADD_PROMOTION = ".btn-add-promo";
+
+    static final String SELECTOR_PROMOTIONS = ".at-promotion";
+
+    SelenideElement addPromotionFirstButton = $$(SELECTOR_ADD_PROMOTION).first();
+    SelenideElement addPromotionSecondButton = $$(SELECTOR_ADD_PROMOTION).last();
+
+    public void addPromotion() {
+        addPromotionFirstButton.click();
     }
 }
