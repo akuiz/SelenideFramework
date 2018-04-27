@@ -33,8 +33,8 @@ public class MainPage {
     ElementsCollection navigationLinks = $$(SELECTOR_TAB_LINKS);
 
     SelenideElement promotionsNavigationTab = navigationLinks.get(0);
-    SelenideElement campaignsNavigationTab = navigationLinks.get(0);
-    SelenideElement forecastNavigationTab = navigationLinks.get(0);
+    SelenideElement campaignsNavigationTab = navigationLinks.get(1);
+    SelenideElement forecastNavigationTab = navigationLinks.get(2);
 
     SelenideElement promotionsTabButton = $(byXpath(SELECTOR_PROMOTIONS_TAB));
     SelenideElement campaignsTabButton = $(byXpath(SELECTOR_CAMPAIGNS_TAB));
@@ -53,7 +53,6 @@ public class MainPage {
     @Step("Navigate to createPromotions Tab")
     public CreatePromotionsPageObject navigateToCreatePromotionsPage(){
         promotionsNavigationTab.click();
-        System.out.println($("app-promotions-page").exists());
         return new CreatePromotionsPageObject($("app-promotions-page"));
     }
 

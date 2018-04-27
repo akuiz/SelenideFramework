@@ -1,6 +1,5 @@
 package com.griddynamics.cto.assertions;
 
-import com.griddynamics.cto.models.CampaignModel;
 import com.griddynamics.cto.models.OfferModel;
 import org.assertj.core.api.AbstractAssert;
 
@@ -26,7 +25,7 @@ public class OfferModelAssert extends AbstractAssert<OfferModelAssert, OfferMode
         isNotNull();
         assertThat(actual).hasSameNameAs(expectedOffer);
         assertThat(actual).hasSameTypeAs(expectedOffer);
-        assertThat(actual).hasSameRuleAs(expectedOffer);
+        assertThat(actual).hasSameBrandsAs(expectedOffer);
         assertThat(actual).hasSameValueAs(expectedOffer);
         return this;
     }
@@ -39,10 +38,12 @@ public class OfferModelAssert extends AbstractAssert<OfferModelAssert, OfferMode
         return this;
     }
 
-    public AbstractAssert hasSameRuleAs(OfferModel expectedOffer) {
+    public AbstractAssert hasSameBrandsAs(OfferModel expectedOffer) {
         isNotNull();
-        if (!actual.getRule().equals(expectedOffer.getRule())) {
-            failWithMessage("Expected offer's rule to be <%s> but was <%s>", expectedOffer.getRule(), actual.getRule());
+        for (int i = 0; i <actual.getBrands().size() ; i++) {
+            if (!actual.getBrands().get(i).equals(expectedOffer.getBrands().get(i))) {
+                failWithMessage("Expected offer's brand to be <%s> but was <%s>", expectedOffer.getBrands().get(i), actual.getBrands().get(i));
+            }
         }
         return this;
     }

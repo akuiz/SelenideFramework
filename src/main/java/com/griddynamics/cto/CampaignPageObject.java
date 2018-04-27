@@ -83,10 +83,6 @@ public class CampaignPageObject extends PageObject {
         return getOffer(n).getRule();
     }
 
-    public String getOfferType(int n){
-        return getOffer(n).getType();
-
-    }
 
     public CampaignModel getCampaignModel() {
         ArrayList<OfferModel> campaingOffers = getOffersFromCampaign();
@@ -105,8 +101,6 @@ public class CampaignPageObject extends PageObject {
             offers.add(new OfferModel().toBuilder()
                     .name(getOfferName(offerNumber))
                     .value(getOfferValue(offerNumber))
-                    .type(getOfferType(offerNumber))
-                    .rule(getOfferRule(offerNumber))
                     .build());
         }
         return offers;

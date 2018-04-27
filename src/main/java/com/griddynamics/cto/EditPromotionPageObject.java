@@ -1,6 +1,5 @@
 package com.griddynamics.cto;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.models.OfferModel;
@@ -13,11 +12,14 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class NewPromotionPageObject extends PageObject{
+public class EditPromotionPageObject extends PageObject {
+    public EditPromotionPageObject(SelenideElement root) {
+        super(root);
+    }
 
-    static final String SELECTOR_ADD_PROMOTION = ".btn";
+    static final String SELECTOR_UPDATE_PROMOTION = ".btn__title";
 
-    static final String SELECTOR_OFFER_NAME = ".name__input";
+    static final String SELECTOR_PROMOTION_NAME = ".name__input";
     static final String SELECTOR_OFFER_RULE = ".rule__input";
     static final String SELECTOR_OFFER_TYPE = ".type__input";
     static final String SELECTOR_OFFER_VALUE = ".value__input";
@@ -30,18 +32,14 @@ public class NewPromotionPageObject extends PageObject{
 
     static final String SELECTOR_OFFER_CANCEL_CREATION = ".at-offer-cancel-creation";
 
-    SelenideElement addPromotionButton = root.$(SELECTOR_ADD_PROMOTION);
+    SelenideElement updatePromotionButton = root.$(SELECTOR_UPDATE_PROMOTION);
 
-    SelenideElement offerNameInput = root.$(SELECTOR_OFFER_NAME);
+    SelenideElement offerNameInput = root.$(SELECTOR_PROMOTION_NAME);
     SelenideElement offerRuleInput = root.$(SELECTOR_OFFER_RULE);
     SelenideElement offerTypeInput = root.$(SELECTOR_OFFER_TYPE);
     SelenideElement offerValueInput = root.$(SELECTOR_OFFER_VALUE);
 
     SelenideElement closeWindowButton = root.$(SELECTOR_CLOSE_WINDOW);
-
-    public NewPromotionPageObject(SelenideElement root) {
-        super(root);
-    }
 
     public void setOfferName(String name){
         offerNameInput.setValue(name);
@@ -97,20 +95,29 @@ public class NewPromotionPageObject extends PageObject{
     public void setOfferBrands(ArrayList<String> promotionBrands){
         offerRuleInput.click();
         ElementsCollection brandsSelection = $$(SELECTOR_OPTIONS);
-         for(String brand : promotionBrands){
+        for(String brand : promotionBrands){
             int indexOfBrand = brandsSelection.texts().indexOf(brand);
+            if(!brandsSelection.get(indexOfBrand).parent().getAttribute("aria-selected").equals("true"))
             brandsSelection.get(indexOfBrand).scrollTo().click();
         }
         $(SELECTOR_BACKGROUND).click();
     }
 
-    @Step("Add promotion template")
-    public void addPromotion(OfferModel promotion) {
-        setPromotionValues(promotion);
-        addPromotionButton.click();
+    @Step("Update promotion name")
+    public void updatePromotionName(String name){
+        offerNameInput.setValue(name);
+        updatePromotionButton.click();
+    }
+
+    @Step("Update promotion to a new one")
+    public void updatePromotion(OfferModel newPromotion) {
+        setPromotionValues(newPromotion);
+        updatePromotionButton.click();
     }
 
     public void isVisible() {
         root.shouldBe(visible);
     }
+
+
 }
