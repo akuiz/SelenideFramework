@@ -52,10 +52,10 @@ public class CampaignModelAssert extends AbstractAssert<CampaignModelAssert, Cam
 
     public AbstractAssert hasSameDiscountsAs(CampaignModel expectedCampaign) {
         isNotNull();
-        ArrayList<OfferModel> actualOffers = actual.getOfferList();
-        ArrayList<OfferModel> expectedOffers = expectedCampaign.getOfferList();
-        for (int offerNumber = 0; offerNumber < actualOffers.size(); offerNumber++) {
-            OfferModelAssert.assertThat(actualOffers.get(offerNumber)).isSameDiscountAs(expectedOffers.get(offerNumber));
+        ArrayList<DiscountModel> actualDiscounts = actual.getDiscounts();
+        ArrayList<DiscountModel> expectedDiscounts = expectedCampaign.getDiscounts();
+        for (int discountNumber = 0; discountNumber < actualDiscounts.size(); discountNumber++) {
+            DiscountModelAssert.assertThat(actualDiscounts.get(discountNumber)).isSameDiscountAs(expectedDiscounts.get(discountNumber));
         }
         return this;
     }

@@ -1,24 +1,27 @@
 package com.griddynamics.cto;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.models.CampaignModel;
 import com.griddynamics.cto.models.DiscountModel;
-import com.griddynamics.cto.models.OfferModel;
+import sun.jvm.hotspot.debugger.Page;
 
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class NewCampaignPageObject extends PageObject{
+public class EditCampaignPageObject extends PageObject{
+
+    public EditCampaignPageObject(SelenideElement root) {
+        super(root);
+    }
 
     static final String SELECTOR_CAMPAIGN_NAME = ".name__input";
     static final String SELECTOR_START_DATE = ".start-date__input";
     static final String SELECTOR_END_DATE = ".end-date__input";
     static final String SELECTOR_PROMOTIONS = ".promotions__input";
-    static final String SELECETOR_ADD_CAMPAIGN_BUTTON = ".btn__title";
+    static final String SELECETOR_UPDATECAMPAIGN_BUTTON = ".btn__title";
 
     static final String SELECTOR_PROMOTION_OPTIONS = ".mat-option-text";
 
@@ -29,21 +32,10 @@ public class NewCampaignPageObject extends PageObject{
     SelenideElement endDateInput = root.$(SELECTOR_END_DATE);
     SelenideElement promotionsInput = root.$(SELECTOR_PROMOTIONS);
 
-    SelenideElement addCampaignButton = root.$(SELECETOR_ADD_CAMPAIGN_BUTTON);
 
-    public NewCampaignPageObject(SelenideElement root) {
-        super(root);
-    }
 
-    public void addCampaign(CampaignModel campaign) {
-        nameInput.setValue(campaign.getName());
-        startDateInput.setValue(campaign.getStartDate());
-        $(SELECTOR_BACKGROUND).click();
-        endDateInput.setValue(campaign.getEndDate());
-        $(SELECTOR_BACKGROUND).click();
-        setDiscounts(campaign.getDiscounts());
-        addCampaignButton.click();
-    }
+    SelenideElement updateCampaignButton = root.$(SELECETOR_UPDATECAMPAIGN_BUTTON);
+
 
     void setDiscounts(ArrayList<DiscountModel> discounts){
         promotionsInput.click();
@@ -55,4 +47,8 @@ public class NewCampaignPageObject extends PageObject{
         $(SELECTOR_BACKGROUND).click();
     }
 
+    public void changeName(String name) {
+        nameInput.setValue(name);
+        updateCampaignButton.click();
+    }
 }

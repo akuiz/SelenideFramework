@@ -28,7 +28,10 @@ public class MainPage {
     final static String XPATH_FIRST_CAMPAIGN = "//mat-card[contains(@class, 'main-card')]/div[1]";
     final static String XPATH_ALL_CAMPAIGNS = "//mat-card[contains(@class, 'main-card')]/div";
 
-    final static String SELECTOR_TAB_LINKS = ".mat-tab-link";
+    final static String SELECTOR_CAMPAIGNS_PAGE_OBJECT = "app-campaigns-page";
+    final static String SELECTOR_PROMOTIONS_PAGE_OBJECT = "app-promotions-page";
+
+    final static String SELECTOR_TAB_LINKS = ".navigation__tab";
 
     ElementsCollection navigationLinks = $$(SELECTOR_TAB_LINKS);
 
@@ -53,14 +56,14 @@ public class MainPage {
     @Step("Navigate to createPromotions Tab")
     public CreatePromotionsPageObject navigateToCreatePromotionsPage(){
         promotionsNavigationTab.click();
-        return new CreatePromotionsPageObject($("app-promotions-page"));
+        return new CreatePromotionsPageObject($(SELECTOR_PROMOTIONS_PAGE_OBJECT));
     }
 
     @Step("Add Campaign")
     public CampaignPageObject addCampaign(CampaignModel campaign) {
         addCampaignButton.scrollTo().click();
         CampaignPageObject campaignPageObject = new CampaignPageObject(lastCampaignElement);
-        campaignPageObject.setCampaignValues(campaign);
+        //campaignPageObject.setCampaignValues(campaign);
         return campaignPageObject;
     }
 
@@ -100,5 +103,11 @@ public class MainPage {
 
     public void addPromotion() {
         addPromotionFirstButton.click();
+    }
+
+    @Step("Navigate to ManageCampaigns Tab")
+    public ManageCampaignsPageObject navigateToManageCampaignsPage() {
+        campaignsNavigationTab.click();
+        return new ManageCampaignsPageObject($(SELECTOR_CAMPAIGNS_PAGE_OBJECT));
     }
 }

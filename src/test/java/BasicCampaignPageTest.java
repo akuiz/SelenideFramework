@@ -72,4 +72,14 @@ public class BasicCampaignPageTest {
         createPromotionPage.updatePromotion(OfferModel.EditTestOriginPromotion(), OfferModel.EditTestModifiedPromotion());
         createPromotionPage.checkPromotionExists(OfferModel.EditTestModifiedPromotion());
     }
+
+    @Test(description = "Clone promotion test")
+    public void duplicatePromotionTest(){
+        MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
+        CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
+        createPromotionPage.addPromotion(OfferModel.DuplicatePromotion());
+        createPromotionPage.checkPromotionExists(OfferModel.DuplicatePromotion());
+        createPromotionPage.duplicatePromotion(OfferModel.DuplicatePromotion());
+        createPromotionPage.checkPromotionExistsTwice(OfferModel.DuplicatePromotion());
+    }
 }

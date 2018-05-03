@@ -15,29 +15,34 @@ public class CampaignModel {
     private String startDate;
     private String endDate;
     private String name;
-    private ArrayList<OfferModel> offerList;
+    private ArrayList<DiscountModel> discounts;
 
-    public static CampaignModel CalvinKleinSpring2018() {
+    public static CampaignModel TestCampaign() {
         return new CampaignModel().toBuilder()
-                .name("Calvin Klein Spring 2018")
+                .name("TestCampaign")
                 .startDate("1/1/2018")
                 .endDate("1/1/2019")
-                .offerList(new ArrayList<OfferModel>() {{
-                    add(OfferModel.CalvinKlein5OFF());
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.TestCampaignBOGODiscount());
+                    add(DiscountModel.TestCampaignOFFPromotion());
+
                 }})
                 .build();
     }
 
-    public static CampaignModel CalvinKleinSpring2019() {
+    public static CampaignModel TestEditedCampaign() {
         return new CampaignModel().toBuilder()
-                .name("Calvin Klein Spring 2019")
-                .startDate("1/1/2019")
-                .endDate("1/1/2020")
-                .offerList(new ArrayList<OfferModel>() {{
-                    add(OfferModel.CalvinKlein7OFF());
-                    add(OfferModel.CalvinKlein7OFF());
+                .name("TestEditedCampaign")
+                .startDate("1/1/2018")
+                .endDate("1/1/2019")
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.TestCampaignBOGODiscount());
+                    add(DiscountModel.TestCampaignOFFPromotion());
+
                 }})
                 .build();
     }
 
 }
+
+

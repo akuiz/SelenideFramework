@@ -111,4 +111,19 @@ public class OfferPageObject extends PageObject {
         editPromotionWindow.updatePromotion(newPromotion);
 
     }
+
+    public void duplicatePromotion() {
+        actions.get(1).click();
+        DuplicatePromotionPageObject duplicatePromotionWindow = new DuplicatePromotionPageObject($(ELEMENT_UPDATE_PROMOTION_WINDOW));
+        duplicatePromotionWindow.duplicatePromotion();
+    }
+
+    public OfferModel getOfferModel() {
+        return new OfferModel().toBuilder()
+                .name(this.getName())
+                .value(this.getValue())
+                .type(this.getType())
+                .brands(this.getBrands())
+                .build();
+    }
 }

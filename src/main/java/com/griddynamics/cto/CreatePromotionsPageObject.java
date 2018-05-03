@@ -3,18 +3,12 @@ package com.griddynamics.cto;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
-import com.codeborne.selenide.commands.Exists;
 import com.griddynamics.cto.models.OfferModel;
-import net.bytebuddy.utility.JavaModule;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byValue;
-import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static com.griddynamics.cto.assertions.OfferModelAssert.assertThat;
 
@@ -24,8 +18,11 @@ public class CreatePromotionsPageObject extends PageObject {
 
     String SELECTOR_PROMOTIONS = ".at-promotion";
 
-    String ELEMENT_ADD_NEW_PROMOTION_WINDOW = ".mat-dialog-container";
+    String SELECTOR_ADD_NEW_PROMOTION_WINDOW = ".mat-dialog-container";
 
+    String SELECTOR_MANAGE_CAMPAIGNS_BUTTON = ".manage-campaigns-button";
+
+    SelenideElement manageCampaignsButtong = root.$(SELECTOR_MANAGE_CAMPAIGNS_BUTTON);
     SelenideElement addPromotionFirstButton = root.$$(SELECTOR_ADD_PROMOTION).first();
     SelenideElement addPromotionSecondButton = root.$$(SELECTOR_ADD_PROMOTION).last();
 
@@ -38,7 +35,7 @@ public class CreatePromotionsPageObject extends PageObject {
     public void addPromotion(OfferModel promotion) {
         Selenide.sleep(2000);
         addPromotionFirstButton.click();
-        NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(ELEMENT_ADD_NEW_PROMOTION_WINDOW));
+        NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
         createNewPromotionWindow.addPromotion(promotion);
     }
 
@@ -75,7 +72,7 @@ public class CreatePromotionsPageObject extends PageObject {
     public void addPromotionWithEmptyName(OfferModel promotion) {
         addPromotionFirstButton.scrollTo();
         addPromotionFirstButton.click();
-        NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(ELEMENT_ADD_NEW_PROMOTION_WINDOW));
+        NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
         createNewPromotionWindow.addPromotion(promotion);
         createNewPromotionWindow.isVisible();
     }
@@ -89,4 +86,27 @@ public class CreatePromotionsPageObject extends PageObject {
         OfferPageObject promotionPageObject = findOfferPageObjectByName(actualPromotion.getName());
         promotionPageObject.updatePromotion(newPromotion);
     }
+
+    public void duplicatePromotion(OfferModel actualPromotion) {
+        OfferPageObject promotionPageObject = findOfferPageObjectByName(actualPromotion.getName());
+        promotionPageObject.duplicatePromotion();
+
+    }
+
+    public void checkPromotionExistsTwice(OfferModel originPromotion) {
+        ArrayList<OfferPageObject> promotionsList = findAllPromotionsByName(originPromotion.getName());
+        for (int i = 0; i < promotionsList.size() ; i++) {
+            OfferModel promotion  = promotionsList.get(i).getOfferModel();
+            assertThat(promotion).isSameDiscountAs(originPromotion);
+        }
+    }
+
+    private ArrayList<OfferPageObject> findAllPromotionsByName(String name) {
+        $$(byText(name)).shouldHaveSize(2);
+        ArrayList promotions = new ArrayList();
+        promotions.add(new OfferPageObject(root.$$(byText(name)).get(0).parent()));
+        promotions.add(new OfferPageObject(root.$$(byText(name)).get(1).parent()));
+        return promotions;
+    }
+
 }

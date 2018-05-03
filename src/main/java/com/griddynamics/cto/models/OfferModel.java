@@ -136,6 +136,42 @@ public class OfferModel {
                 .build();
     }
 
+    public static OfferModel DuplicatePromotion(){
+        return new OfferModel().toBuilder()
+                .name("This11 is promotion for duplicate test11")
+                .brands(new ArrayList<String>() {{
+                    add("Calvin Klein");
+                    add("Free People");
+                }})
+                .type(PERCENT_OFF)
+                .value("8%")
+                .build();
+    }
+
+    public static OfferModel TestCampaignBOGOPromotion(){
+        return new OfferModel().toBuilder()
+                .name("CreateCampaignTestPromotionBOGO")
+                .brands(new ArrayList<String>() {{
+                    add("Calvin Klein");
+                    add("Free People");
+                }})
+                .type(BOGO)
+                .value("")
+                .build();
+    }
+
+    public static OfferModel TestCampaignOFFPromotion(){
+        return new OfferModel().toBuilder()
+                .name("CreateCampaignTestPromotionOFF")
+                .brands(new ArrayList<String>() {{
+                    add("Calvin Klein");
+                    add("Free People");
+                }})
+                .type(PERCENT_OFF)
+                .value("10%")
+                .build();
+    }
+
     public boolean isBOGO(){
         return this.getType().equals(BOGO);
     }

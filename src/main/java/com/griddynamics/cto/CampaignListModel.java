@@ -19,8 +19,8 @@ public class CampaignListModel {
     public static CampaignListModel testInitCampaignList() {
         return new CampaignListModel().toBuilder().
                 campaigns(new ArrayList<CampaignModel>() {{
-                    add(CampaignModel.CalvinKleinSpring2018());
-                    add(CampaignModel.CalvinKleinSpring2019());
+                    add(CampaignModel.TestCampaign());
+               //     add(CampaignModel.CalvinKleinSpring2019());
                 }})
                 .build();
     }
