@@ -2,9 +2,7 @@ package com.griddynamics.cto;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.griddynamics.cto.models.CampaignModel;
-import com.griddynamics.cto.models.DiscountModel;
-import sun.jvm.hotspot.debugger.Page;
+import com.griddynamics.cto.model.DiscountModel;
 
 import java.util.ArrayList;
 

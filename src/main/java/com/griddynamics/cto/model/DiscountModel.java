@@ -1,14 +1,10 @@
-package com.griddynamics.cto.models;
+package com.griddynamics.cto.model;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-
-import static com.griddynamics.cto.OfferType.PERCENT_OFF;
 
 @Data
 @Builder(toBuilder = true)
@@ -26,6 +22,12 @@ public class DiscountModel {
     public static DiscountModel TestCampaignOFFPromotion(){
         return new DiscountModel().toBuilder()
                 .name("CreateCampaignTestPromotionOFF")
+                .build();
+    }
+
+    public static DiscountModel Spring2018Discount(){
+        return new DiscountModel().toBuilder()
+                .name("Spring 5% off on $400")
                 .build();
     }
 

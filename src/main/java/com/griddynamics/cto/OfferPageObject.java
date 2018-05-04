@@ -2,14 +2,11 @@ package com.griddynamics.cto;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.griddynamics.cto.models.OfferModel;
+import com.griddynamics.cto.model.OfferModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-import static com.codeborne.selenide.Selectors.byAttribute;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 

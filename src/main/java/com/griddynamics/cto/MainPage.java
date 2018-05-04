@@ -3,10 +3,10 @@ package com.griddynamics.cto;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import com.griddynamics.cto.models.CampaignModel;
+import com.griddynamics.cto.model.CampaignModel;
 
 import java.util.ArrayList;
-import static com.griddynamics.cto.assertions.CustomAssertions.assertThat;
+import static com.griddynamics.cto.assertion.CustomAssertions.assertThat;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -65,33 +65,6 @@ public class MainPage {
         CampaignPageObject campaignPageObject = new CampaignPageObject(lastCampaignElement);
         //campaignPageObject.setCampaignValues(campaign);
         return campaignPageObject;
-    }
-
-    @Step("Check that all expected campaigns are on the page")
-    public void checkCampaignsConfiguration(CampaignListModel expectedCampaigns) {
-        CampaignListModel actualCampaigns = getActualCampaigns();
-        compareCampaignLists(actualCampaigns, expectedCampaigns);
-    }
-
-    @Step("Get campaigns from the page")
-    private CampaignListModel getActualCampaigns() {
-        ArrayList<CampaignModel> campaigns = new ArrayList<CampaignModel>();
-        CampaignListModel actualCampaignList = new CampaignListModel(campaigns);
-        for (int campaignNumber = 0; campaignNumber < campaignElements.size() ; campaignNumber++) {
-            CampaignPageObject campaignPageObject = new CampaignPageObject(campaignElements.get(campaignNumber));
-            campaigns.add(campaignPageObject.getCampaignModel());
-        }
-        return actualCampaignList;
-    }
-
-    @Step("Compare campaigns' values")
-    private void compareCampaignLists(CampaignListModel actualCampaigns, CampaignListModel expectedCampaigns) {
-        assertThat(actualCampaigns.getCampaigns()).hasSameSizeAs(expectedCampaigns.getCampaigns());
-        for (int campaignNumber = 0; campaignNumber < actualCampaigns.getAmountOfCampaigns(); campaignNumber++) {
-            CampaignModel actualCampaign = actualCampaigns.getCampaigns().get(campaignNumber);
-            CampaignModel expectedCampaign = expectedCampaigns.getCampaigns().get(campaignNumber);
-            assertThat(actualCampaign).isSameCampaignAs(expectedCampaign);
-        }
     }
 
     static final String SELECTOR_ADD_PROMOTION = ".btn-add-promo";

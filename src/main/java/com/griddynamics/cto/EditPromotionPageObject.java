@@ -2,13 +2,12 @@ package com.griddynamics.cto;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.griddynamics.cto.models.OfferModel;
+import com.griddynamics.cto.model.OfferModel;
 import io.qameta.allure.Step;
 
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 

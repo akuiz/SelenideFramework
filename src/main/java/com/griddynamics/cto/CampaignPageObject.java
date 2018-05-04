@@ -2,16 +2,16 @@ package com.griddynamics.cto;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.griddynamics.cto.models.DiscountModel;
-import io.qameta.allure.Step;
-import com.griddynamics.cto.models.CampaignModel;
-import com.griddynamics.cto.models.OfferModel;
+import com.griddynamics.cto.model.DiscountModel;
+import com.griddynamics.cto.model.CampaignModel;
+import com.griddynamics.cto.model.OfferModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class CampaignPageObject extends PageObject {
 
@@ -20,6 +20,7 @@ public class CampaignPageObject extends PageObject {
     static final String SELECTOR_CAMPAIGN_END_DATE = ".end-column";
     static final String SELECTOR_CAMPAIGN_ACTIONS = ".actions-column";
     static final String SELECTOR_CAMPAIGNS_DISCOUNTS = ".name-column__promos";
+    static final String SELECTOR_SHOW_PREDITION = ".show-prediction-btn";
 
     static final String XPATH_CAMPAIGN_START_DATE = ".//input[@placeholder='Start Date']";
     static final String XPATH_CAMPAIGN_END_DATE = ".//input[@placeholder='End Date']";
@@ -28,7 +29,7 @@ public class CampaignPageObject extends PageObject {
     final static String XPATH_LAST_OFFER = ".//mat-list/mat-list-item[last()]";
     final static String XPATH_OFFERS = ".//mat-list/mat-list-item";
 
-    String SELECTOR_DUPLICATE_CAMPAIGN = ".mat-dialog-container";
+    String SELECTOR_POP_UP = ".mat-dialog-container";
 
     static final String SELECTOR_OVERLAY_DATE_PICKER = ".cdk-overlay-backdrop";
 
@@ -36,34 +37,16 @@ public class CampaignPageObject extends PageObject {
 
     ElementsCollection actions = root.$$(".mat-icon-button");
 
-    SelenideElement lastOfferElement = root.$(byXpath(XPATH_LAST_OFFER));
-    SelenideElement addOfferButton = root.$(SELECTOR_ADD_OFFER_BUTTON);
+    SelenideElement predictionButton = $(SELECTOR_SHOW_PREDITION);
 
     ElementsCollection offerElements = root.$$(byXpath(XPATH_OFFERS));
 
-    SelenideElement startDateField = root.$(SELECTOR_CAMPAIGN_NAME);
-    SelenideElement endDateField = root.$(SELECTOR_CAMPAIGN_START_DATE);
-    SelenideElement campaignNameField = root.$(SELECTOR_CAMPAIGN_END_DATE);
+    SelenideElement startDateField = root.$(SELECTOR_CAMPAIGN_START_DATE);
+    SelenideElement endDateField = root.$(SELECTOR_CAMPAIGN_END_DATE);
+    SelenideElement campaignNameField = root.$(SELECTOR_CAMPAIGN_NAME);
 
     public CampaignPageObject(SelenideElement root) {
         super(root);
-    }
-
-    public void setOffers(ArrayList<OfferModel> offerList) {
-        for (int offerNumber = 0; offerNumber < offerList.size(); offerNumber++) {
-            this.addOffer(offerList.get(offerNumber));
-        }
-    }
-
-    @Step("Add offer to campaign")
-    public void addOffer(OfferModel offer) {
-        addOfferButton.scrollTo().click();
-        OfferPageObject offerPageObject = new OfferPageObject(lastOfferElement);
-        offerPageObject.setValues(offer);
-    }
-
-    public int getAmountOfOffers(){
-        return offerElements.size();
     }
 
     public String getOfferName(int n){
@@ -125,9 +108,9 @@ public class CampaignPageObject extends PageObject {
     public ArrayList<DiscountModel> getDiscounts() {
         List<String> discountNames = $(SELECTOR_CAMPAIGNS_DISCOUNTS).$$("div").texts();
         ArrayList<DiscountModel> discounts = new ArrayList<>();
-        for (String discountName : discountNames){
+        for (int i = 0; i <discountNames.size()-1 ; i++) {
             discounts.add(DiscountModel.builder().
-                    name(discountName).
+                    name(discountNames.get(i)).
                     build());
         }
         return discounts;
@@ -140,17 +123,26 @@ public class CampaignPageObject extends PageObject {
 
     public void duplicateCampaign() {
         actions.get(1).click();
-        DuplicatePromotionPageObject duplicatePromotionWindow = new DuplicatePromotionPageObject($(SELECTOR_DUPLICATE_CAMPAIGN));
+        DuplicatePromotionPageObject duplicatePromotionWindow = new DuplicatePromotionPageObject($(SELECTOR_POP_UP));
         duplicatePromotionWindow.duplicatePromotion();
     }
 
     public void editCampaign(CampaignModel campaignModel) {
-
     }
 
     public void changeCampaignName(String name) {
         actions.first().click();
-        EditCampaignPageObject editCampaignWindow = new EditCampaignPageObject($(SELECTOR_DUPLICATE_CAMPAIGN));
+        EditCampaignPageObject editCampaignWindow = new EditCampaignPageObject($(SELECTOR_POP_UP));
         editCampaignWindow.changeName(name);
+    }
+
+    public void checkPredition(int profitBaseLine, int quantityBaseLine, int profitPrediction, int quantityPrediction) {
+        predictionButton.click();
+        PredictionPageObject predictionWindow = new PredictionPageObject($(SELECTOR_POP_UP));
+        assertThat(predictionWindow.getCampaignName()).isEqualTo(getName());
+        assertThat(predictionWindow.getCampaignStartDate()).isEqualTo(getStartDate());
+        assertThat(predictionWindow.getCampaignEndDate()).isEqualTo(getEndDate());
+        predictionWindow.checkBaseLine(profitBaseLine, quantityBaseLine);
+        predictionWindow.checkCampaignPrediction(profitPrediction,quantityPrediction);
     }
 }

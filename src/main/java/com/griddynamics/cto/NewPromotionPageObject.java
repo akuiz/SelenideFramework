@@ -1,15 +1,13 @@
 package com.griddynamics.cto;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.griddynamics.cto.models.OfferModel;
+import com.griddynamics.cto.model.OfferModel;
 import io.qameta.allure.Step;
 
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -69,10 +67,6 @@ public class NewPromotionPageObject extends PageObject{
         }
     }
 
-    public String getOfferType(){
-        return offerTypeInput.getValue();
-    }
-
     public void setOfferValue(String value){
         if (value != null) offerValueInput.setValue(value);
         else return;
@@ -104,7 +98,6 @@ public class NewPromotionPageObject extends PageObject{
         $(SELECTOR_BACKGROUND).click();
     }
 
-    @Step("Add promotion template")
     public void addPromotion(OfferModel promotion) {
         setPromotionValues(promotion);
         addPromotionButton.click();

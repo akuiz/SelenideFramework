@@ -3,14 +3,15 @@ package com.griddynamics.cto;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.griddynamics.cto.models.OfferModel;
+import com.griddynamics.cto.model.OfferModel;
+import io.qameta.allure.Step;
 
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.griddynamics.cto.assertions.OfferModelAssert.assertThat;
+import static com.griddynamics.cto.assertion.OfferModelAssert.assertThat;
 
 public class CreatePromotionsPageObject extends PageObject {
 
@@ -32,13 +33,17 @@ public class CreatePromotionsPageObject extends PageObject {
        super(root);
    }
 
-    public void addPromotion(OfferModel promotion) {
+    @Step("Add promotion template")
+    public OfferPageObject addPromotion(OfferModel promotion) {
         Selenide.sleep(2000);
         addPromotionFirstButton.click();
         NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
         createNewPromotionWindow.addPromotion(promotion);
+        checkPromotionExists(promotion);
+        return new OfferPageObject(root.$(byText(promotion.getName())).parent());
     }
 
+    @Step("Check that promotion was successully created")
     public void checkPromotionExists(OfferModel offerModel) {
         OfferModel promotion = findOfferByName(offerModel.getName());
         assertThat(promotion).isSameDiscountAs(offerModel);

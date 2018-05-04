@@ -1,4 +1,4 @@
-package com.griddynamics.cto.models;
+package com.griddynamics.cto.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,6 +39,17 @@ public class CampaignModel {
                     add(DiscountModel.TestCampaignBOGODiscount());
                     add(DiscountModel.TestCampaignOFFPromotion());
 
+                }})
+                .build();
+    }
+
+    public static CampaignModel Spring2018() {
+        return new CampaignModel().toBuilder()
+                .name("Spring 2018")
+                .startDate("2018/03/01")
+                .endDate("2018/05/30")
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.Spring2018Discount());
                 }})
                 .build();
     }

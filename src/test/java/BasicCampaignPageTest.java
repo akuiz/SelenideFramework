@@ -1,51 +1,47 @@
 import com.griddynamics.cto.CreatePromotionsPageObject;
 import com.griddynamics.cto.MainPage;
-import com.griddynamics.cto.models.OfferModel;
+import com.griddynamics.cto.configuration.Configuration;
+import com.griddynamics.cto.configuration.EnvironmentConfig;
+import com.griddynamics.cto.model.OfferModel;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
 
 public class BasicCampaignPageTest {
 
-
-    final static String PRODUCTION_URL = "http://35.196.70.251:4200/";
-    final static String LOCALHOST_URL = "http://localhost:4200/promo";
+    private static final EnvironmentConfig environmentConfig = Configuration.INSTANCE.getEnvironmentConfig();
 
     @Test(description = "Add  %_off promotion test")
     public void addPercentOffPromotion() {
-       MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
-       CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
-      createPromotionPage.addPromotion(OfferModel.CalvinKlein7OFF());
-      createPromotionPage.checkPromotionExists(OfferModel.CalvinKlein7OFF());
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
+        createPromotionPage.addPromotion(OfferModel.CalvinKlein7OFF());
     }
 
     @Test(description = "Add  %_off_amount promotion test")
     public void addPercentOfAmountPromotion() {
-        MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.CalvinKleinPercentOfAmoutDiscount());
-        createPromotionPage.checkPromotionExists(OfferModel.CalvinKleinPercentOfAmoutDiscount());
     }
 
     @Test(description = "Add fix discount promotion test")
     public void addPercentFixDiscountPromotion() {
-        MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.CalvinKleinFixDiscount());
-        createPromotionPage.checkPromotionExists(OfferModel.CalvinKleinFixDiscount());
     }
 
     @Test(description = "Add BOGO promotion test")
     public void addBOGOPromotion() {
-        MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.CalvinKlein5OFF());
-        createPromotionPage.checkPromotionExists(OfferModel.CalvinKlein5OFF());
     }
 
     @Test(description = "Delete recentrly created promotion test")
     public void deletePromotionTest() {
-        MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.CalvinKlein8OFF());
         createPromotionPage.checkPromotionExists(OfferModel.CalvinKlein8OFF());
@@ -55,7 +51,7 @@ public class BasicCampaignPageTest {
 
     @Test(description = "Update promotion name test")
     public void updatePromotionNameTest(){
-        MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.EditTestOriginPromotion());
         createPromotionPage.checkPromotionExists(OfferModel.EditTestOriginPromotion());
@@ -65,7 +61,7 @@ public class BasicCampaignPageTest {
 
     @Test(description = "Update promotion test")
     public void updatePromotionTest(){
-        MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.EditTestOriginPromotion());
         createPromotionPage.checkPromotionExists(OfferModel.EditTestOriginPromotion());
@@ -75,7 +71,7 @@ public class BasicCampaignPageTest {
 
     @Test(description = "Clone promotion test")
     public void duplicatePromotionTest(){
-        MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.DuplicatePromotion());
         createPromotionPage.checkPromotionExists(OfferModel.DuplicatePromotion());

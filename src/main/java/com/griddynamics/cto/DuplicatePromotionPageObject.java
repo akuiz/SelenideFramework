@@ -2,8 +2,7 @@ package com.griddynamics.cto;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.griddynamics.cto.models.CampaignModel;
-import com.griddynamics.cto.models.OfferModel;
+import com.griddynamics.cto.model.OfferModel;
 import io.qameta.allure.Step;
 
 import java.util.ArrayList;

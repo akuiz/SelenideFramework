@@ -1,6 +1,6 @@
-package com.griddynamics.cto.assertions;
+package com.griddynamics.cto.assertion;
 
-import com.griddynamics.cto.models.OfferModel;
+import com.griddynamics.cto.model.OfferModel;
 import org.assertj.core.api.AbstractAssert;
 
 public class OfferModelAssert extends AbstractAssert<OfferModelAssert, OfferModel>{

@@ -1,7 +1,6 @@
-package com.griddynamics.cto.assertions;
+package com.griddynamics.cto.assertion;
 
-import com.griddynamics.cto.models.DiscountModel;
-import com.griddynamics.cto.models.OfferModel;
+import com.griddynamics.cto.model.DiscountModel;
 import org.assertj.core.api.AbstractAssert;
 
 public class DiscountModelAssert extends AbstractAssert<DiscountModelAssert, DiscountModel> {

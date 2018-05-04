@@ -1,72 +1,79 @@
-import com.codeborne.selenide.Selenide;
-import com.griddynamics.cto.CreatePromotionsPageObject;
-import com.griddynamics.cto.MainPage;
-import com.griddynamics.cto.ManageCampaignsPageObject;
-import com.griddynamics.cto.models.CampaignModel;
-import com.griddynamics.cto.models.OfferModel;
+import com.griddynamics.cto.*;
+import com.griddynamics.cto.configuration.Configuration;
+import com.griddynamics.cto.configuration.EnvironmentConfig;
+import com.griddynamics.cto.model.CampaignModel;
+import com.griddynamics.cto.model.OfferModel;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
 
 public class CampaignTest {
-    final static String PRODUCTION_URL = "http://35.196.70.251:4200/";
-    final static String LOCALHOST_URL = "http://localhost:4200/promo";
+
+    private static final EnvironmentConfig environmentConfig = Configuration.INSTANCE.getEnvironmentConfig();
 
     @Test(description = "Add campaign test")
     public void addCampaignTest(){
-        MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.TestCampaignBOGOPromotion());
-        createPromotionPage.checkPromotionExists(OfferModel.TestCampaignBOGOPromotion());
         createPromotionPage.addPromotion(OfferModel.TestCampaignOFFPromotion());
-        createPromotionPage.checkPromotionExists(OfferModel.TestCampaignOFFPromotion());
         ManageCampaignsPageObject campaignsPageObject = mainPage.navigateToManageCampaignsPage();
         campaignsPageObject.addCampaign(CampaignModel.TestCampaign());
-        campaignsPageObject.checkCampaignExists(CampaignModel.TestCampaign());
     }
 
     @Test(description = "Remove campaign test")
     public void deleteCampaignTest(){
-        MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.TestCampaignBOGOPromotion());
-        createPromotionPage.checkPromotionExists(OfferModel.TestCampaignBOGOPromotion());
         createPromotionPage.addPromotion(OfferModel.TestCampaignOFFPromotion());
-        createPromotionPage.checkPromotionExists(OfferModel.TestCampaignOFFPromotion());
         ManageCampaignsPageObject campaignsPageObject = mainPage.navigateToManageCampaignsPage();
         campaignsPageObject.addCampaign(CampaignModel.TestCampaign());
-        campaignsPageObject.checkCampaignExists(CampaignModel.TestCampaign());
         campaignsPageObject.deleteCampaignByName(CampaignModel.TestCampaign().getName());
-        campaignsPageObject.checkCampaingNotExists(CampaignModel.TestCampaign());
     }
 
+    @Test(description = "Remove campaign test")
     public void duplicateCampaignTest(){
-        MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.TestCampaignBOGOPromotion());
-        createPromotionPage.checkPromotionExists(OfferModel.TestCampaignBOGOPromotion());
         createPromotionPage.addPromotion(OfferModel.TestCampaignOFFPromotion());
-        createPromotionPage.checkPromotionExists(OfferModel.TestCampaignOFFPromotion());
         ManageCampaignsPageObject campaignsPageObject = mainPage.navigateToManageCampaignsPage();
         campaignsPageObject.addCampaign(CampaignModel.TestCampaign());
-        campaignsPageObject.checkCampaignExists(CampaignModel.TestCampaign());
         campaignsPageObject.duplicateCampaign(CampaignModel.TestCampaign());
         campaignsPageObject.checkCampaignExistsTwice(CampaignModel.TestCampaign());
     }
 
+    @Test(description = "Edit campaign test")
     public void editCampaignTest(){
-        MainPage mainPage = open(PRODUCTION_URL, MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.TestCampaignBOGOPromotion());
-        createPromotionPage.checkPromotionExists(OfferModel.TestCampaignBOGOPromotion());
         createPromotionPage.addPromotion(OfferModel.TestCampaignOFFPromotion());
-        createPromotionPage.checkPromotionExists(OfferModel.TestCampaignOFFPromotion());
         ManageCampaignsPageObject campaignsPageObject = mainPage.navigateToManageCampaignsPage();
         campaignsPageObject.addCampaign(CampaignModel.TestCampaign());
-        campaignsPageObject.checkCampaignExists(CampaignModel.TestCampaign());
         campaignsPageObject.changeCampaignName(CampaignModel.TestEditedCampaign(), CampaignModel.TestEditedCampaign().getName());
-        campaignsPageObject.checkCampaingNotExists(CampaignModel.TestCampaign());
+        campaignsPageObject.checkCampaingNotExists(CampaignModel.TestCampaign().getName());
         campaignsPageObject.checkCampaignExistsTwice(CampaignModel.TestEditedCampaign());
     }
 
+
+    @Test(description = "Campaign prediction test")
+    public void predictionCampaignTest(){
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
+        createPromotionPage.addPromotion(OfferModel.TestCampaignBOGOPromotion());
+        createPromotionPage.addPromotion(OfferModel.TestCampaignOFFPromotion());
+        ManageCampaignsPageObject campaignsPageObject = mainPage.navigateToManageCampaignsPage();
+        CampaignPageObject campaign = campaignsPageObject.addCampaign(CampaignModel.TestCampaign());
+        campaign.checkPredition(100,200,100,200);
+    }
+
+    @Test(description = "Campaign check test")
+    public void campaignExistsCheck() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPageObject = mainPage.navigateToManageCampaignsPage();
+        campaignsPageObject.checkCampaignExists(CampaignModel.Spring2018());
+
+    }
 }

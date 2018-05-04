@@ -3,19 +3,15 @@ package com.griddynamics.cto;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.griddynamics.cto.assertions.OfferModelAssert;
-import com.griddynamics.cto.models.CampaignModel;
-import com.griddynamics.cto.models.OfferModel;
+import com.griddynamics.cto.model.CampaignModel;
 
 import java.util.ArrayList;
 
-import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.griddynamics.cto.assertions.CampaignModelAssert.assertThat;
+import static com.griddynamics.cto.assertion.CampaignModelAssert.assertThat;
 
 public class ManageCampaignsPageObject extends PageObject {
 
@@ -35,11 +31,14 @@ public class ManageCampaignsPageObject extends PageObject {
     }
 
 
-    public void addCampaign(CampaignModel campaign) {
+    public CampaignPageObject addCampaign(CampaignModel campaign) {
         Selenide.sleep(2000);
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.addCampaign(campaign);
+        checkCampaignExists(campaign);
+        CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaign.getName())).parent().parent());
+        return campaignPageObject;
     }
 
     public void checkCampaignExistsTwice(CampaignModel originCampaign){
@@ -78,10 +77,11 @@ public class ManageCampaignsPageObject extends PageObject {
     public void deleteCampaignByName(String name) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(name)).parent().parent());
         campaignPageObject.delete();
+        checkCampaingNotExists(name);
     }
 
-    public void checkCampaingNotExists(CampaignModel campaignModel) {
-        $(byText(campaignModel.getName())).shouldNot(exist);
+    public void checkCampaingNotExists(String name) {
+        $(byText(name)).shouldNot(exist);
     }
 
     public void duplicateCampaign(CampaignModel campaignModel) {
@@ -97,5 +97,9 @@ public class ManageCampaignsPageObject extends PageObject {
     public void changeCampaignName(CampaignModel campaignModel, String name) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaignModel.getName())).parent().parent());
         campaignPageObject.changeCampaignName(name);
+    }
+
+    public void checkPredition() {
+
     }
 }

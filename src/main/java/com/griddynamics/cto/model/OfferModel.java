@@ -1,4 +1,4 @@
-package com.griddynamics.cto.models;
+package com.griddynamics.cto.model;
 
 import com.griddynamics.cto.OfferType;
 import lombok.AllArgsConstructor;

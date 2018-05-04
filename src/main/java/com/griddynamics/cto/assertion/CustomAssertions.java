@@ -1,7 +1,7 @@
-package com.griddynamics.cto.assertions;
+package com.griddynamics.cto.assertion;
 
-import com.griddynamics.cto.models.CampaignModel;
-import com.griddynamics.cto.models.OfferModel;
+import com.griddynamics.cto.model.CampaignModel;
+import com.griddynamics.cto.model.OfferModel;
 import org.assertj.core.api.Assertions;
 
 

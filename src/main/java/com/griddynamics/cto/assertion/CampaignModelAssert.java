@@ -1,9 +1,8 @@
-package com.griddynamics.cto.assertions;
+package com.griddynamics.cto.assertion;
 
-import io.qameta.allure.Step;
 import org.assertj.core.api.AbstractAssert;
 
-import com.griddynamics.cto.models.*;
+import com.griddynamics.cto.model.*;
 
 import java.util.ArrayList;
 
