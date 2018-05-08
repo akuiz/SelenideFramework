@@ -30,8 +30,8 @@ public class CreatePromotionsPageObject extends PageObject {
     ElementsCollection promotions = $$(SELECTOR_PROMOTIONS);
 
     public CreatePromotionsPageObject(SelenideElement root) {
-       super(root);
-   }
+        super(root);
+    }
 
     @Step("Add promotion template")
     public OfferPageObject addPromotion(OfferModel promotion) {
@@ -56,9 +56,8 @@ public class CreatePromotionsPageObject extends PageObject {
                 .value(promotionPageObject.getValue())
                 .type(promotionPageObject.getType())
                 .brands(promotionPageObject.getBrands())
-        .build();
+                .build();
         return promotion;
-
     }
 
     public void deletePromotionByName(OfferModel offerModel) {
@@ -95,13 +94,12 @@ public class CreatePromotionsPageObject extends PageObject {
     public void duplicatePromotion(OfferModel actualPromotion) {
         OfferPageObject promotionPageObject = findOfferPageObjectByName(actualPromotion.getName());
         promotionPageObject.duplicatePromotion();
-
     }
 
     public void checkPromotionExistsTwice(OfferModel originPromotion) {
         ArrayList<OfferPageObject> promotionsList = findAllPromotionsByName(originPromotion.getName());
-        for (int i = 0; i < promotionsList.size() ; i++) {
-            OfferModel promotion  = promotionsList.get(i).getOfferModel();
+        for (int i = 0; i < promotionsList.size(); i++) {
+            OfferModel promotion = promotionsList.get(i).getOfferModel();
             assertThat(promotion).isSameDiscountAs(originPromotion);
         }
     }

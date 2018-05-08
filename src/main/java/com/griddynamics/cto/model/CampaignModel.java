@@ -20,8 +20,34 @@ public class CampaignModel {
     public static CampaignModel TestCampaign() {
         return new CampaignModel().toBuilder()
                 .name("TestCampaign")
-                .startDate("1/1/2018")
-                .endDate("1/1/2019")
+                .startDate("2018/05/01")
+                .endDate("2018/05/31")
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.TestCampaignBOGODiscount());
+                    add(DiscountModel.TestCampaignOFFPromotion());
+
+                }})
+                .build();
+    }
+
+    public static CampaignModel IssueCampaign() {
+        return new CampaignModel().toBuilder()
+                .name("IssueCampaign")
+                .startDate("2018/05/01")
+                .endDate("2018/05/31")
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.TestCampaignBOGODiscount());
+                    add(DiscountModel.TestCampaignOFFPromotion());
+
+                }})
+                .build();
+    }
+
+    public static CampaignModel Test2Promo() {
+        return new CampaignModel().toBuilder()
+                .name("Test2Promo")
+                .startDate("2018/05/01")
+                .endDate("2018/05/31")
                 .discounts(new ArrayList<DiscountModel>() {{
                     add(DiscountModel.TestCampaignBOGODiscount());
                     add(DiscountModel.TestCampaignOFFPromotion());

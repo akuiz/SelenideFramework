@@ -27,6 +27,8 @@ public class OfferPageObject extends PageObject {
     static final String SELECTOR_OFFER_COPY = ".at-copy-offer";
     static final String SELECTOR_OFFER_DELETE = ".at-delete-offer";
 
+    static final String XPATH_DELETE_PROMOTION = "//span[contains(text(),'REMOVE')]";
+
     String ELEMENT_UPDATE_PROMOTION_WINDOW = ".mat-dialog-container";
 
 
@@ -38,7 +40,7 @@ public class OfferPageObject extends PageObject {
     SelenideElement offerRuleField = root.$((SELECTOR_OFFER_RULE));
     SelenideElement offerValueField = root.$(SELECTOR_OFFER_VALUE);
 
-    public SelenideElement getActions(){
+    public SelenideElement getActions() {
         return actions1.$(".mat-icon-button");
     }
 
@@ -88,7 +90,7 @@ public class OfferPageObject extends PageObject {
 
     public void deletePromotion() {
         actions.last().click();
-        $(byXpath("//span[contains(text(),'REMOVE')]")).click();
+        $(byXpath(XPATH_DELETE_PROMOTION)).click();
     }
 
     public ArrayList<String> getBrands() {

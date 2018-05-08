@@ -37,17 +37,17 @@ public class DuplicatePromotionPageObject extends PageObject {
 
     SelenideElement closeWindowButton = root.$(SELECTOR_CLOSE_WINDOW);
 
-    public void setOfferName(String name){
+    public void setOfferName(String name) {
         offerNameInput.setValue(name);
     }
 
-    public String getOfferName(){
+    public String getOfferName() {
         return offerNameInput.getValue();
     }
 
-    public void setOfferType(OfferType type){
+    public void setOfferType(OfferType type) {
         offerTypeInput.click();
-        switch (type){
+        switch (type) {
             case PERCENT_OFF:
                 $$(SELECTOR_OPTIONS).get(0).click();
                 break;
@@ -63,21 +63,21 @@ public class DuplicatePromotionPageObject extends PageObject {
         }
     }
 
-    public String getOfferType(){
+    public String getOfferType() {
         return offerTypeInput.getValue();
     }
 
-    public void setOfferValue(String value){
+    public void setOfferValue(String value) {
         if (value != null) offerValueInput.setValue(value);
         else return;
     }
 
-    public String getOfferValue(){
+    public String getOfferValue() {
         return offerValueInput.getValue();
     }
 
     @Step("Close add promotion dialog")
-    public void closeAddPromotionDialog(){
+    public void closeAddPromotionDialog() {
         closeWindowButton.click();
     }
 
@@ -85,13 +85,13 @@ public class DuplicatePromotionPageObject extends PageObject {
         offerNameInput.setValue(promotion.getName());
         setOfferBrands(promotion.getBrands());
         setOfferType(promotion.getType());
-        if(!promotion.isBOGO()) setOfferValue(promotion.getValue());
+        if (!promotion.isBOGO()) setOfferValue(promotion.getValue());
     }
 
-    public void setOfferBrands(ArrayList<String> promotionBrands){
+    public void setOfferBrands(ArrayList<String> promotionBrands) {
         offerRuleInput.click();
         ElementsCollection brandsSelection = $$(SELECTOR_OPTIONS);
-        for(String brand : promotionBrands){
+        for (String brand : promotionBrands) {
             int indexOfBrand = brandsSelection.texts().indexOf(brand);
             brandsSelection.get(indexOfBrand).scrollTo().click();
         }

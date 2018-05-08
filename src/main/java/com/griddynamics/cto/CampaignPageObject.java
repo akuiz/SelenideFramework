@@ -1,14 +1,18 @@
 package com.griddynamics.cto;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.DiscountModel;
 import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.OfferModel;
+import com.griddynamics.cto.model.PredictionModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -49,20 +53,20 @@ public class CampaignPageObject extends PageObject {
         super(root);
     }
 
-    public String getOfferName(int n){
+    public String getOfferName(int n) {
         return getOffer(n).getName();
     }
 
-    public OfferPageObject getOffer(int n){
-        return  new OfferPageObject(offerElements.get(n));
+    public OfferPageObject getOffer(int n) {
+        return new OfferPageObject(offerElements.get(n));
     }
 
-    public String getOfferValue(int n){
+    public String getOfferValue(int n) {
         return getOffer(n).getValue();
 
     }
 
-    public String getOfferRule(int n){
+    public String getOfferRule(int n) {
         return getOffer(n).getRule();
     }
 
@@ -80,7 +84,7 @@ public class CampaignPageObject extends PageObject {
 
     public ArrayList<OfferModel> getOffersFromCampaign() {
         ArrayList<OfferModel> offers = new ArrayList<OfferModel>();
-        for (int offerNumber = 0; offerNumber <offerElements.size(); offerNumber++) {
+        for (int offerNumber = 0; offerNumber < offerElements.size(); offerNumber++) {
             offers.add(new OfferModel().toBuilder()
                     .name(getOfferName(offerNumber))
                     .value(getOfferValue(offerNumber))
@@ -94,11 +98,11 @@ public class CampaignPageObject extends PageObject {
     }
 
     public String getStartDate() {
-        return startDateField.getText().replace('-','/');
+        return startDateField.getText().replace('-', '/');
     }
 
     public String getEndDate() {
-        return endDateField.getText().replace('-','/');
+        return endDateField.getText().replace('-', '/');
     }
 
     public void expand() {
@@ -108,7 +112,7 @@ public class CampaignPageObject extends PageObject {
     public ArrayList<DiscountModel> getDiscounts() {
         List<String> discountNames = $(SELECTOR_CAMPAIGNS_DISCOUNTS).$$("div").texts();
         ArrayList<DiscountModel> discounts = new ArrayList<>();
-        for (int i = 0; i <discountNames.size()-1 ; i++) {
+        for (int i = 0; i < discountNames.size() - 1; i++) {
             discounts.add(DiscountModel.builder().
                     name(discountNames.get(i)).
                     build());
@@ -136,13 +140,15 @@ public class CampaignPageObject extends PageObject {
         editCampaignWindow.changeName(name);
     }
 
-    public void checkPredition(int profitBaseLine, int quantityBaseLine, int profitPrediction, int quantityPrediction) {
+    public void checkPrediction(PredictionModel predictionModel) {
+        this.expand();
         predictionButton.click();
         PredictionPageObject predictionWindow = new PredictionPageObject($(SELECTOR_POP_UP));
         assertThat(predictionWindow.getCampaignName()).isEqualTo(getName());
         assertThat(predictionWindow.getCampaignStartDate()).isEqualTo(getStartDate());
         assertThat(predictionWindow.getCampaignEndDate()).isEqualTo(getEndDate());
-        predictionWindow.checkBaseLine(profitBaseLine, quantityBaseLine);
-        predictionWindow.checkCampaignPrediction(profitPrediction,quantityPrediction);
+        predictionWindow.checkRevenue(predictionModel.getRevenue().getKey(), predictionModel.getRevenue().getValue());
+        predictionWindow.checkProfit(predictionModel.getProfit().getKey(), predictionModel.getProfit().getValue());
+        predictionWindow.checkQuantity(predictionModel.getQuantity().getKey(), predictionModel.getQuantity().getValue());
     }
 }

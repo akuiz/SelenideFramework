@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class DuplicateCampaignPageObject extends PageObject{
+public class DuplicateCampaignPageObject extends PageObject {
     static final String SELECTOR_CAMPAIGN_NAME = ".name__input";
     static final String SELECTOR_START_DATE = ".start-date__input";
     static final String SELECTOR_END_DATE = ".end-date__input";
@@ -35,10 +35,10 @@ public class DuplicateCampaignPageObject extends PageObject{
         duplicateCampaignButton.click();
     }
 
-    void setDiscounts(ArrayList<DiscountModel> discounts){
+    void setDiscounts(ArrayList<DiscountModel> discounts) {
         promotionsInput.click();
         ElementsCollection discountSelection = $$(SELECTOR_PROMOTION_OPTIONS);
-        for(DiscountModel discount : discounts){
+        for (DiscountModel discount : discounts) {
             int indexOfBrand = discountSelection.texts().indexOf(discount.getName());
             discountSelection.get(indexOfBrand).scrollTo().click();
         }

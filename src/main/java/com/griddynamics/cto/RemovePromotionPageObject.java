@@ -2,7 +2,7 @@ package com.griddynamics.cto;
 
 import com.codeborne.selenide.SelenideElement;
 
-public class RemovePromotionPageObject extends PageObject{
+public class RemovePromotionPageObject extends PageObject {
 
     static final String SELECTOR_REMOVE_OFFER_CONFIRMATION = ".at-remove-offer";
 

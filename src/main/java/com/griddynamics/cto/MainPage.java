@@ -6,6 +6,7 @@ import io.qameta.allure.Step;
 import com.griddynamics.cto.model.CampaignModel;
 
 import java.util.ArrayList;
+
 import static com.griddynamics.cto.assertion.CustomAssertions.assertThat;
 
 import static com.codeborne.selenide.Selectors.byXpath;
@@ -54,17 +55,9 @@ public class MainPage {
     SelenideElement createPromotionsPageObject = $(SELECTOR_PROMOTION_PAGE);
 
     @Step("Navigate to createPromotions Tab")
-    public CreatePromotionsPageObject navigateToCreatePromotionsPage(){
+    public CreatePromotionsPageObject navigateToCreatePromotionsPage() {
         promotionsNavigationTab.click();
         return new CreatePromotionsPageObject($(SELECTOR_PROMOTIONS_PAGE_OBJECT));
-    }
-
-    @Step("Add Campaign")
-    public CampaignPageObject addCampaign(CampaignModel campaign) {
-        addCampaignButton.scrollTo().click();
-        CampaignPageObject campaignPageObject = new CampaignPageObject(lastCampaignElement);
-        //campaignPageObject.setCampaignValues(campaign);
-        return campaignPageObject;
     }
 
     static final String SELECTOR_ADD_PROMOTION = ".btn-add-promo";

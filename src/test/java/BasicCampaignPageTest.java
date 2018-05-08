@@ -50,7 +50,7 @@ public class BasicCampaignPageTest {
     }
 
     @Test(description = "Update promotion name test")
-    public void updatePromotionNameTest(){
+    public void updatePromotionNameTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.EditTestOriginPromotion());
@@ -60,7 +60,7 @@ public class BasicCampaignPageTest {
     }
 
     @Test(description = "Update promotion test")
-    public void updatePromotionTest(){
+    public void updatePromotionTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.EditTestOriginPromotion());
@@ -70,7 +70,7 @@ public class BasicCampaignPageTest {
     }
 
     @Test(description = "Clone promotion test")
-    public void duplicatePromotionTest(){
+    public void duplicatePromotionTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.DuplicatePromotion());

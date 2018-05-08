@@ -19,6 +19,6 @@ public enum OfferType {
                 return b;
             }
         }
-       throw new IllegalArgumentException("No constant with text " + text + " found");
+        throw new IllegalArgumentException("No constant with text " + text + " found");
     }
 }

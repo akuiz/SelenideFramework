@@ -32,7 +32,7 @@ public class ManageCampaignsPageObject extends PageObject {
 
 
     public CampaignPageObject addCampaign(CampaignModel campaign) {
-        Selenide.sleep(2000);
+        Selenide.sleep(3000);
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.addCampaign(campaign);
@@ -41,15 +41,15 @@ public class ManageCampaignsPageObject extends PageObject {
         return campaignPageObject;
     }
 
-    public void checkCampaignExistsTwice(CampaignModel originCampaign){
+    public void checkCampaignExistsTwice(CampaignModel originCampaign) {
         ArrayList<CampaignPageObject> campaignList = findAllCampaignsByName(originCampaign.getName());
-        for (int i = 0; i < campaignList.size() ; i++) {
-            CampaignModel campaign  = campaignList.get(i).getCampaignModel();
+        for (int i = 0; i < campaignList.size(); i++) {
+            CampaignModel campaign = campaignList.get(i).getCampaignModel();
             assertThat(campaign).isSameCampaignAs(originCampaign);
         }
     }
 
-    public ArrayList<CampaignPageObject> findAllCampaignsByName(String name){
+    public ArrayList<CampaignPageObject> findAllCampaignsByName(String name) {
         $$(byText(name)).shouldHaveSize(2);
         ArrayList campaigns = new ArrayList();
         campaigns.add(new CampaignPageObject(root.$$(byText(name)).get(0).parent().parent()));
@@ -101,5 +101,10 @@ public class ManageCampaignsPageObject extends PageObject {
 
     public void checkPredition() {
 
+    }
+
+    public CampaignPageObject getCampaignByName(String name) {
+        CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(name)).parent().parent());
+        return campaignPageObject;
     }
 }

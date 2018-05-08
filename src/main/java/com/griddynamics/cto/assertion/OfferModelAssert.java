@@ -3,7 +3,7 @@ package com.griddynamics.cto.assertion;
 import com.griddynamics.cto.model.OfferModel;
 import org.assertj.core.api.AbstractAssert;
 
-public class OfferModelAssert extends AbstractAssert<OfferModelAssert, OfferModel>{
+public class OfferModelAssert extends AbstractAssert<OfferModelAssert, OfferModel> {
 
     public OfferModelAssert(OfferModel actualOffer) {
         super(actualOffer, OfferModelAssert.class);
@@ -40,7 +40,7 @@ public class OfferModelAssert extends AbstractAssert<OfferModelAssert, OfferMode
 
     public AbstractAssert hasSameBrandsAs(OfferModel expectedOffer) {
         isNotNull();
-        for (int i = 0; i <actual.getBrands().size() ; i++) {
+        for (int i = 0; i < actual.getBrands().size(); i++) {
             if (!actual.getBrands().get(i).equals(expectedOffer.getBrands().get(i))) {
                 failWithMessage("Expected offer's brand to be <%s> but was <%s>", expectedOffer.getBrands().get(i), actual.getBrands().get(i));
             }

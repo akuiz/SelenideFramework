@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class NewCampaignPageObject extends PageObject{
+public class NewCampaignPageObject extends PageObject {
 
     static final String SELECTOR_CAMPAIGN_NAME = ".name__input";
     static final String SELECTOR_START_DATE = ".start-date__input";
@@ -43,10 +43,10 @@ public class NewCampaignPageObject extends PageObject{
         addCampaignButton.click();
     }
 
-    void setDiscounts(ArrayList<DiscountModel> discounts){
+    void setDiscounts(ArrayList<DiscountModel> discounts) {
         promotionsInput.click();
         ElementsCollection discountSelection = $$(SELECTOR_PROMOTION_OPTIONS);
-        for(DiscountModel discount : discounts){
+        for (DiscountModel discount : discounts) {
             int indexOfBrand = discountSelection.texts().indexOf(discount.getName());
             discountSelection.get(indexOfBrand).scrollTo().click();
         }

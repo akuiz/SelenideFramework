@@ -19,13 +19,13 @@ public class DiscountModel {
                 .build();
     }
 
-    public static DiscountModel TestCampaignOFFPromotion(){
+    public static DiscountModel TestCampaignOFFPromotion() {
         return new DiscountModel().toBuilder()
                 .name("CreateCampaignTestPromotionOFF")
                 .build();
     }
 
-    public static DiscountModel Spring2018Discount(){
+    public static DiscountModel Spring2018Discount() {
         return new DiscountModel().toBuilder()
                 .name("Spring 5% off on $400")
                 .build();

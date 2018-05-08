@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class EditCampaignPageObject extends PageObject{
+public class EditCampaignPageObject extends PageObject {
 
     public EditCampaignPageObject(SelenideElement root) {
         super(root);
@@ -30,15 +30,12 @@ public class EditCampaignPageObject extends PageObject{
     SelenideElement endDateInput = root.$(SELECTOR_END_DATE);
     SelenideElement promotionsInput = root.$(SELECTOR_PROMOTIONS);
 
-
-
     SelenideElement updateCampaignButton = root.$(SELECETOR_UPDATECAMPAIGN_BUTTON);
 
-
-    void setDiscounts(ArrayList<DiscountModel> discounts){
+    void setDiscounts(ArrayList<DiscountModel> discounts) {
         promotionsInput.click();
         ElementsCollection discountSelection = $$(SELECTOR_PROMOTION_OPTIONS);
-        for(DiscountModel discount : discounts){
+        for (DiscountModel discount : discounts) {
             int indexOfBrand = discountSelection.texts().indexOf(discount.getName());
             discountSelection.get(indexOfBrand).scrollTo().click();
         }

@@ -99,7 +99,7 @@ public class OfferModel {
                 .build();
     }
 
-    public static OfferModel EditTestOriginPromotion(){
+    public static OfferModel EditTestOriginPromotion() {
         return new OfferModel().toBuilder()
                 .name("This is initial edit promotion test name")
                 .brands(new ArrayList<String>() {{
@@ -112,7 +112,7 @@ public class OfferModel {
                 .build();
     }
 
-    public static OfferModel EditTestModifiedPromotion(){
+    public static OfferModel EditTestModifiedPromotion() {
         return new OfferModel().toBuilder()
                 .name("Completely different promotion")
                 .brands(new ArrayList<String>() {{
@@ -124,7 +124,7 @@ public class OfferModel {
                 .build();
     }
 
-    public static OfferModel EditTestModifiedNamePromotion(){
+    public static OfferModel EditTestModifiedNamePromotion() {
         return new OfferModel().toBuilder()
                 .name("This is modified edit promotion test name")
                 .brands(new ArrayList<String>() {{
@@ -136,7 +136,7 @@ public class OfferModel {
                 .build();
     }
 
-    public static OfferModel DuplicatePromotion(){
+    public static OfferModel DuplicatePromotion() {
         return new OfferModel().toBuilder()
                 .name("This11 is promotion for duplicate test11")
                 .brands(new ArrayList<String>() {{
@@ -148,7 +148,7 @@ public class OfferModel {
                 .build();
     }
 
-    public static OfferModel TestCampaignBOGOPromotion(){
+    public static OfferModel TestCampaignBOGOPromotion() {
         return new OfferModel().toBuilder()
                 .name("CreateCampaignTestPromotionBOGO")
                 .brands(new ArrayList<String>() {{
@@ -160,7 +160,7 @@ public class OfferModel {
                 .build();
     }
 
-    public static OfferModel TestCampaignOFFPromotion(){
+    public static OfferModel TestCampaignOFFPromotion() {
         return new OfferModel().toBuilder()
                 .name("CreateCampaignTestPromotionOFF")
                 .brands(new ArrayList<String>() {{
@@ -172,7 +172,7 @@ public class OfferModel {
                 .build();
     }
 
-    public boolean isBOGO(){
+    public boolean isBOGO() {
         return this.getType().equals(BOGO);
     }
 
