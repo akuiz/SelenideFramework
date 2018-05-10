@@ -52,5 +52,4 @@ public class NewCampaignPageObject extends PageObject {
         }
         $(SELECTOR_BACKGROUND).click();
     }
-
 }

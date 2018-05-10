@@ -16,8 +16,8 @@ public class CampaignTest {
     public void addCampaignTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
-        createPromotionPage.addPromotion(OfferModel.TestCampaignBOGOPromotion());
-        createPromotionPage.addPromotion(OfferModel.TestCampaignOFFPromotion());
+        //createPromotionPage.addPromotion(OfferModel.TestCampaignBOGOPromotion());
+        //createPromotionPage.addPromotion(OfferModel.TestCampaignOFFPromotion());
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
         campaignsPage.addCampaign(CampaignModel.TestCampaign());
     }
@@ -33,7 +33,7 @@ public class CampaignTest {
         campaignsPage.deleteCampaignByName(CampaignModel.TestCampaign().getName());
     }
 
-    @Test(description = "Remove campaign test")
+    @Test(description = "Remove campaign test", enabled = false)
     public void duplicateCampaignTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
@@ -45,7 +45,7 @@ public class CampaignTest {
         campaignsPage.checkCampaignExistsTwice(CampaignModel.TestCampaign());
     }
 
-    @Test(description = "Edit campaign test")
+    @Test(description = "Edit campaign test", enabled = false)
     public void editCampaignTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
@@ -65,18 +65,11 @@ public class CampaignTest {
         campaignsPage.checkCampaignExists(CampaignModel.Spring2018());
     }
 
-    @Test(description = "Create campaign with 2 Promos")
-    public void createCampaignWith2ExistingPromos() {
-        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
-        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        campaignsPage.addCampaign(CampaignModel.IssueCampaign());
-    }
-
     @Test(description = "Check Prediction Test2Promo")
     public void checkPrediction() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        CampaignPageObject campaign = campaignsPage.getCampaignByName(CampaignModel.Test2Promo().getName());
+        CampaignPageObject campaign = campaignsPage.getCampaignByName(CampaignModel.IssueCampaign().getName());
         campaign.checkPrediction(PredictionModel.Test2PromotPrediction());
     }
 }

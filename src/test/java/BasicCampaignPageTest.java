@@ -18,14 +18,14 @@ public class BasicCampaignPageTest {
         createPromotionPage.addPromotion(OfferModel.CalvinKlein7OFF());
     }
 
-    @Test(description = "Add  %_off_amount promotion test")
+    @Test(description = "Add  %_off_amount promotion test", enabled = false)
     public void addPercentOfAmountPromotion() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
         createPromotionPage.addPromotion(OfferModel.CalvinKleinPercentOfAmoutDiscount());
     }
 
-    @Test(description = "Add fix discount promotion test")
+    @Test(description = "Add fix discount promotion test", enabled = false)
     public void addPercentFixDiscountPromotion() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();

@@ -5,17 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.visible;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class PredictionPageObject extends PageObject {
-    public PredictionPageObject(SelenideElement root) {
-        super(root);
-    }
-
-    final static String SELECTOR_CAMPAIGN_NAME = ".name__input";
-    final static String SELECTOR_START_DATE = ".start-date__input";
-    final static String SELECTOR_END_DATE = ".end-date__input";
-
-    final static String SELECTOR_PROFITS = ".mat-column-profit";
-    final static String SELECTOR_QUANTITIES = ".mat-column-quantity";
+public class CampaignsForecastPageObject extends PageObject {
 
     final static String SELECTOR_REVENUE = ".revenue";
     final static String SELECTOR_PROFIT = ".profit";
@@ -28,21 +18,8 @@ public class PredictionPageObject extends PageObject {
     SelenideElement quantityBaseline = root.$$(SELECTOR_QUANTITY).first();
     SelenideElement quantityPrediction = root.$$(SELECTOR_QUANTITY).last();
 
-    public String getCampaignName() {
-        return root.$(SELECTOR_CAMPAIGN_NAME).getValue();
-    }
-
-    public String getCampaignStartDate() {
-        return root.$(SELECTOR_START_DATE).getValue();
-    }
-
-    public String getCampaignEndDate() {
-        return root.$(SELECTOR_END_DATE).getValue();
-    }
-
-    public void checkCampaignPrediction(int profit, int quantity) {
-        assertThat(profitPrediction.getText()).isEqualTo(profit);
-        assertThat(quantityPrediction.getText()).isEqualTo(quantity);
+    public CampaignsForecastPageObject(SelenideElement root) {
+        super(root);
     }
 
     public void checkRevenue(String expectedBaseLine, String expectedPrediction) {
@@ -60,4 +37,5 @@ public class PredictionPageObject extends PageObject {
         assertThat(quantityBaseline.getText()).isEqualTo(expectedBaseLine);
         assertThat(quantityPrediction.getText()).isEqualTo(expectedPrediction);
     }
+
 }

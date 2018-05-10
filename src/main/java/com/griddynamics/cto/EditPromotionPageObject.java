@@ -58,7 +58,7 @@ public class EditPromotionPageObject extends PageObject {
                 $$(SELECTOR_OPTIONS).get(1).click();
                 break;
             case BOGO:
-                $$(SELECTOR_OPTIONS).get(2).click();
+                $$(SELECTOR_OPTIONS).get(1).click();
                 break;
             case FIX_DISCOUNT:
                 $$(SELECTOR_OPTIONS).get(3).click();

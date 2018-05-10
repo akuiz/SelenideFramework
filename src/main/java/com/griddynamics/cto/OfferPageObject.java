@@ -108,7 +108,6 @@ public class OfferPageObject extends PageObject {
         actions.first().click();
         EditPromotionPageObject editPromotionWindow = new EditPromotionPageObject($(ELEMENT_UPDATE_PROMOTION_WINDOW));
         editPromotionWindow.updatePromotion(newPromotion);
-
     }
 
     public void duplicatePromotion() {

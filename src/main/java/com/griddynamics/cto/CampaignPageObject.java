@@ -1,8 +1,6 @@
 package com.griddynamics.cto;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.DiscountModel;
 import com.griddynamics.cto.model.CampaignModel;
@@ -12,7 +10,6 @@ import com.griddynamics.cto.model.PredictionModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -63,13 +60,11 @@ public class CampaignPageObject extends PageObject {
 
     public String getOfferValue(int n) {
         return getOffer(n).getValue();
-
     }
 
     public String getOfferRule(int n) {
         return getOffer(n).getRule();
     }
-
 
     public CampaignModel getCampaignModel() {
         ArrayList<OfferModel> campaingOffers = getOffersFromCampaign();

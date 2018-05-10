@@ -30,9 +30,8 @@ public class ManageCampaignsPageObject extends PageObject {
         super(root);
     }
 
-
     public CampaignPageObject addCampaign(CampaignModel campaign) {
-        Selenide.sleep(3000);
+        Selenide.sleep(1000);
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.addCampaign(campaign);
@@ -97,10 +96,6 @@ public class ManageCampaignsPageObject extends PageObject {
     public void changeCampaignName(CampaignModel campaignModel, String name) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaignModel.getName())).parent().parent());
         campaignPageObject.changeCampaignName(name);
-    }
-
-    public void checkPredition() {
-
     }
 
     public CampaignPageObject getCampaignByName(String name) {

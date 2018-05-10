@@ -17,7 +17,6 @@ import static com.codeborne.selenide.Selenide.$$;
 public class NewPromotionPageObject extends PageObject {
 
     static final String SELECTOR_ADD_PROMOTION = ".btn__title";
-
     static final String SELECTOR_OFFER_NAME = ".name__input";
     static final String SELECTOR_OFFER_RULE = ".rule__input";
     static final String SELECTOR_OFFER_TYPE = ".type__input";

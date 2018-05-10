@@ -31,6 +31,8 @@ public class MainPage {
 
     final static String SELECTOR_CAMPAIGNS_PAGE_OBJECT = "app-campaigns-page";
     final static String SELECTOR_PROMOTIONS_PAGE_OBJECT = "app-promotions-page";
+    final static String SELECTOR_FORECAST_PAGE_OBJECT = "app-forecast";
+
 
     final static String SELECTOR_TAB_LINKS = ".navigation__tab";
 
@@ -75,5 +77,10 @@ public class MainPage {
     public ManageCampaignsPageObject navigateToManageCampaignsPage() {
         campaignsNavigationTab.click();
         return new ManageCampaignsPageObject($(SELECTOR_CAMPAIGNS_PAGE_OBJECT));
+    }
+
+    public ForecastPageObject navigateToForecastPage() {
+        forecastNavigationTab.click();
+        return new ForecastPageObject($(SELECTOR_FORECAST_PAGE_OBJECT));
     }
 }
