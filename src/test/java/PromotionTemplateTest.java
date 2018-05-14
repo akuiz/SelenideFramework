@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
 
-public class BasicCampaignPageTest {
+public class PromotionTemplateTest {
 
     private static final EnvironmentConfig environmentConfig = Configuration.INSTANCE.getEnvironmentConfig();
 

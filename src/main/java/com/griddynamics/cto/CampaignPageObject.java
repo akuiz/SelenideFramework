@@ -1,11 +1,13 @@
 package com.griddynamics.cto;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.DiscountModel;
 import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.OfferModel;
 import com.griddynamics.cto.model.PredictionModel;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,7 @@ public class CampaignPageObject extends PageObject {
 
     ElementsCollection actions = root.$$(".mat-icon-button");
 
-    SelenideElement predictionButton = $(SELECTOR_SHOW_PREDITION);
+    SelenideElement predictionButton = root.$(SELECTOR_SHOW_PREDITION);
 
     ElementsCollection offerElements = root.$$(byXpath(XPATH_OFFERS));
 
@@ -92,12 +94,12 @@ public class CampaignPageObject extends PageObject {
         return campaignNameField.getText();
     }
 
-    public String getStartDate() {
-        return startDateField.getText().replace('-', '/');
+    public DateTime getStartDate() {
+        return formatter.parseDateTime((startDateField.getText()));
     }
 
-    public String getEndDate() {
-        return endDateField.getText().replace('-', '/');
+    public DateTime getEndDate() {
+        return formatter.parseDateTime((endDateField.getText()));
     }
 
     public void expand() {
@@ -105,7 +107,7 @@ public class CampaignPageObject extends PageObject {
     }
 
     public ArrayList<DiscountModel> getDiscounts() {
-        List<String> discountNames = $(SELECTOR_CAMPAIGNS_DISCOUNTS).$$("div").texts();
+        List<String> discountNames = root.$(SELECTOR_CAMPAIGNS_DISCOUNTS).$$("div").texts();
         ArrayList<DiscountModel> discounts = new ArrayList<>();
         for (int i = 0; i < discountNames.size() - 1; i++) {
             discounts.add(DiscountModel.builder().
@@ -137,7 +139,7 @@ public class CampaignPageObject extends PageObject {
 
     public void checkPrediction(PredictionModel predictionModel) {
         this.expand();
-        predictionButton.click();
+        predictionButton.shouldBe(Condition.enabled).click();
         PredictionPageObject predictionWindow = new PredictionPageObject($(SELECTOR_POP_UP));
         assertThat(predictionWindow.getCampaignName()).isEqualTo(getName());
         assertThat(predictionWindow.getCampaignStartDate()).isEqualTo(getStartDate());

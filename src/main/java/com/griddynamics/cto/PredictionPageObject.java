@@ -1,6 +1,7 @@
 package com.griddynamics.cto;
 
 import com.codeborne.selenide.SelenideElement;
+import org.joda.time.DateTime;
 
 import static com.codeborne.selenide.Condition.visible;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -32,12 +33,12 @@ public class PredictionPageObject extends PageObject {
         return root.$(SELECTOR_CAMPAIGN_NAME).getValue();
     }
 
-    public String getCampaignStartDate() {
-        return root.$(SELECTOR_START_DATE).getValue();
+    public DateTime getCampaignStartDate() {
+        return formatter.parseDateTime(root.$(SELECTOR_START_DATE).getValue());
     }
 
-    public String getCampaignEndDate() {
-        return root.$(SELECTOR_END_DATE).getValue();
+    public DateTime getCampaignEndDate() {
+        return formatter.parseDateTime(root.$(SELECTOR_END_DATE).getValue());
     }
 
     public void checkCampaignPrediction(int profit, int quantity) {

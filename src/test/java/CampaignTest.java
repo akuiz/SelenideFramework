@@ -16,8 +16,8 @@ public class CampaignTest {
     public void addCampaignTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
-        //createPromotionPage.addPromotion(OfferModel.TestCampaignBOGOPromotion());
-        //createPromotionPage.addPromotion(OfferModel.TestCampaignOFFPromotion());
+        createPromotionPage.addPromotion(OfferModel.TestCampaignBOGOPromotion());
+        createPromotionPage.addPromotion(OfferModel.TestCampaignOFFPromotion());
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
         campaignsPage.addCampaign(CampaignModel.TestCampaign());
     }
@@ -33,7 +33,7 @@ public class CampaignTest {
         campaignsPage.deleteCampaignByName(CampaignModel.TestCampaign().getName());
     }
 
-    @Test(description = "Remove campaign test", enabled = false)
+    @Test(description = "Duplicate campaign test", enabled = false)
     public void duplicateCampaignTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
@@ -58,7 +58,7 @@ public class CampaignTest {
         campaignsPage.checkCampaignExistsTwice(CampaignModel.TestEditedCampaign());
     }
 
-    @Test(description = "Campaign check test")
+    @Test(description = "Campaign check test", enabled = false)
     public void campaignExistsCheck() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();

@@ -32,10 +32,10 @@ public class CampaignModelAssert extends AbstractAssert<CampaignModelAssert, Cam
         return this;
     }
 
-    public AbstractAssert hasSameStartEndAs(CampaignModel expectedCampaign) {
+    public AbstractAssert hasSameEndDateAs(CampaignModel expectedCampaign) {
         isNotNull();
         if (!actual.getEndDate().equals(expectedCampaign.getEndDate())) {
-            failWithMessage("Expected campaigns's start date to be <%s> but was <%s>", expectedCampaign.getEndDate(), actual.getEndDate());
+            failWithMessage("Expected campaigns's end date to be <%s> but was <%s>", expectedCampaign.getEndDate(), actual.getEndDate());
         }
         return this;
     }
@@ -44,7 +44,7 @@ public class CampaignModelAssert extends AbstractAssert<CampaignModelAssert, Cam
         isNotNull();
         assertThat(actual).hasSameNameAs(expectedCampaign);
         assertThat(actual).hasSameStartDateAs(expectedCampaign);
-        assertThat(actual).hasSameStartDateAs(expectedCampaign);
+        assertThat(actual).hasSameEndDateAs(expectedCampaign);
         assertThat(actual).hasSameDiscountsAs(expectedCampaign);
         return this;
     }
