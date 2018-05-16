@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.CampaignModel;
+import com.griddynamics.cto.model.OfferModel;
 
 import java.util.ArrayList;
 
@@ -101,5 +102,12 @@ public class ManageCampaignsPageObject extends PageObject {
     public CampaignPageObject getCampaignByName(String name) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(name)).parent().parent());
         return campaignPageObject;
+    }
+
+    public void addCampaignValidationCheck(CampaignModel campaignModel) {
+        Selenide.sleep(1000);
+        addCampaignFirstButton.click();
+        NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
+        createNewCampaignWindow.checkAddCampaignValidation(campaignModel);
     }
 }

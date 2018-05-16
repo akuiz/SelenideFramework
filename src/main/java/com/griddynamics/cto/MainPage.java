@@ -40,7 +40,7 @@ public class MainPage {
 
     SelenideElement promotionsNavigationTab = navigationLinks.get(0);
     SelenideElement campaignsNavigationTab = navigationLinks.get(1);
-    SelenideElement forecastNavigationTab = navigationLinks.get(2);
+    SelenideElement forecastNavigationTab = navigationLinks.last();
 
     SelenideElement promotionsTabButton = $(byXpath(SELECTOR_PROMOTIONS_TAB));
     SelenideElement campaignsTabButton = $(byXpath(SELECTOR_CAMPAIGNS_TAB));
@@ -62,6 +62,10 @@ public class MainPage {
         return new CreatePromotionsPageObject($(SELECTOR_PROMOTIONS_PAGE_OBJECT));
     }
 
+    public CreatePromotionsPageObject getPromotionsPageObject(){
+        return new CreatePromotionsPageObject($(SELECTOR_PROMOTIONS_PAGE_OBJECT));
+    }
+
     static final String SELECTOR_ADD_PROMOTION = ".btn-add-promo";
 
     static final String SELECTOR_PROMOTIONS = ".at-promotion";
@@ -80,7 +84,7 @@ public class MainPage {
     }
 
     public ForecastPageObject navigateToForecastPage() {
-        forecastNavigationTab.click();
+        forecastNavigationTab.scrollIntoView(false).click();
         return new ForecastPageObject($(SELECTOR_FORECAST_PAGE_OBJECT));
     }
 }

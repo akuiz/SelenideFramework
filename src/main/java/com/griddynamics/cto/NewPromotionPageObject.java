@@ -9,6 +9,7 @@ import org.openqa.selenium.remote.CapabilityType;
 
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -16,7 +17,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class NewPromotionPageObject extends PageObject {
 
-    static final String SELECTOR_ADD_PROMOTION = ".btn__title";
+    static final String SELECTOR_ADD_PROMOTION = ".btn";
     static final String SELECTOR_OFFER_NAME = ".name__input";
     static final String SELECTOR_OFFER_RULE = ".rule__input";
     static final String SELECTOR_OFFER_TYPE = ".type__input";
@@ -107,5 +108,11 @@ public class NewPromotionPageObject extends PageObject {
 
     public void isVisible() {
         root.shouldBe(visible);
+    }
+
+    public void tryToAddBadPromotion(OfferModel promotion) {
+            setPromotionValues(promotion);
+            addPromotionButton.click();
+            addPromotionButton.shouldBe(disabled);
     }
 }

@@ -53,4 +53,11 @@ public class PredictionModel {
                 .build();
     }
 
+    public static PredictionModel ProductionAdriannaForecast() {
+        return new PredictionModel().toBuilder()
+                .revenue(new Pair("$739,372.45", "$920,667.55"))
+                .profit(new Pair("$301,282.04", "$352,228"))
+                .quantity(new Pair("3741", "4873"))
+                .build();
+    }
 }

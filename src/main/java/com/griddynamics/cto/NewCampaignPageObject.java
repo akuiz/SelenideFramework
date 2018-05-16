@@ -1,5 +1,6 @@
 package com.griddynamics.cto;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -11,6 +12,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -22,7 +24,7 @@ public class NewCampaignPageObject extends PageObject {
     static final String SELECTOR_START_DATE = ".start-date__input";
     static final String SELECTOR_END_DATE = ".end-date__input";
     static final String SELECTOR_PROMOTIONS = ".promotions__input";
-    static final String SELECTOR_ADD_CAMPAIGN_BUTTON = ".btn__title";
+    static final String SELECTOR_ADD_CAMPAIGN_BUTTON = ".btn";
 
     static final String SELECTOR_DATE_PICKER = ".mat-datepicker-popup";
 
@@ -47,6 +49,14 @@ public class NewCampaignPageObject extends PageObject {
         setDiscounts(campaign.getDiscounts());
         addCampaignButton.click();
     }
+
+    public void checkAddCampaignValidation(CampaignModel campaign) {
+        nameInput.setValue(campaign.getName());
+        addCampaignButton.shouldBe(disabled);
+        setDiscounts(campaign.getDiscounts());
+        addCampaignButton.shouldBe(disabled);
+    }
+
 
     private void setDates(DateTime startDate, DateTime endDate) {
         if(startDate.isBefore(formatter.parseDateTime("5/1/2018"))){

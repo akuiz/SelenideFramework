@@ -19,9 +19,57 @@ public class DiscountModel {
                 .build();
     }
 
+    public static DiscountModel TestEditCampaignDiscountBOGO() {
+        return new DiscountModel().toBuilder()
+                .name("TestEditCampaignPromotionBOGO")
+                .build();
+    }
+
+    public static DiscountModel TestEditCampaignDiscountOFF() {
+        return new DiscountModel().toBuilder()
+                .name("TestEditCampaignPromotionOFF")
+                .build();
+    }
+
     public static DiscountModel TestCampaignOFFPromotion() {
         return new DiscountModel().toBuilder()
                 .name("CreateCampaignTestPromotionOFF")
+                .build();
+    }
+
+    public static DiscountModel DiscountBOGOOnlyCampaign() {
+        return new DiscountModel().toBuilder()
+                .name("CreateCampaignTestWithBOGOPromotion")
+                .build();
+    }
+
+    public static DiscountModel DiscountOFFOnlyCampaign() {
+        return new DiscountModel().toBuilder()
+                .name("CreateCampaignTestWithOFFPromotion")
+                .build();
+    }
+
+    public static DiscountModel TestDeleteCampaignOFFDiscount() {
+        return new DiscountModel().toBuilder()
+                .name("DeleteCampaignTestPromotionOFF")
+                .build();
+    }
+
+    public static DiscountModel ForecastOFFDiscount() {
+        return new DiscountModel().toBuilder()
+                .name("ForecastTestPromotionOFF")
+                .build();
+    }
+
+    public static DiscountModel ForecastBOGODiscount() {
+        return new DiscountModel().toBuilder()
+                .name("ForecastTestPromotionBOGO")
+                .build();
+    }
+
+    public static DiscountModel TestDeleteCampaignBOGODiscount() {
+        return new DiscountModel().toBuilder()
+                .name("DeleteCampaignTestPromotionBOGO")
                 .build();
     }
 
@@ -31,4 +79,21 @@ public class DiscountModel {
                 .build();
     }
 
+    public static DiscountModel AdriannaPappell5PercentOFF() {
+        return new DiscountModel().toBuilder()
+                .name("Adrianna Papell 5% OFF")
+                .build();
+    }
+
+    public static DiscountModel DiscountBOGOSmoke() {
+        return new DiscountModel().toBuilder()
+                .name("Smoke promotion BOGO")
+                .build();
+    }
+
+    public static DiscountModel DiscountOFFSmoke() {
+        return new DiscountModel().toBuilder()
+                .name("Smoke promotion %OFF")
+                .build();
+    }
 }

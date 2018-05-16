@@ -43,6 +43,14 @@ public class CreatePromotionsPageObject extends PageObject {
         return new OfferPageObject(root.$(byText(promotion.getName())).parent());
     }
 
+    @Step("Add promotion without required parameters")
+    public void addBadPromotion(OfferModel promotion) {
+        Selenide.sleep(2000);
+        addPromotionFirstButton.click();
+        NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
+        createNewPromotionWindow.tryToAddBadPromotion(promotion);
+    }
+
     @Step("Check that promotion was successully created")
     public void checkPromotionExists(OfferModel offerModel) {
         OfferModel promotion = findOfferByName(offerModel.getName());
@@ -60,9 +68,10 @@ public class CreatePromotionsPageObject extends PageObject {
         return promotion;
     }
 
-    public void deletePromotionByName(OfferModel offerModel) {
-        OfferPageObject promotionPageObject = findOfferPageObjectByName(offerModel.getName());
+    public void deletePromotionByName(OfferModel promotion) {
+        OfferPageObject promotionPageObject = findOfferPageObjectByName(promotion.getName());
         promotionPageObject.deletePromotion();
+        checkPromotionNotExistsByName(promotion);
     }
 
     private OfferPageObject findOfferPageObjectByName(String name) {

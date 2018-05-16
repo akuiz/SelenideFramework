@@ -94,7 +94,7 @@ public class OfferPageObject extends PageObject {
     }
 
     public ArrayList<String> getBrands() {
-        ArrayList<String> brandsArrayList = new ArrayList<String>(Arrays.asList(offerRuleField.getText().split(",")));
+        ArrayList<String> brandsArrayList = new ArrayList<String>(Arrays.asList(offerRuleField.getText().split(", ")));
         return brandsArrayList;
     }
 
