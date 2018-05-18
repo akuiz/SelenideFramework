@@ -18,6 +18,27 @@ public class CampaignModel {
     private String name;
     private ArrayList<DiscountModel> discounts;
 
+    public static CampaignModel EditCampaignOrigin() {
+        return new CampaignModel().toBuilder()
+                .name("Origin campaign, dates,discounts,name should be changed")
+                .startDate(new DateTime(2018, 5, 2, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountBOGOSmoke());
+                }})
+                .build();
+    }
+    public static CampaignModel EditCampaignEdited() {
+        return new CampaignModel().toBuilder()
+                .name("Origin campaign, dates,discounts,name have been changed")
+                .startDate(new DateTime(2018, 5, 4, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 25, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
+                }})
+                .build();
+    }
+
     public static CampaignModel CampaignBOGOSmoke() {
         return new CampaignModel().toBuilder()
                 .name("Smoke campaign with BOGO promotion")
@@ -67,6 +88,18 @@ public class CampaignModel {
                 .name("Smoke campaign with %OFF and BOGO promotions")
                 .startDate(new DateTime(2018, 5, 4, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 17, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
+                    add(DiscountModel.DiscountBOGOSmoke());
+                }})
+                .build();
+    }
+
+    public static CampaignModel CampaignDateTimeTest() {
+        return new CampaignModel().toBuilder()
+                .name("Campaign with time")
+                .startDate(new DateTime(2018, 4, 4, 0, 0, 0, 0))
+                .endDate(new DateTime(2019, 6, 17, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
                     add(DiscountModel.DiscountOFFSmoke());
                     add(DiscountModel.DiscountBOGOSmoke());
@@ -134,18 +167,6 @@ public class CampaignModel {
                 .build();
     }
 
-    public static CampaignModel TestEditCampaign() {
-        return new CampaignModel().toBuilder()
-                .name("TestEditCampaign")
-                .startDate(new DateTime(2018, 5, 24, 0, 0, 0, 0))
-                .endDate(new DateTime(2018, 5, 28, 0, 0, 0, 0))
-                .discounts(new ArrayList<DiscountModel>() {{
-                    add(DiscountModel.TestEditCampaignDiscountBOGO());
-                    add(DiscountModel.TestEditCampaignDiscountOFF());
-                }})
-                .build();
-    }
-
     public static CampaignModel CampaignWithBOGOPromotion() {
         return new CampaignModel().toBuilder()
                 .name("CampaignWithBOGOPromotion")
@@ -153,17 +174,6 @@ public class CampaignModel {
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
                     add(DiscountModel.DiscountBOGOOnlyCampaign());
-                }})
-                .build();
-    }
-
-    public static CampaignModel CampaignWithOFFPromotion() {
-        return new CampaignModel().toBuilder()
-                .name("CampaignWithOFFPromotion")
-                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
-                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
-                .discounts(new ArrayList<DiscountModel>() {{
-                    add(DiscountModel.DiscountOFFOnlyCampaign());
                 }})
                 .build();
     }
@@ -186,58 +196,6 @@ public class CampaignModel {
                 .discounts(new ArrayList<DiscountModel>() {{
                     add(DiscountModel.ForecastBOGODiscount());
                     add(DiscountModel.ForecastOFFDiscount());
-                }})
-                .build();
-    }
-
-    public static CampaignModel Promo1() {
-        return new CampaignModel().toBuilder()
-                .name("1Promo")
-                .startDate(new DateTime(2018, 5, 1, 0, 0, 0, 0))
-                .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
-                .discounts(new ArrayList<DiscountModel>() {{
-                    add(DiscountModel.TestCampaignBOGODiscount());
-                    add(DiscountModel.TestCampaignOFFPromotion());
-
-                }})
-                .build();
-    }
-
-    public static CampaignModel Promo3() {
-        return new CampaignModel().toBuilder()
-                .name("3Promos")
-                .startDate(new DateTime(2018, 5, 1, 0, 0, 0, 0))
-                .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
-                .discounts(new ArrayList<DiscountModel>() {{
-                    add(DiscountModel.TestCampaignBOGODiscount());
-                    add(DiscountModel.TestCampaignOFFPromotion());
-
-                }})
-                .build();
-    }
-
-    public static CampaignModel Calvin28() {
-        return new CampaignModel().toBuilder()
-                .name("Calvin Klein with brand 28")
-                .startDate(new DateTime(2018, 5, 1, 0, 0, 0, 0))
-                .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
-                .discounts(new ArrayList<DiscountModel>() {{
-                    add(DiscountModel.TestCampaignBOGODiscount());
-                    add(DiscountModel.TestCampaignOFFPromotion());
-
-                }})
-                .build();
-    }
-
-    public static CampaignModel CalvinSpring() {
-        return new CampaignModel().toBuilder()
-                .name("Calvin Klein Spring 2018")
-                .startDate(new DateTime(2018, 5, 1, 0, 0, 0, 0))
-                .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
-                .discounts(new ArrayList<DiscountModel>() {{
-                    add(DiscountModel.TestCampaignBOGODiscount());
-                    add(DiscountModel.TestCampaignOFFPromotion());
-
                 }})
                 .build();
     }
@@ -281,30 +239,6 @@ public class CampaignModel {
                 .build();
     }
 
-    public static CampaignModel TestEditedCampaign() {
-        return new CampaignModel().toBuilder()
-                .name("Edited campaign name")
-                .startDate(new DateTime(2018, 5, 24, 0, 0, 0, 0))
-                .endDate(new DateTime(2018, 5, 28, 0, 0, 0, 0))
-                .discounts(new ArrayList<DiscountModel>() {{
-                    add(DiscountModel.TestEditCampaignDiscountBOGO());
-                    add(DiscountModel.TestEditCampaignDiscountOFF());
-
-                }})
-                .build();
-    }
-
-    public static CampaignModel Spring2018() {
-        return new CampaignModel().toBuilder()
-                .name("Spring 2018")
-                .startDate(new DateTime(2018, 5, 1, 0, 0, 0, 0))
-                .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
-                .discounts(new ArrayList<DiscountModel>() {{
-                    add(DiscountModel.Spring2018Discount());
-                }})
-                .build();
-    }
-
     public static CampaignModel ProductionAdrianna() {
         return new CampaignModel().toBuilder()
                 .name("Adrianna Papell Spring 2018")
@@ -326,6 +260,7 @@ public class CampaignModel {
                 }})
                 .build();
     }
+
 }
 
 

@@ -75,10 +75,10 @@ public class NewCampaignPageObject extends PageObject {
         datePickerPageObject.pickDate(startDate);
     }
 
-    private void setEndDate(DateTime startDate) {
+    private void setEndDate(DateTime endDate) {
         endDateInput.click();
         DatePickerPageObject datePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
-        datePickerPageObject.pickDate(startDate);
+        datePickerPageObject.pickDate(endDate);
     }
 
 

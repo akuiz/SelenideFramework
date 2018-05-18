@@ -72,7 +72,6 @@ public class CampaignTest {
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
         campaignsPage.addCampaign(CampaignModel.EditDatesCampaignOrigin());
         campaignsPage.changeCampaignDates(CampaignModel.EditDatesCampaignOrigin(), CampaignModel.EditDatesCampaignChanged().getStartDate(), CampaignModel.EditDatesCampaignChanged().getEndDate());
-        campaignsPage.checkCampaingNotExists(CampaignModel.EditDatesCampaignOrigin().getName());
         campaignsPage.checkCampaignExists(CampaignModel.EditDatesCampaignChanged());
         campaignsPage.deleteCampaignByName(CampaignModel.EditDatesCampaignChanged().getName());
     }
@@ -92,8 +91,8 @@ public class CampaignTest {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
         campaignsPage.addCampaign(CampaignModel.EditDiscountsCampaignOrigin());
-        campaignsPage.editCampaign();
-        campaignsPage.checkCampaignExists(CampaignModel.EditDiscountsCampaignEdited());
-        campaignsPage.deleteCampaignByName(CampaignModel.EditDiscountsCampaignEdited().getName());
+        campaignsPage.editCampaign(CampaignModel.EditCampaignOrigin(), CampaignModel.EditCampaignEdited());
+        campaignsPage.checkCampaignExists(CampaignModel.EditCampaignEdited());
+        campaignsPage.deleteCampaignByName(CampaignModel.EditCampaignEdited().getName());
     }
 }

@@ -91,9 +91,10 @@ public class ManageCampaignsPageObject extends PageObject {
         campaignPageObject.duplicateCampaign();
     }
 
-    public void editCampaign(CampaignModel campaignModel) {
-        CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaignModel.getName())).parent().parent());
-        campaignPageObject.editCampaign(campaignModel);
+    public void editCampaign(CampaignModel originCampaign, CampaignModel editedCampaign) {
+        CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(originCampaign.getName())).parent().parent());
+        campaignPageObject.editCampaign(editedCampaign);
+        checkCampaingNotExists(originCampaign.getName());
     }
 
     public void changeCampaignName(CampaignModel campaignModel, String name) {

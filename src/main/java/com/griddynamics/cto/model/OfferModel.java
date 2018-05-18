@@ -67,18 +67,6 @@ public class OfferModel {
                 .build();
     }
 
-    public static OfferModel CalvinKlein7OFF() {
-        return new OfferModel().toBuilder()
-                .name("Calvin Klein 8% off")
-                .brands(new ArrayList<String>() {{
-                    add("Calvin Klein");
-                    add("Free People");
-                }})
-                .type(PERCENT_OFF)
-                .value("8%")
-                .build();
-    }
-
     public static OfferModel CalvinKleinFixDiscount() {
         return new OfferModel().toBuilder()
                 .name("AT-promo-fix")
@@ -98,28 +86,6 @@ public class OfferModel {
                 }})
                 .type(PERCENT_OF_AMOUNT)
                 .value("8%")
-                .build();
-    }
-
-    public static OfferModel CalvinKlein5OFF() {
-        return new OfferModel().toBuilder()
-                .name("Calvin Klein Spring 5% off")
-                .brands(new ArrayList<String>() {{
-                    add("Free People");
-                }})
-                .type(BOGO)
-                .value("")
-                .build();
-    }
-
-    public static OfferModel SimpleBOGOPromotion() {
-        return new OfferModel().toBuilder()
-                .name("sort_test1")
-                .brands(new ArrayList<String>() {{
-                    add("Free People");
-                }})
-                .type(BOGO)
-                .value("")
                 .build();
     }
 
@@ -197,18 +163,6 @@ public class OfferModel {
                 .build();
     }
 
-    public static OfferModel EditTestModifiedNamePromotion() {
-        return new OfferModel().toBuilder()
-                .name("This is modified edit promotion test name")
-                .brands(new ArrayList<String>() {{
-                    add("Calvin Klein");
-                    add("Free People");
-                }})
-                .type(PERCENT_OFF)
-                .value("8%")
-                .build();
-    }
-
     public static OfferModel DuplicatePromotion() {
         return new OfferModel().toBuilder()
                 .name("This promotion should exists twice")
@@ -243,103 +197,6 @@ public class OfferModel {
                 .build();
     }
 
-    public static OfferModel TestCampaignBOGOPromotion() {
-        return new OfferModel().toBuilder()
-                .name("CreateCampaignTestPromotionBOGO")
-                .brands(new ArrayList<String>() {{
-                    add("Calvin Klein");
-                    add("Free People");
-                }})
-                .type(BOGO)
-                .value("")
-                .build();
-    }
-
-    public static OfferModel TestEditCampaignPromotionBOGO() {
-        return new OfferModel().toBuilder()
-                .name("TestEditCampaignPromotionBOGO")
-                .brands(new ArrayList<String>() {{
-                    add("Diesel");
-                    add("DL1961");
-                }})
-                .type(BOGO)
-                .value("")
-                .build();
-    }
-
-    public static OfferModel TestEditCampaignPromotionOFF() {
-        return new OfferModel().toBuilder()
-                .name("TestEditCampaignPromotionOFF")
-                .brands(new ArrayList<String>() {{
-                    add("Calvin Klein");
-                    add("Free People");
-                }})
-                .type(PERCENT_OFF)
-                .value("13%")
-                .build();
-    }
-
-    public static OfferModel TestCreateCampaignWithBOGOPromotion() {
-        return new OfferModel().toBuilder()
-                .name("CreateCampaignTestWithBOGOPromotion")
-                .brands(new ArrayList<String>() {{
-                    add("Diesel");
-                    add("DL1961");
-                    add("Dolce Vita");
-                }})
-                .type(BOGO)
-                .value("")
-                .build();
-    }
-
-    public static OfferModel TestCreateCampaignWithOFFPromotion() {
-        return new OfferModel().toBuilder()
-                .name("CreateCampaignTestWithOFFPromotion")
-                .brands(new ArrayList<String>() {{
-                    add("Blue Life");
-                    add("Life is Good");
-                    add("NAU");
-                }})
-                .type(PERCENT_OFF)
-                .value("12%")
-                .build();
-    }
-
-    public static OfferModel TestCampaignOFFPromotion() {
-        return new OfferModel().toBuilder()
-                .name("CreateCampaignTestPromotionOFF")
-                .brands(new ArrayList<String>() {{
-                    add("Calvin Klein");
-                    add("Free People");
-                }})
-                .type(PERCENT_OFF)
-                .value("10%")
-                .build();
-    }
-
-    public static OfferModel TestDeleteCampaignBOGOPromotion() {
-        return new OfferModel().toBuilder()
-                .name("DeleteCampaignTestPromotionBOGO")
-                .brands(new ArrayList<String>() {{
-                    add("Calvin Klein");
-                    add("Free People");
-                }})
-                .type(BOGO)
-                .value("")
-                .build();
-    }
-
-    public static OfferModel TestDeleteCampaignOFFPromotion() {
-        return new OfferModel().toBuilder()
-                .name("DeleteCampaignTestPromotionOFF")
-                .brands(new ArrayList<String>() {{
-                    add("Calvin Klein");
-                    add("Free People");
-                }})
-                .type(PERCENT_OFF)
-                .value("10%")
-                .build();
-    }
 
     public boolean isBOGO() {
         return this.getType().equals(BOGO);

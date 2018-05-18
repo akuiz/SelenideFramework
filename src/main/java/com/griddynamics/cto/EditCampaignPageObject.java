@@ -1,8 +1,8 @@
 package com.griddynamics.cto;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.DiscountModel;
 import org.joda.time.DateTime;
 
@@ -37,7 +37,12 @@ public class EditCampaignPageObject extends PageObject {
 
     SelenideElement updateCampaignButton = root.$(SELECETOR_UPDATECAMPAIGN_BUTTON);
 
-    void setDiscounts(ArrayList<DiscountModel> discounts) {
+    void changeDiscounts(ArrayList<DiscountModel> discounts) {
+        setDiscounts(discounts);
+        updateCampaignButton.click();
+    }
+
+    void setDiscounts(ArrayList<DiscountModel> discounts){
         promotionsInput.click();
         ArrayList<String> requiredDiscountNames = getDiscountNames(discounts);
         ElementsCollection discountSelection = $$(SELECTOR_PROMOTION_OPTIONS);
@@ -55,7 +60,6 @@ public class EditCampaignPageObject extends PageObject {
                 discountSelection.get(indexOfDiscount).scrollTo().click();
         }
         $(SELECTOR_BACKGROUND).click();
-        updateCampaignButton.click();
     }
 
     public ArrayList<String> getDiscountNames(ArrayList<DiscountModel> discounts){
@@ -72,6 +76,11 @@ public class EditCampaignPageObject extends PageObject {
     }
 
     public void changeDates(DateTime startDate, DateTime endDate) {
+        setDates(startDate, endDate);
+        updateCampaignButton.click();
+    }
+
+    private void setDates(DateTime startDate, DateTime endDate) {
         if (startDate.isBefore(formatter.parseDateTime("5/1/2018"))) {
             setStartDate(startDate);
             setEndDate(endDate);
@@ -79,7 +88,6 @@ public class EditCampaignPageObject extends PageObject {
             setEndDate(endDate);
             setStartDate(startDate);
         }
-        updateCampaignButton.click();
     }
 
     private void setStartDate(DateTime startDate) {
@@ -92,6 +100,14 @@ public class EditCampaignPageObject extends PageObject {
         endDateInput.click();
         DatePickerPageObject datePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
         datePickerPageObject.pickDate(startDate);
+    }
+
+    public void setValues(CampaignModel campaignModel) {
+        nameInput.setValue(campaignModel.getName());
+        setEndDate(campaignModel.getStartDate());
+        setStartDate(campaignModel.getEndDate());
+        setDiscounts(campaignModel.getDiscounts());
+        updateCampaignButton.click();
     }
 }
 

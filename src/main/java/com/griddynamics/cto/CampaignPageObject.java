@@ -129,6 +129,9 @@ public class CampaignPageObject extends PageObject {
     }
 
     public void editCampaign(CampaignModel campaignModel) {
+        actions.first().click();
+        EditCampaignPageObject editCampaignWindow = new EditCampaignPageObject($(SELECTOR_POP_UP));
+        editCampaignWindow.setValues(campaignModel);
     }
 
     public void changeCampaignName(String name) {
@@ -158,6 +161,6 @@ public class CampaignPageObject extends PageObject {
     public void changeCampaignDiscounts(ArrayList<DiscountModel> discounts) {
         actions.first().click();
         EditCampaignPageObject editCampaignWindow = new EditCampaignPageObject($(SELECTOR_POP_UP));
-        editCampaignWindow.setDiscounts(discounts);
+        editCampaignWindow.changeDiscounts(discounts);
     }
 }

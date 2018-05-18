@@ -5,6 +5,7 @@ import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.PredictionModel;
 import org.joda.time.DateTime;
 
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -40,7 +41,7 @@ public class ForecastPageObject extends PageObject {
     }
 
     public void buildForeCast() {
-        buildForecastButton.scrollIntoView(false).click();
+        buildForecastButton.shouldBe(enabled).scrollIntoView(false).click();
         waitForLoader();
     }
 
@@ -50,7 +51,7 @@ public class ForecastPageObject extends PageObject {
         $(SELECTOR_LOADER_SPINNER).waitUntil(not(visible), timeout);
     }
 
-    public void checkPrediction(PredictionModel predictionModel) {
+    public void checkForecast(PredictionModel predictionModel) {
         PredictionPageObject predictionPart = new PredictionPageObject($(SELECTOR_FORDECAST_CHARTS));
         predictionPart.checkRevenue(predictionModel.getRevenue().getKey(), predictionModel.getRevenue().getValue());
         predictionPart.checkProfit(predictionModel.getProfit().getKey(), predictionModel.getProfit().getValue());

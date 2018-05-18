@@ -19,7 +19,7 @@ public class PromotionTemplateTest {
     }
 
     @Test(description = "Add  %_off promotion test", groups = {"promotion_smoke"})
-    public void addPercentOffPromotion() {
+    public void addPercentOFFPromotion() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
         createPromotionPage.addPromotion(OfferModel.PromotionOFFSmoke());
@@ -32,7 +32,7 @@ public class PromotionTemplateTest {
         createPromotionPage.addPromotion(OfferModel.SmokePromotionBOGO());
     }
 
-    @Test(description = "Delete recentrly created promotion test")
+    @Test(description = "Delete recentrly created promotion test", dependsOnMethods = {"addPercentOFFPromotion,addBOGOPromotion"})
     public void deletePromotionTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();

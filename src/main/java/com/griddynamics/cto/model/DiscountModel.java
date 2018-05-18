@@ -19,18 +19,6 @@ public class DiscountModel {
                 .build();
     }
 
-    public static DiscountModel TestEditCampaignDiscountBOGO() {
-        return new DiscountModel().toBuilder()
-                .name("TestEditCampaignPromotionBOGO")
-                .build();
-    }
-
-    public static DiscountModel TestEditCampaignDiscountOFF() {
-        return new DiscountModel().toBuilder()
-                .name("TestEditCampaignPromotionOFF")
-                .build();
-    }
-
     public static DiscountModel TestCampaignOFFPromotion() {
         return new DiscountModel().toBuilder()
                 .name("CreateCampaignTestPromotionOFF")
@@ -43,18 +31,6 @@ public class DiscountModel {
                 .build();
     }
 
-    public static DiscountModel DiscountOFFOnlyCampaign() {
-        return new DiscountModel().toBuilder()
-                .name("CreateCampaignTestWithOFFPromotion")
-                .build();
-    }
-
-    public static DiscountModel TestDeleteCampaignOFFDiscount() {
-        return new DiscountModel().toBuilder()
-                .name("DeleteCampaignTestPromotionOFF")
-                .build();
-    }
-
     public static DiscountModel ForecastOFFDiscount() {
         return new DiscountModel().toBuilder()
                 .name("ForecastTestPromotionOFF")
@@ -64,18 +40,6 @@ public class DiscountModel {
     public static DiscountModel ForecastBOGODiscount() {
         return new DiscountModel().toBuilder()
                 .name("ForecastTestPromotionBOGO")
-                .build();
-    }
-
-    public static DiscountModel TestDeleteCampaignBOGODiscount() {
-        return new DiscountModel().toBuilder()
-                .name("DeleteCampaignTestPromotionBOGO")
-                .build();
-    }
-
-    public static DiscountModel Spring2018Discount() {
-        return new DiscountModel().toBuilder()
-                .name("Spring 5% off on $400")
                 .build();
     }
 

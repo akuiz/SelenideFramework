@@ -29,23 +29,7 @@ public class PredictionModel {
                 .build();
     }
 
-    public static PredictionModel IssueCampaignPrediction() {
-        return new PredictionModel().toBuilder()
-                .revenue(new Pair("$205,038.99", "$64,209,132.03"))
-                .profit(new Pair("$85,143.77", "$6,644,541.1"))
-                .quantity(new Pair("1184", "427424"))
-                .build();
-    }
-
-    public static PredictionModel AdriannaPrediction() {
-        return new PredictionModel().toBuilder()
-                .revenue(new Pair("$739,372.45", "$920,667.55"))
-                .profit(new Pair("$301,282.05", "$352,227.98"))
-                .quantity(new Pair("3741", "4873"))
-                .build();
-    }
-
-    public static PredictionModel SimpleForecast() {
+    public static PredictionModel SmokeForecast() {
         return new PredictionModel().toBuilder()
                 .revenue(new Pair("$344,755.34", "$343,961.61"))
                 .profit(new Pair("$112,967.34", "$112,849.91"))

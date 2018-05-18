@@ -19,8 +19,8 @@ public class DatePickerPageObject extends PageObject{
     private String month;
     private int dayToPick;
 
-    SelenideElement previousMonthButton = root.$(SELECTOR_PREVIOUS_MONTH);
-    SelenideElement nextMonthButton = root.$(SELECTOR_NEXT_MONTH);
+    SelenideElement previousMonthButton = $(SELECTOR_PREVIOUS_MONTH);
+    SelenideElement nextMonthButton = $(SELECTOR_NEXT_MONTH);
 
     public DatePickerPageObject(SelenideElement root) {
         super(root);
@@ -45,13 +45,13 @@ public class DatePickerPageObject extends PageObject{
         int monthDifference = monthOfYear - defaultMonth;
         if(monthDifference > 0){
             for (int i = 0; i < monthDifference ; i++) {
-                previousMonthButton.click();
+                nextMonthButton.click();
             }
         }
         else {
             monthDifference *= -1;
             for (int i = 0; i < monthDifference ; i++) {
-                nextMonthButton.click();
+                previousMonthButton.click();
             }
         }
     }
@@ -60,8 +60,8 @@ public class DatePickerPageObject extends PageObject{
         if(year == defaultYear) return;
         int yearDifference = year - defaultYear;
         if(yearDifference > 0){
-            for (int i = 0; i < yearDifference * 12 ; i++) {
-                previousMonthButton.click();
+            for (int i = 0; i < 12 ; i++) {
+                nextMonthButton.click();
             }
         }
         else{
