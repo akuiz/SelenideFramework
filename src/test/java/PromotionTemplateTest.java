@@ -32,7 +32,7 @@ public class PromotionTemplateTest {
         createPromotionPage.addPromotion(OfferModel.SmokePromotionBOGO());
     }
 
-    @Test(description = "Delete recentrly created promotion test", groups = {"promotion_smoke"})
+    @Test(description = "Delete recentrly created promotion test")
     public void deletePromotionTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
@@ -42,7 +42,7 @@ public class PromotionTemplateTest {
         createPromotionPage.deletePromotionByName(OfferModel.SmokeDeletePromotionOFF());
     }
 
-    @Test(description = "Update promotion name test", groups = {"promotion_smoke"}, dependsOnMethods = {"addPercentOffPromotion"})
+    @Test(description = "Update promotion name test", dependsOnMethods = {"addPercentOffPromotion"})
     public void updatePromotionNameTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
@@ -52,7 +52,7 @@ public class PromotionTemplateTest {
         createPromotionPage.deletePromotionByName(OfferModel.EditNameRenamedPromotion());
     }
 
-    @Test(description = "Update promotion type test", groups = {"promotion_smoke"})
+    @Test(description = "Update promotion type test")
     public void updatePromotionTypeTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
@@ -62,7 +62,7 @@ public class PromotionTemplateTest {
         createPromotionPage.deletePromotionByName(OfferModel.EditTypeChangedPromotionBOGO());
     }
 
-    @Test(description = "Duplicate promotion test", groups = {"promotion_smoke"})
+    @Test(description = "Duplicate promotion test")
     public void duplicatePromotionTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
@@ -70,8 +70,6 @@ public class PromotionTemplateTest {
         createPromotionPage.checkPromotionExists(OfferModel.DuplicatePromotion());
         createPromotionPage.duplicatePromotion(OfferModel.DuplicatePromotion());
         createPromotionPage.checkPromotionExistsTwice(OfferModel.DuplicatePromotion());
-        createPromotionPage.deletePromotionByName(OfferModel.DuplicatePromotion());
-        createPromotionPage.deletePromotionByName(OfferModel.DuplicatePromotion());
     }
 
     @Test(description = "Add  %_off_amount promotion test", enabled = false, groups = {"promotion_smoke"})

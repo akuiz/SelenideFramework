@@ -1,11 +1,14 @@
 package com.griddynamics.cto;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.DiscountModel;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -21,6 +24,8 @@ public class EditCampaignPageObject extends PageObject {
     static final String SELECTOR_PROMOTIONS = ".promotions__input";
     static final String SELECETOR_UPDATECAMPAIGN_BUTTON = ".btn__title";
 
+    static final String SELECTOR_DATE_PICKER = ".mat-datepicker-popup";
+
     static final String SELECTOR_PROMOTION_OPTIONS = ".mat-option-text";
 
     static final String SELECTOR_BACKGROUND = ".cdk-overlay-container";
@@ -34,16 +39,59 @@ public class EditCampaignPageObject extends PageObject {
 
     void setDiscounts(ArrayList<DiscountModel> discounts) {
         promotionsInput.click();
+        ArrayList<String> requiredDiscountNames = getDiscountNames(discounts);
         ElementsCollection discountSelection = $$(SELECTOR_PROMOTION_OPTIONS);
+        for (SelenideElement selectedDiscount : discountSelection){
+            if (selectedDiscount.parent().getAttribute("aria-selected").equals("true")) {
+                if (!requiredDiscountNames.contains(selectedDiscount.getText())) {
+                    int indexOfDiscountToUnhceck = discountSelection.texts().indexOf(selectedDiscount.getText());
+                    discountSelection.get(indexOfDiscountToUnhceck).scrollTo().click();
+                }
+            }
+        }
         for (DiscountModel discount : discounts) {
-            int indexOfBrand = discountSelection.texts().indexOf(discount.getName());
-            discountSelection.get(indexOfBrand).scrollTo().click();
+            int indexOfDiscount = discountSelection.texts().indexOf(discount.getName());
+            if (!discountSelection.get(indexOfDiscount).parent().getAttribute("aria-selected").equals("true"))
+                discountSelection.get(indexOfDiscount).scrollTo().click();
         }
         $(SELECTOR_BACKGROUND).click();
+        updateCampaignButton.click();
+    }
+
+    public ArrayList<String> getDiscountNames(ArrayList<DiscountModel> discounts){
+        ArrayList<String> discountNames = new ArrayList<>();
+        for (DiscountModel discount : discounts){
+            discountNames.add(discount.getName());
+        }
+        return discountNames;
     }
 
     public void changeName(String name) {
         nameInput.setValue(name);
         updateCampaignButton.click();
     }
+
+    public void changeDates(DateTime startDate, DateTime endDate) {
+        if (startDate.isBefore(formatter.parseDateTime("5/1/2018"))) {
+            setStartDate(startDate);
+            setEndDate(endDate);
+        } else {
+            setEndDate(endDate);
+            setStartDate(startDate);
+        }
+        updateCampaignButton.click();
+    }
+
+    private void setStartDate(DateTime startDate) {
+        startDateInput.click();
+        DatePickerPageObject datePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
+        datePickerPageObject.pickDate(startDate);
+    }
+
+    private void setEndDate(DateTime startDate) {
+        endDateInput.click();
+        DatePickerPageObject datePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
+        datePickerPageObject.pickDate(startDate);
+    }
 }
+

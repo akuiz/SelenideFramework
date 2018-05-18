@@ -148,4 +148,16 @@ public class CampaignPageObject extends PageObject {
         predictionWindow.checkProfit(predictionModel.getProfit().getKey(), predictionModel.getProfit().getValue());
         predictionWindow.checkQuantity(predictionModel.getQuantity().getKey(), predictionModel.getQuantity().getValue());
     }
+
+    public void changeCampaignDates(DateTime startDate, DateTime endDate) {
+        actions.first().click();
+        EditCampaignPageObject editCampaignWindow = new EditCampaignPageObject($(SELECTOR_POP_UP));
+        editCampaignWindow.changeDates(startDate, endDate);
+    }
+
+    public void changeCampaignDiscounts(ArrayList<DiscountModel> discounts) {
+        actions.first().click();
+        EditCampaignPageObject editCampaignWindow = new EditCampaignPageObject($(SELECTOR_POP_UP));
+        editCampaignWindow.setDiscounts(discounts);
+    }
 }

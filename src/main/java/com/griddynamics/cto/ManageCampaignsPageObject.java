@@ -4,7 +4,9 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.CampaignModel;
+import com.griddynamics.cto.model.DiscountModel;
 import com.griddynamics.cto.model.OfferModel;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
@@ -32,7 +34,7 @@ public class ManageCampaignsPageObject extends PageObject {
     }
 
     public CampaignPageObject addCampaign(CampaignModel campaign) {
-        Selenide.sleep(1000);
+        Selenide.sleep(3000);
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.addCampaign(campaign);
@@ -97,6 +99,7 @@ public class ManageCampaignsPageObject extends PageObject {
     public void changeCampaignName(CampaignModel campaignModel, String name) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaignModel.getName())).parent().parent());
         campaignPageObject.changeCampaignName(name);
+        checkCampaingNotExists(campaignModel.getName());
     }
 
     public CampaignPageObject getCampaignByName(String name) {
@@ -109,5 +112,15 @@ public class ManageCampaignsPageObject extends PageObject {
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.checkAddCampaignValidation(campaignModel);
+    }
+
+    public void changeCampaignDates(CampaignModel campaignModel, DateTime startDate, DateTime endDate) {
+        CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaignModel.getName())).parent().parent());
+        campaignPageObject.changeCampaignDates(startDate, endDate);
+    }
+
+    public void changeCampaignDiscounts(CampaignModel campaignModel, ArrayList<DiscountModel> discounts) {
+        CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaignModel.getName())).parent().parent());
+        campaignPageObject.changeCampaignDiscounts(discounts);
     }
 }

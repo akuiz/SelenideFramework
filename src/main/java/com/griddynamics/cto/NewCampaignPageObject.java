@@ -23,7 +23,7 @@ public class NewCampaignPageObject extends PageObject {
     static final String SELECTOR_CAMPAIGN_NAME = ".name__input";
     static final String SELECTOR_START_DATE = ".start-date__input";
     static final String SELECTOR_END_DATE = ".end-date__input";
-    static final String SELECTOR_PROMOTIONS = ".promotions__input";
+    static final String SELECTOR_PROMOTIONS = ".promotions";
     static final String SELECTOR_ADD_CAMPAIGN_BUTTON = ".btn";
 
     static final String SELECTOR_DATE_PICKER = ".mat-datepicker-popup";

@@ -30,109 +30,70 @@ public class CampaignTest {
     public void addCampaign() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        campaignsPage.addCampaign(CampaignModel.CampaignOFFSmoke());
+        campaignsPage.addCampaign(CampaignModel.CampaignOFFBOGOSmoke());
     }
 
-    @Test(description = "Add campaign with OFF promotion")
-    public void addCampaignWithOFFPromotion() {
-        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
-        CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
-        createPromotionPage.addPromotion(OfferModel.TestCreateCampaignWithOFFPromotion());
-        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        campaignsPage.addCampaign(CampaignModel.CampaignWithOFFPromotion());
-    }
-
-    @Test(description = "Remove campaign test")
+    @Test(description = "Remove campaign test", dependsOnGroups = {"promotion_smoke"}, groups = {"campaign_smoke"}, dependsOnMethods = {"addCampaign"})
     public void deleteCampaignTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
-        CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
-        createPromotionPage.addPromotion(OfferModel.TestDeleteCampaignBOGOPromotion());
-        createPromotionPage.addPromotion(OfferModel.TestDeleteCampaignOFFPromotion());
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        campaignsPage.addCampaign(CampaignModel.TestDeleteCampaign());
-        campaignsPage.deleteCampaignByName(CampaignModel.TestDeleteCampaign().getName());
+        campaignsPage.addCampaign(CampaignModel.CampaignDeleteSmoke());
+        campaignsPage.deleteCampaignByName(CampaignModel.CampaignDeleteSmoke().getName());
     }
 
-    @Test(description = "Campaign with empty name and no promotions should not be added")
+    @Test(description = "Campaign with empty name and no promotions should not be added", groups = {"campaign_smoke"})
     public void addCampaignValidationTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
         campaignsPage.addCampaignValidationCheck(CampaignModel.ValidationCheckCampaign());
     }
 
-        @Test(description = "Duplicate campaign test", enabled = false)
-    public void duplicateCampaignTest() {
-        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
-        CreatePromotionsPageObject createPromotionPage = mainPage.navigateToCreatePromotionsPage();
-        createPromotionPage.addPromotion(OfferModel.TestCampaignBOGOPromotion());
-        createPromotionPage.addPromotion(OfferModel.TestCampaignOFFPromotion());
-        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        campaignsPage.addCampaign(CampaignModel.TestCreateCampaign());
-        campaignsPage.duplicateCampaign(CampaignModel.TestCreateCampaign());
-        campaignsPage.checkCampaignExistsTwice(CampaignModel.TestCreateCampaign());
-    }
-
-    @Test(description = "Edit campaign name test", enabled = false)
-    public void editCampaignNameTest() {
-        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
-        CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
-        createPromotionPage.addPromotion(OfferModel.TestEditCampaignPromotionBOGO());
-        createPromotionPage.addPromotion(OfferModel.TestEditCampaignPromotionOFF());
-        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        campaignsPage.addCampaign(CampaignModel.TestEditCampaign());
-        campaignsPage.changeCampaignName(CampaignModel.TestEditCampaign(), CampaignModel.TestEditedCampaign().getName());
-        campaignsPage.checkCampaingNotExists(CampaignModel.TestEditCampaign().getName());
-        campaignsPage.checkCampaignExists(CampaignModel.TestEditedCampaign());
-    }
-
-    @Test(description = "Edit campaign discounts test", enabled = false)
-    public void editCampaignDiscountsTest() {
-        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
-        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        campaignsPage.addCampaign(CampaignModel.TestEditCampaign());
-        campaignsPage.changeCampaignName(CampaignModel.TestEditCampaign(), CampaignModel.TestEditedCampaign().getName());
-        campaignsPage.checkCampaingNotExists(CampaignModel.TestEditCampaign().getName());
-        campaignsPage.checkCampaignExists(CampaignModel.TestEditedCampaign());
-    }
-
-    @Test(description = "Edit campaign dates test", enabled = false)
-    public void editCampaignDatesTest() {
-        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
-        CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
-        createPromotionPage.addPromotion(OfferModel.TestEditCampaignPromotionBOGO());
-        createPromotionPage.addPromotion(OfferModel.TestEditCampaignPromotionOFF());
-        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        campaignsPage.addCampaign(CampaignModel.TestEditCampaign());
-        campaignsPage.changeCampaignName(CampaignModel.TestEditCampaign(), CampaignModel.TestEditedCampaign().getName());
-        campaignsPage.checkCampaingNotExists(CampaignModel.TestEditCampaign().getName());
-        campaignsPage.checkCampaignExists(CampaignModel.TestEditedCampaign());
-    }
-
-    @Test(description = "Edit campaign dates test", enabled = false)
-    public void editCampaignTest() {
-        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
-        CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
-        createPromotionPage.addPromotion(OfferModel.TestEditCampaignPromotionBOGO());
-        createPromotionPage.addPromotion(OfferModel.TestEditCampaignPromotionOFF());
-        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        campaignsPage.addCampaign(CampaignModel.TestEditCampaign());
-        campaignsPage.changeCampaignName(CampaignModel.TestEditCampaign(), CampaignModel.TestEditedCampaign().getName());
-        campaignsPage.checkCampaingNotExists(CampaignModel.TestEditCampaign().getName());
-        campaignsPage.checkCampaignExists(CampaignModel.TestEditedCampaign());
-    }
-
-    @Test(description = "Campaign check test", enabled = false)
-    public void campaignExistsCheck() {
-        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
-        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        campaignsPage.checkCampaignExists(CampaignModel.Spring2018());
-    }
-
-    @Test(description = "Check Campaign Prediction")
+    @Test(description = "Check Campaign Prediction", dependsOnMethods = {"addCampaign"}, groups = {"campaign_smoke"})
     public void checkPrediction() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        CampaignPageObject campaign = campaignsPage.getCampaignByName(CampaignModel.IssueCampaign().getName());
+        CampaignPageObject campaign = campaignsPage.getCampaignByName(CampaignModel.CampaignOFFBOGOSmoke().getName());
         campaign.checkPrediction(PredictionModel.Test2PromotPrediction());
+    }
+
+    @Test(description = "Edit campaign name test", dependsOnGroups = {"promotion_smoke"}, dependsOnMethods = {"addCampaign"}, groups = {"campaign_smoke"})
+    public void editCampaignNameTest() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        campaignsPage.addCampaign(CampaignModel.EditNameCampaignOrigin());
+        campaignsPage.changeCampaignName(CampaignModel.EditNameCampaignOrigin(), CampaignModel.EditNameCampaignRenamed().getName());
+        campaignsPage.checkCampaignExists(CampaignModel.EditNameCampaignRenamed());
+        campaignsPage.deleteCampaignByName(CampaignModel.EditNameCampaignRenamed().getName());
+    }
+
+    @Test(description = "Edit campaign dates test", dependsOnGroups = {"promotion_smoke"}, dependsOnMethods = {"addCampaign"}, groups = {"campaign_smoke"})
+    public void editCampaignDatesTest() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        campaignsPage.addCampaign(CampaignModel.EditDatesCampaignOrigin());
+        campaignsPage.changeCampaignDates(CampaignModel.EditDatesCampaignOrigin(), CampaignModel.EditDatesCampaignChanged().getStartDate(), CampaignModel.EditDatesCampaignChanged().getEndDate());
+        campaignsPage.checkCampaingNotExists(CampaignModel.EditDatesCampaignOrigin().getName());
+        campaignsPage.checkCampaignExists(CampaignModel.EditDatesCampaignChanged());
+        campaignsPage.deleteCampaignByName(CampaignModel.EditDatesCampaignChanged().getName());
+    }
+
+    @Test(description = "Edit campaign discounts test", dependsOnGroups = {"promotion_smoke"}, dependsOnMethods = {"addCampaign"}, groups = {"campaign_smoke"})
+    public void editCampaignDiscountsTest() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        campaignsPage.addCampaign(CampaignModel.EditDiscountsCampaignOrigin());
+        campaignsPage.changeCampaignDiscounts(CampaignModel.EditDiscountsCampaignOrigin(), CampaignModel.EditDiscountsCampaignEdited().getDiscounts());
+        campaignsPage.checkCampaignExists(CampaignModel.EditDiscountsCampaignEdited());
+        campaignsPage.deleteCampaignByName(CampaignModel.EditDiscountsCampaignEdited().getName());
+    }
+
+    @Test(description = "Edit campaign's name,dates,discounts", dependsOnGroups = {"promotion_smoke"}, dependsOnMethods = {"addCampaign"}, groups = {"campaign_smoke"})
+    public void editCampaignTest() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        campaignsPage.addCampaign(CampaignModel.EditDiscountsCampaignOrigin());
+        campaignsPage.editCampaign();
+        campaignsPage.checkCampaignExists(CampaignModel.EditDiscountsCampaignEdited());
+        campaignsPage.deleteCampaignByName(CampaignModel.EditDiscountsCampaignEdited().getName());
     }
 }

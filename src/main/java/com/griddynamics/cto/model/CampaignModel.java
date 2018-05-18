@@ -24,7 +24,29 @@ public class CampaignModel {
                 .startDate(new DateTime(2018, 5, 2, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
-                    DiscountModel.DiscountBOGOSmoke();
+                    add(DiscountModel.DiscountBOGOSmoke());
+                }})
+                .build();
+    }
+
+    public static CampaignModel EditDiscountsCampaignOrigin() {
+        return new CampaignModel().toBuilder()
+                .name("Discounts should be changed")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
+                }})
+                .build();
+    }
+
+    public static CampaignModel EditDiscountsCampaignEdited() {
+        return new CampaignModel().toBuilder()
+                .name("Discounts should be changed")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountBOGOSmoke());
                 }})
                 .build();
     }
@@ -35,7 +57,7 @@ public class CampaignModel {
                 .startDate(new DateTime(2018, 5, 3, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 27, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
-                    DiscountModel.DiscountOFFSmoke();
+                    add(DiscountModel.DiscountOFFSmoke());
                 }})
                 .build();
     }
@@ -46,8 +68,68 @@ public class CampaignModel {
                 .startDate(new DateTime(2018, 5, 4, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 17, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
-                    DiscountModel.DiscountOFFSmoke();
-                    DiscountModel.DiscountBOGOSmoke();
+                    add(DiscountModel.DiscountOFFSmoke());
+                    add(DiscountModel.DiscountBOGOSmoke());
+                }})
+                .build();
+    }
+
+    public static CampaignModel CampaignDeleteSmoke() {
+        return new CampaignModel().toBuilder()
+                .name("This campaign should be deleted")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
+                    add(DiscountModel.DiscountBOGOSmoke());
+                }})
+                .build();
+    }
+
+    public static CampaignModel EditNameCampaignOrigin() {
+        return new CampaignModel().toBuilder()
+                .name("This campaign should be renamed")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
+                    add(DiscountModel.DiscountBOGOSmoke());
+                }})
+                .build();
+    }
+
+    public static CampaignModel EditNameCampaignRenamed() {
+        return new CampaignModel().toBuilder()
+                .name("This campaign has been renamed")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
+                    add(DiscountModel.DiscountBOGOSmoke());
+                }})
+                .build();
+    }
+
+    public static CampaignModel EditDatesCampaignOrigin() {
+        return new CampaignModel().toBuilder()
+                .name("Campaign's dates should be changed")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
+                    add(DiscountModel.DiscountBOGOSmoke());
+                }})
+                .build();
+    }
+
+    public static CampaignModel EditDatesCampaignChanged() {
+        return new CampaignModel().toBuilder()
+                .name("Campaign's dates should be changed")
+                .startDate(new DateTime(2018, 5, 2, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 18, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
+                    add(DiscountModel.DiscountBOGOSmoke());
                 }})
                 .build();
     }
@@ -104,18 +186,6 @@ public class CampaignModel {
                 .discounts(new ArrayList<DiscountModel>() {{
                     add(DiscountModel.ForecastBOGODiscount());
                     add(DiscountModel.ForecastOFFDiscount());
-                }})
-                .build();
-    }
-
-    public static CampaignModel TestDeleteCampaign() {
-        return new CampaignModel().toBuilder()
-                .name("TestDeleteCampaign")
-                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
-                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
-                .discounts(new ArrayList<DiscountModel>() {{
-                    add(DiscountModel.TestDeleteCampaignBOGODiscount());
-                    add(DiscountModel.TestDeleteCampaignOFFDiscount());
                 }})
                 .build();
     }
@@ -256,8 +326,6 @@ public class CampaignModel {
                 }})
                 .build();
     }
-
-
 }
 
 
