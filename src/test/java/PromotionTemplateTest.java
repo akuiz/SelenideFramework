@@ -12,57 +12,64 @@ public class PromotionTemplateTest {
     private static final EnvironmentConfig environmentConfig = Configuration.INSTANCE.getEnvironmentConfig();
 
     @Test(description = "Promotion with no brands should not be added", groups = {"promotion_smoke"})
-    public void addEmptyPromotion() {
+    public void addPromotionWithNoBrands() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
-        createPromotionPage.addBadPromotion(OfferModel.PromotionWithNoBrands());
+        createPromotionPage.addPromotionWithoutBrands(OfferModel.PromotionWithNoBrands());
     }
 
-    @Test(description = "Add  %_off promotion test", groups = {"promotion_smoke"})
+    @Test(description = "Promotion with empty name should not be added", groups = {"promotion_smoke"})
+    public void addPromotionWithEmptyName() {
+        MainPage mainPage = open("http://35.196.70.251:4200/promo", MainPage.class);
+        CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
+        createPromotionPage.addPromotionWithoutName(OfferModel.PromotionWithEmptyName());
+    }
+
+    @Test(description = "Promotion with %OFF type should be successfully aded", groups = {"promotion_smoke", "create_promotion"})
     public void addPercentOFFPromotion() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
         createPromotionPage.addPromotion(OfferModel.PromotionOFFSmoke());
     }
 
-    @Test(description = "Add BOGO promotion test", groups = {"promotion_smoke"})
+    @Test(description = "Add BOGO promotion test", groups = {"promotion_smoke", "create_promotion"})
     public void addBOGOPromotion() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
         createPromotionPage.addPromotion(OfferModel.SmokePromotionBOGO());
     }
 
-    @Test(description = "Delete recentrly created promotion test", dependsOnMethods = {"addPercentOFFPromotion,addBOGOPromotion"})
+    @Test(description = "Delete recentrly created promotion test", groups = {"promotion_smoke"})
     public void deletePromotionTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
         createPromotionPage.addPromotion(OfferModel.SmokeDeletePromotionOFF());
         createPromotionPage.addPromotion(OfferModel.SmokeDeletePromotionBOGO());
-        createPromotionPage.deletePromotionByName(OfferModel.SmokeDeletePromotionBOGO());
-        createPromotionPage.deletePromotionByName(OfferModel.SmokeDeletePromotionOFF());
+        createPromotionPage.deletePromotion(OfferModel.SmokeDeletePromotionBOGO().getName());
+        createPromotionPage.deletePromotion(OfferModel.SmokeDeletePromotionOFF().getName());
     }
 
-    @Test(description = "Update promotion name test", dependsOnMethods = {"addPercentOffPromotion"})
+    @Test(description = "Update promotion name test", groups = {"promotion_smoke"})
     public void updatePromotionNameTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
         createPromotionPage.addPromotion(OfferModel.EditNameOriginPromotion());
-        createPromotionPage.updatePromotionByName(OfferModel.EditNameOriginPromotion().getName(), OfferModel.EditNameRenamedPromotion().getName());
+        createPromotionPage.updatePromotionName(OfferModel.EditNameOriginPromotion(), OfferModel.EditNameRenamedPromotion().getName());
         createPromotionPage.checkPromotionExists(OfferModel.EditNameRenamedPromotion());
-        createPromotionPage.deletePromotionByName(OfferModel.EditNameRenamedPromotion());
+        createPromotionPage.deletePromotion(OfferModel.EditNameRenamedPromotion().getName());
     }
 
-    @Test(description = "Update promotion type test")
+    @Test(description = "Update promotion type test", groups = {"promotion_smoke"})
     public void updatePromotionTypeTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
         createPromotionPage.addPromotion(OfferModel.EditTypeOriginPromotionOFF());
         createPromotionPage.updatePromotion(OfferModel.EditTypeOriginPromotionOFF(), OfferModel.EditTypeChangedPromotionBOGO());
         createPromotionPage.checkPromotionExists(OfferModel.EditTypeChangedPromotionBOGO());
-        createPromotionPage.deletePromotionByName(OfferModel.EditTypeChangedPromotionBOGO());
+        createPromotionPage.deletePromotion(OfferModel.EditTypeChangedPromotionBOGO().getName());
     }
 
-    @Test(description = "Duplicate promotion test")
+    @Test(description = "Duplicate promotion test", groups = {"promotion_smoke"})
     public void duplicatePromotionTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();

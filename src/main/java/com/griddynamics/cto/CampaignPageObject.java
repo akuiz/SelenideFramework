@@ -7,6 +7,7 @@ import com.griddynamics.cto.model.DiscountModel;
 import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.OfferModel;
 import com.griddynamics.cto.model.PredictionModel;
+import io.qameta.allure.Step;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -140,6 +141,7 @@ public class CampaignPageObject extends PageObject {
         editCampaignWindow.changeName(name);
     }
 
+    @Step("Check prediction of the campaign")
     public void checkPrediction(PredictionModel predictionModel) {
         this.expand();
         predictionButton.shouldBe(Condition.enabled).click();

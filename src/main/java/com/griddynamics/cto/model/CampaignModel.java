@@ -178,12 +178,23 @@ public class CampaignModel {
                 .build();
     }
 
-    public static CampaignModel ValidationCheckCampaign() {
+    public static CampaignModel CampaignWithNoDiscounts() {
+        return new CampaignModel().toBuilder()
+                .name("Campaign with no discounts")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                }})
+                .build();
+    }
+
+    public static CampaignModel CampaignWithEmptyName() {
         return new CampaignModel().toBuilder()
                 .name("")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
                 }})
                 .build();
     }

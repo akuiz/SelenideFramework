@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.DiscountModel;
 import com.griddynamics.cto.model.OfferModel;
+import io.qameta.allure.Step;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -33,8 +34,9 @@ public class ManageCampaignsPageObject extends PageObject {
         super(root);
     }
 
+    @Step("Add campaign")
     public CampaignPageObject addCampaign(CampaignModel campaign) {
-        Selenide.sleep(3000);
+        Selenide.sleep(2000);
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.addCampaign(campaign);
@@ -59,11 +61,13 @@ public class ManageCampaignsPageObject extends PageObject {
         return campaigns;
     }
 
+    @Step("Make sure campaign was successfully created/updated")
     public void checkCampaignExists(CampaignModel expectedCampaign) {
         CampaignModel actualCampaign = findCampaignByName(expectedCampaign.getName());
         assertThat(actualCampaign).isSameCampaignAs(expectedCampaign);
     }
 
+    @Step("Find campaign with name {name}")
     private CampaignModel findCampaignByName(String name) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(name)).parent().parent());
         campaignPageObject.expand();
@@ -76,12 +80,14 @@ public class ManageCampaignsPageObject extends PageObject {
         return campaign;
     }
 
+    @Step("Delete campaign with name {name}")
     public void deleteCampaignByName(String name) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(name)).parent().parent());
         campaignPageObject.delete();
         checkCampaingNotExists(name);
     }
 
+    @Step("Make sure there is no campaign with name: {name}")
     public void checkCampaingNotExists(String name) {
         $(byText(name)).shouldNot(exist);
     }
@@ -91,37 +97,58 @@ public class ManageCampaignsPageObject extends PageObject {
         campaignPageObject.duplicateCampaign();
     }
 
+    @Step("Replace campaign with another")
     public void editCampaign(CampaignModel originCampaign, CampaignModel editedCampaign) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(originCampaign.getName())).parent().parent());
         campaignPageObject.editCampaign(editedCampaign);
         checkCampaingNotExists(originCampaign.getName());
     }
 
+    @Step("Change campaign name to {name}")
     public void changeCampaignName(CampaignModel campaignModel, String name) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaignModel.getName())).parent().parent());
         campaignPageObject.changeCampaignName(name);
         checkCampaingNotExists(campaignModel.getName());
     }
 
+    @Step("Find campaign with name {name}")
     public CampaignPageObject getCampaignByName(String name) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(name)).parent().parent());
         return campaignPageObject;
     }
 
     public void addCampaignValidationCheck(CampaignModel campaignModel) {
-        Selenide.sleep(1000);
+        Selenide.sleep(2000);
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.checkAddCampaignValidation(campaignModel);
     }
 
+    @Step("Change campaign dates")
     public void changeCampaignDates(CampaignModel campaignModel, DateTime startDate, DateTime endDate) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaignModel.getName())).parent().parent());
         campaignPageObject.changeCampaignDates(startDate, endDate);
     }
 
+    @Step("Change campaign dates")
     public void changeCampaignDiscounts(CampaignModel campaignModel, ArrayList<DiscountModel> discounts) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaignModel.getName())).parent().parent());
         campaignPageObject.changeCampaignDiscounts(discounts);
+    }
+
+    @Step("Add campaign without name")
+    public void addCampaignWithEmptyName(CampaignModel campaignModel) {
+        Selenide.sleep(2000);
+        addCampaignFirstButton.click();
+        NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
+        createNewCampaignWindow.addBadCampaign(campaignModel);
+    }
+
+    @Step("Add campaign without discounts")
+    public void addCampaignWithNoDiscounts(CampaignModel campaignModel) {
+        Selenide.sleep(2000);
+        addCampaignFirstButton.click();
+        NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
+        createNewCampaignWindow.addBadCampaign(campaignModel);
     }
 }

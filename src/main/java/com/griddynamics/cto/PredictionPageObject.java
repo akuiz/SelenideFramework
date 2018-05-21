@@ -1,6 +1,7 @@
 package com.griddynamics.cto;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.joda.time.DateTime;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -46,17 +47,20 @@ public class PredictionPageObject extends PageObject {
         assertThat(quantityPrediction.getText()).isEqualTo(quantity);
     }
 
+    @Step("Make sure that revenue is equal to expected value")
     public void checkRevenue(String expectedBaseLine, String expectedPrediction) {
         revenueBaseline.waitUntil(visible, timeout);
         assertThat(revenueBaseline.getText()).isEqualTo(expectedBaseLine);
         assertThat(revenuePrediction.getText()).isEqualTo(expectedPrediction);
     }
 
+    @Step("Make sure that profit is equal to expected value")
     public void checkProfit(String expectedBaseLine, String expectedPrediction) {
         assertThat(profitBaseline.getText()).isEqualTo(expectedBaseLine);
         assertThat(profitPrediction.getText()).isEqualTo(expectedPrediction);
     }
 
+    @Step("Make sure that quantity is equal to expected value")
     public void checkQuantity(String expectedBaseLine, String expectedPrediction) {
         assertThat(quantityBaseline.getText()).isEqualTo(expectedBaseLine);
         assertThat(quantityPrediction.getText()).isEqualTo(expectedPrediction);

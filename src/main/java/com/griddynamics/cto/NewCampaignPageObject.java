@@ -1,14 +1,14 @@
 package com.griddynamics.cto;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
 import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.DiscountModel;
+import io.qameta.allure.Step;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import java.util.ArrayList;
 
@@ -57,7 +57,6 @@ public class NewCampaignPageObject extends PageObject {
         addCampaignButton.shouldBe(disabled);
     }
 
-
     private void setDates(DateTime startDate, DateTime endDate) {
         if(startDate.isBefore(formatter.parseDateTime("5/1/2018"))){
             setStartDate(startDate);
@@ -81,7 +80,6 @@ public class NewCampaignPageObject extends PageObject {
         datePickerPageObject.pickDate(endDate);
     }
 
-
     void setDiscounts(ArrayList<DiscountModel> discounts) {
         promotionsInput.click();
         ElementsCollection discountSelection = $$(SELECTOR_PROMOTION_OPTIONS);
@@ -90,5 +88,31 @@ public class NewCampaignPageObject extends PageObject {
             discountSelection.get(indexOfBrand).scrollTo().click();
         }
         $(SELECTOR_BACKGROUND).click();
+    }
+
+    @Step("Make sure that 'Add Campaign' button is disabled after filling values")
+    public void addBadCampaign(CampaignModel campaignModel) {
+        setCampaignValues(campaignModel);
+        addCampaignButton.shouldBe(disabled);
+    }
+
+    private void setCampaignValues(CampaignModel campaign) {
+        setName(campaign.getName());
+        setDiscounts(campaign.getDiscounts());
+        setDates(campaign.getStartDate(), campaign.getEndDate());
+    }
+
+    private void setName(String name) {
+        if("".equals(name)){
+            clearNameInputValue();
+        }
+        else {
+            nameInput.setValue(name);
+        }
+    }
+
+    private void clearNameInputValue() {
+        WebDriverRunner.getWebDriver().findElement(By.cssSelector(SELECTOR_CAMPAIGN_NAME)).sendKeys(Keys.chord(Keys.COMMAND,"a"));
+        WebDriverRunner.getWebDriver().findElement(By.cssSelector(SELECTOR_CAMPAIGN_NAME)).sendKeys(Keys.BACK_SPACE);
     }
 }

@@ -17,7 +17,6 @@ public class ForecastPageObject extends PageObject {
         super(root);
     }
 
-
     static final String SELECTOR_START_DATE = ".start-date__input";
     static final String SELECTOR_END_DATE = ".end-date__input";
     final static String SELECTOR_BUILD_FORECAST = ".btn__title";
@@ -43,12 +42,6 @@ public class ForecastPageObject extends PageObject {
     public void buildForeCast() {
         buildForecastButton.shouldBe(enabled).scrollIntoView(false).click();
         waitForLoader();
-    }
-
-
-    private void waitForLoader() {
-        $(SELECTOR_LOADER_SPINNER).shouldBe(visible);
-        $(SELECTOR_LOADER_SPINNER).waitUntil(not(visible), timeout);
     }
 
     public void checkForecast(PredictionModel predictionModel) {

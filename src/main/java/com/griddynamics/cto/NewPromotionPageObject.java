@@ -1,27 +1,27 @@
 package com.griddynamics.cto;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import com.griddynamics.cto.model.OfferModel;
 import io.qameta.allure.Step;
-import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class NewPromotionPageObject extends PageObject {
 
     static final String SELECTOR_ADD_PROMOTION = ".btn";
-    static final String SELECTOR_OFFER_NAME = ".name__input";
-    static final String SELECTOR_OFFER_RULE = ".rule__input";
-    static final String SELECTOR_OFFER_TYPE = ".type__input";
-    static final String SELECTOR_OFFER_VALUE = ".value__input";
+    static final String SELECTOR_PROMOTION_NAME = ".name__input";
+    static final String SELECTOR_PROMOTION_RULE = ".rule__input";
+    static final String SELECTOR_RPOMOTION_TYPE = ".type__input";
+    static final String SELECTOR_PROMOTION_VALUE = ".value__input";
 
     static final String SELECTOR_BACKGROUND = ".cdk-overlay-container";
 
@@ -33,10 +33,10 @@ public class NewPromotionPageObject extends PageObject {
 
     SelenideElement addPromotionButton = root.$(SELECTOR_ADD_PROMOTION);
 
-    SelenideElement offerNameInput = root.$(SELECTOR_OFFER_NAME);
-    SelenideElement offerRuleInput = root.$(SELECTOR_OFFER_RULE);
-    SelenideElement offerTypeInput = root.$(SELECTOR_OFFER_TYPE);
-    SelenideElement offerValueInput = root.$(SELECTOR_OFFER_VALUE);
+    SelenideElement promotionNameInput = root.$(SELECTOR_PROMOTION_NAME);
+    SelenideElement promotionRuleInput = root.$(SELECTOR_PROMOTION_RULE);
+    SelenideElement promotionTypeInput = root.$(SELECTOR_RPOMOTION_TYPE);
+    SelenideElement promotionValueInput = root.$(SELECTOR_PROMOTION_VALUE);
 
     SelenideElement closeWindowButton = root.$(SELECTOR_CLOSE_WINDOW);
 
@@ -45,15 +45,19 @@ public class NewPromotionPageObject extends PageObject {
     }
 
     public void setOfferName(String name) {
-        offerNameInput.setValue(name);
+        if ("".equals(name)) {
+            clearNameInputValue();
+        } else {
+            promotionNameInput.setValue(name);
+        }
     }
 
     public String getOfferName() {
-        return offerNameInput.getValue();
+        return promotionNameInput.getValue();
     }
 
     public void setOfferType(OfferType type) {
-        offerTypeInput.click();
+        promotionTypeInput.click();
         switch (type) {
             case PERCENT_OFF:
                 $$(SELECTOR_OPTIONS).get(0).click();
@@ -71,12 +75,12 @@ public class NewPromotionPageObject extends PageObject {
     }
 
     public void setOfferValue(String value) {
-        if (value != null) offerValueInput.setValue(value);
+        if (value != null) promotionValueInput.setValue(value);
         else return;
     }
 
     public String getOfferValue() {
-        return offerValueInput.getValue();
+        return promotionValueInput.getValue();
     }
 
     @Step("Close add promotion dialog")
@@ -85,14 +89,14 @@ public class NewPromotionPageObject extends PageObject {
     }
 
     public void setPromotionValues(OfferModel promotion) {
-        offerNameInput.setValue(promotion.getName());
+        setOfferName(promotion.getName());
         setOfferBrands(promotion.getBrands());
         setOfferType(promotion.getType());
         if (!promotion.isBOGO()) setOfferValue(promotion.getValue());
     }
 
     public void setOfferBrands(ArrayList<String> promotionBrands) {
-        offerRuleInput.click();
+        promotionRuleInput.click();
         ElementsCollection brandsSelection = $$(SELECTOR_OPTIONS);
         for (String brand : promotionBrands) {
             int indexOfBrand = brandsSelection.texts().indexOf(brand);
@@ -101,6 +105,7 @@ public class NewPromotionPageObject extends PageObject {
         $(SELECTOR_BACKGROUND).click();
     }
 
+    @Step("Set promotion values and click add promotion button")
     public void addPromotion(OfferModel promotion) {
         setPromotionValues(promotion);
         addPromotionButton.click();
@@ -110,9 +115,14 @@ public class NewPromotionPageObject extends PageObject {
         root.shouldBe(visible);
     }
 
-    public void tryToAddBadPromotion(OfferModel promotion) {
-            setPromotionValues(promotion);
-            addPromotionButton.click();
-            addPromotionButton.shouldBe(disabled);
+    @Step("Make sure that button is disabled after filling values")
+    public void addBadPromotion(OfferModel promotion) {
+        setPromotionValues(promotion);
+        addPromotionButton.shouldBe(disabled);
+    }
+
+    private void clearNameInputValue() {
+        WebDriverRunner.getWebDriver().findElement(By.cssSelector(SELECTOR_PROMOTION_NAME)).sendKeys(Keys.chord(Keys.COMMAND, "a"));
+        WebDriverRunner.getWebDriver().findElement(By.cssSelector(SELECTOR_PROMOTION_NAME)).sendKeys(Keys.BACK_SPACE);
     }
 }

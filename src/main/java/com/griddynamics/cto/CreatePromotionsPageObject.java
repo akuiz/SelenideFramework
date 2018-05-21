@@ -43,20 +43,29 @@ public class CreatePromotionsPageObject extends PageObject {
         return new OfferPageObject(root.$(byText(promotion.getName())).parent());
     }
 
-    @Step("Add promotion without required parameters")
-    public void addBadPromotion(OfferModel promotion) {
+    @Step("Add promotion without brands")
+    public void addPromotionWithoutBrands(OfferModel promotion) {
         Selenide.sleep(2000);
         addPromotionFirstButton.click();
         NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
-        createNewPromotionWindow.tryToAddBadPromotion(promotion);
+        createNewPromotionWindow.addBadPromotion(promotion);
     }
 
-    @Step("Check that promotion was successully created")
+    @Step("Add promotion without name")
+    public void addPromotionWithoutName(OfferModel promotion) {
+        Selenide.sleep(2000);
+        addPromotionFirstButton.click();
+        NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
+        createNewPromotionWindow.addBadPromotion(promotion);
+    }
+
+    @Step("Make sure that promotion was successully created/updated")
     public void checkPromotionExists(OfferModel offerModel) {
         OfferModel promotion = findOfferByName(offerModel.getName());
         assertThat(promotion).isSameDiscountAs(offerModel);
     }
 
+    @Step("Find promotion with name: {name}")
     private OfferModel findOfferByName(String name) {
         OfferPageObject promotionPageObject = new OfferPageObject(root.$(byText(name)).parent());
         OfferModel promotion = new OfferModel().toBuilder()
@@ -68,18 +77,20 @@ public class CreatePromotionsPageObject extends PageObject {
         return promotion;
     }
 
-    public void deletePromotionByName(OfferModel promotion) {
-        OfferPageObject promotionPageObject = findOfferPageObjectByName(promotion.getName());
+    @Step("Delete promotion with name: {name}")
+    public void deletePromotion(String name) {
+        OfferPageObject promotionPageObject = findOfferPageObjectByName(name);
         promotionPageObject.deletePromotion();
-        checkPromotionNotExistsByName(promotion);
+        checkPromotionNotExistsByName(name);
     }
 
     private OfferPageObject findOfferPageObjectByName(String name) {
         return new OfferPageObject(root.$(byText(name)).parent());
     }
 
-    public void checkPromotionNotExistsByName(OfferModel offerModel) {
-        $(byText(offerModel.getName())).shouldNot(exist);
+    @Step("Make sure there is no promotion with name: {name}")
+    public void checkPromotionNotExistsByName(String name) {
+        $(byText(name)).shouldNot(exist);
     }
 
     public void addPromotionWithEmptyName(OfferModel promotion) {
@@ -95,16 +106,19 @@ public class CreatePromotionsPageObject extends PageObject {
         promotionPageObject.updatePromotionName(newPromotionName);
     }
 
+    @Step("Update promotion")
     public void updatePromotion(OfferModel actualPromotion, OfferModel newPromotion) {
         OfferPageObject promotionPageObject = findOfferPageObjectByName(actualPromotion.getName());
         promotionPageObject.updatePromotion(newPromotion);
     }
 
+    @Step("Duplicate promotion")
     public void duplicatePromotion(OfferModel actualPromotion) {
         OfferPageObject promotionPageObject = findOfferPageObjectByName(actualPromotion.getName());
         promotionPageObject.duplicatePromotion();
     }
 
+    @Step("Make sure that promotion exist twice")
     public void checkPromotionExistsTwice(OfferModel originPromotion) {
         ArrayList<OfferPageObject> promotionsList = findAllPromotionsByName(originPromotion.getName());
         for (int i = 0; i < promotionsList.size(); i++) {
@@ -121,4 +135,9 @@ public class CreatePromotionsPageObject extends PageObject {
         return promotions;
     }
 
+    @Step("Update promotion name to {name}")
+    public void updatePromotionName(OfferModel actualPromotion, String name) {
+        OfferPageObject promotionPageObject = findOfferPageObjectByName(actualPromotion.getName());
+        promotionPageObject.updatePromotionName(name);
+    }
 }

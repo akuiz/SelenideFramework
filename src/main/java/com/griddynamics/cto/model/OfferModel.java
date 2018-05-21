@@ -99,6 +99,17 @@ public class OfferModel {
                 .build();
     }
 
+    public static OfferModel PromotionWithEmptyName() {
+        return new OfferModel().toBuilder()
+                .name("")
+                .brands(new ArrayList<String>() {{
+                    add("Calvin Klein");
+                }})
+                .type(PERCENT_OFF)
+                .value("8%")
+                .build();
+    }
+
     public static OfferModel EditTestOriginPromotion() {
         return new OfferModel().toBuilder()
                 .name("This is initial edit promotion test name")
