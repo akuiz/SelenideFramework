@@ -3,6 +3,7 @@ package com.griddynamics.cto;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.PredictionModel;
+import io.qameta.allure.Step;
 import org.joda.time.DateTime;
 
 import static com.codeborne.selenide.Condition.enabled;
@@ -30,6 +31,7 @@ public class ForecastPageObject extends PageObject {
 
     SelenideElement buildForecastButton = root.$(SELECTOR_BUILD_FORECAST);
 
+    @Step("Pick campaigns for the forecast")
     public void setCampaigns(CampaignModel... campaigns) {
         for (CampaignModel campaign : campaigns) {
             SelenideElement campaignElement = root.$(byText(campaign.getName())).scrollTo();
@@ -39,11 +41,13 @@ public class ForecastPageObject extends PageObject {
         }
     }
 
+    @Step("Press forecast button and wait for the result")
     public void buildForeCast() {
         buildForecastButton.shouldBe(enabled).scrollIntoView(false).click();
         waitForLoader();
     }
 
+    @Step("Check values of the forecast")
     public void checkForecast(PredictionModel predictionModel) {
         PredictionPageObject predictionPart = new PredictionPageObject($(SELECTOR_FORDECAST_CHARTS));
         predictionPart.checkRevenue(predictionModel.getRevenue().getKey(), predictionModel.getRevenue().getValue());
@@ -51,6 +55,7 @@ public class ForecastPageObject extends PageObject {
         predictionPart.checkQuantity(predictionModel.getQuantity().getKey(), predictionModel.getQuantity().getValue());
     }
 
+    @Step("Set forecast dates")
     public void setDates(DateTime startDate, DateTime endDate) {
         if(startDate.isBefore(formatter.parseDateTime("5/1/2018"))){
             setStartDate(startDate);

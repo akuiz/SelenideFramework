@@ -42,27 +42,22 @@ public class PredictionPageObject extends PageObject {
         return formatter.parseDateTime(root.$(SELECTOR_END_DATE).getValue());
     }
 
-    public void checkCampaignPrediction(int profit, int quantity) {
-        assertThat(profitPrediction.getText()).isEqualTo(profit);
-        assertThat(quantityPrediction.getText()).isEqualTo(quantity);
-    }
-
     @Step("Make sure that revenue is equal to expected value")
     public void checkRevenue(String expectedBaseLine, String expectedPrediction) {
         revenueBaseline.waitUntil(visible, timeout);
-        assertThat(revenueBaseline.getText()).isEqualTo(expectedBaseLine);
-        assertThat(revenuePrediction.getText()).isEqualTo(expectedPrediction);
+        assertThat(revenueBaseline.getText()).as("Revenue baseline equals to %s", expectedBaseLine).isEqualTo(expectedBaseLine);
+        assertThat(revenuePrediction.getText()).as("Revenue prediction equals %s", expectedPrediction).isEqualTo(expectedPrediction);
     }
 
     @Step("Make sure that profit is equal to expected value")
     public void checkProfit(String expectedBaseLine, String expectedPrediction) {
-        assertThat(profitBaseline.getText()).isEqualTo(expectedBaseLine);
-        assertThat(profitPrediction.getText()).isEqualTo(expectedPrediction);
+        assertThat(profitBaseline.getText()).as("Profit baseline equals to %s", expectedBaseLine).isEqualTo(expectedBaseLine);
+        assertThat(profitPrediction.getText()).as("Profit prediction equals to %s", expectedPrediction).isEqualTo(expectedPrediction);
     }
 
     @Step("Make sure that quantity is equal to expected value")
     public void checkQuantity(String expectedBaseLine, String expectedPrediction) {
-        assertThat(quantityBaseline.getText()).isEqualTo(expectedBaseLine);
-        assertThat(quantityPrediction.getText()).isEqualTo(expectedPrediction);
+        assertThat(quantityBaseline.getText()).as("Quantity baseline equals to %s", expectedBaseLine).isEqualTo(expectedBaseLine);
+        assertThat(quantityPrediction.getText()).as("Quantity prediction equals to %s", expectedPrediction).isEqualTo(expectedPrediction);
     }
 }

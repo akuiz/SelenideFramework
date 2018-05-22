@@ -20,7 +20,7 @@ public class CampaignModel {
 
     public static CampaignModel EditCampaignOrigin() {
         return new CampaignModel().toBuilder()
-                .name("Origin campaign, dates,discounts,name should be changed")
+                .name("at_Origin campaign, dates,discounts,name should be changed")
                 .startDate(new DateTime(2018, 5, 2, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -30,7 +30,7 @@ public class CampaignModel {
     }
     public static CampaignModel EditCampaignEdited() {
         return new CampaignModel().toBuilder()
-                .name("Origin campaign, dates,discounts,name have been changed")
+                .name("at_Origin campaign, dates,discounts,name have been changed")
                 .startDate(new DateTime(2018, 5, 4, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 25, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -41,7 +41,7 @@ public class CampaignModel {
 
     public static CampaignModel CampaignBOGOSmoke() {
         return new CampaignModel().toBuilder()
-                .name("Smoke campaign with BOGO promotion")
+                .name("at_Smoke campaign with BOGO promotion")
                 .startDate(new DateTime(2018, 5, 2, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -52,7 +52,7 @@ public class CampaignModel {
 
     public static CampaignModel EditDiscountsCampaignOrigin() {
         return new CampaignModel().toBuilder()
-                .name("Discounts should be changed")
+                .name("at_Discounts should be changed")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -63,7 +63,7 @@ public class CampaignModel {
 
     public static CampaignModel EditDiscountsCampaignEdited() {
         return new CampaignModel().toBuilder()
-                .name("Discounts should be changed")
+                .name("at_Discounts should be changed")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -74,7 +74,7 @@ public class CampaignModel {
 
     public static CampaignModel CampaignOFFSmoke() {
         return new CampaignModel().toBuilder()
-                .name("Smoke campaign with Percent OFF promotion")
+                .name("at_Smoke campaign with Percent OFF promotion")
                 .startDate(new DateTime(2018, 5, 3, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 27, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -85,7 +85,7 @@ public class CampaignModel {
 
     public static CampaignModel CampaignOFFBOGOSmoke() {
         return new CampaignModel().toBuilder()
-                .name("Smoke campaign with %OFF and BOGO promotions")
+                .name("at_Smoke campaign with %OFF and BOGO promotions")
                 .startDate(new DateTime(2018, 5, 4, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 17, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -97,7 +97,7 @@ public class CampaignModel {
 
     public static CampaignModel CampaignDateTimeTest() {
         return new CampaignModel().toBuilder()
-                .name("Campaign with time")
+                .name("at_Campaign with time")
                 .startDate(new DateTime(2018, 4, 4, 0, 0, 0, 0))
                 .endDate(new DateTime(2019, 6, 17, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -109,7 +109,7 @@ public class CampaignModel {
 
     public static CampaignModel CampaignDeleteSmoke() {
         return new CampaignModel().toBuilder()
-                .name("This campaign should be deleted")
+                .name("at_This campaign should be deleted")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -121,7 +121,7 @@ public class CampaignModel {
 
     public static CampaignModel EditNameCampaignOrigin() {
         return new CampaignModel().toBuilder()
-                .name("This campaign should be renamed")
+                .name("at_This campaign should be renamed")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -133,7 +133,7 @@ public class CampaignModel {
 
     public static CampaignModel EditNameCampaignRenamed() {
         return new CampaignModel().toBuilder()
-                .name("This campaign has been renamed")
+                .name("at_This campaign has been renamed")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -145,7 +145,7 @@ public class CampaignModel {
 
     public static CampaignModel EditDatesCampaignOrigin() {
         return new CampaignModel().toBuilder()
-                .name("Campaign's dates should be changed")
+                .name("at_Campaign's dates should be changed")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -157,7 +157,7 @@ public class CampaignModel {
 
     public static CampaignModel EditDatesCampaignChanged() {
         return new CampaignModel().toBuilder()
-                .name("Campaign's dates should be changed")
+                .name("at_Campaign's dates should be changed")
                 .startDate(new DateTime(2018, 5, 2, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 18, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -169,7 +169,7 @@ public class CampaignModel {
 
     public static CampaignModel CampaignWithBOGOPromotion() {
         return new CampaignModel().toBuilder()
-                .name("CampaignWithBOGOPromotion")
+                .name("at_CampaignWithBOGOPromotion")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -180,7 +180,7 @@ public class CampaignModel {
 
     public static CampaignModel CampaignWithNoDiscounts() {
         return new CampaignModel().toBuilder()
-                .name("Campaign with no discounts")
+                .name("at_Campaign with no discounts")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -201,7 +201,7 @@ public class CampaignModel {
 
     public static CampaignModel TestForecastCampaign() {
         return new CampaignModel().toBuilder()
-                .name("ForecastTestCampaign")
+                .name("at_ForecastTestCampaign")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -213,7 +213,7 @@ public class CampaignModel {
 
     public static CampaignModel Adrianna() {
         return new CampaignModel().toBuilder()
-                .name("Adrianna Papell Spring 2018")
+                .name("at_Adrianna Papell Spring 2018")
                 .startDate(new DateTime(2018, 5, 1, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -226,7 +226,7 @@ public class CampaignModel {
 
     public static CampaignModel IssueCampaign() {
         return new CampaignModel().toBuilder()
-                .name("IssueCampaign")
+                .name("at_IssueCampaign")
                 .startDate(new DateTime(2018, 5, 1, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -239,7 +239,7 @@ public class CampaignModel {
 
     public static CampaignModel Test2Promo() {
         return new CampaignModel().toBuilder()
-                .name("Test2Promo")
+                .name("at_Test2Promo")
                 .startDate(new DateTime(2018, 5, 1, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -252,7 +252,7 @@ public class CampaignModel {
 
     public static CampaignModel ProductionAdrianna() {
         return new CampaignModel().toBuilder()
-                .name("Adrianna Papell Spring 2018")
+                .name("at_Adrianna Papell Spring 2018")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -263,7 +263,7 @@ public class CampaignModel {
     }
     public static CampaignModel ProductionAdriannaExtended() {
         return new CampaignModel().toBuilder()
-                .name("Adrianna Papell Spring 2018 Extended")
+                .name("at_Adrianna Papell Spring 2018 Extended")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{

@@ -1,6 +1,7 @@
 package com.griddynamics.cto;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.OfferModel;
 import io.qameta.allure.Step;
@@ -124,5 +125,11 @@ public class OfferPageObject extends PageObject {
                 .type(this.getType())
                 .brands(this.getBrands())
                 .build();
+    }
+
+    public void updatePromotionValue(String value) {
+        actions.first().click();
+        EditPromotionPageObject editPromotionWindow = new EditPromotionPageObject($(ELEMENT_UPDATE_PROMOTION_WINDOW));
+        editPromotionWindow.updatePromotionValue(value);
     }
 }

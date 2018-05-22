@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.griddynamics.cto.assertion.CampaignModelAssert.assertThat;
@@ -36,11 +37,20 @@ public class ManageCampaignsPageObject extends PageObject {
 
     @Step("Add campaign")
     public CampaignPageObject addCampaign(CampaignModel campaign) {
-        Selenide.sleep(2000);
+        waitForLoader();
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.addCampaign(campaign);
-        checkCampaignExists(campaign);
+        CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaign.getName())).parent().parent());
+        return campaignPageObject;
+    }
+
+    @Step("Add campaign")
+    public CampaignPageObject addCampaignSecondButton(CampaignModel campaign) {
+        waitForLoader();
+        addCampaignSecondButton.click();
+        NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
+        createNewCampaignWindow.addCampaign(campaign);
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaign.getName())).parent().parent());
         return campaignPageObject;
     }
@@ -84,7 +94,6 @@ public class ManageCampaignsPageObject extends PageObject {
     public void deleteCampaignByName(String name) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(name)).parent().parent());
         campaignPageObject.delete();
-        checkCampaingNotExists(name);
     }
 
     @Step("Make sure there is no campaign with name: {name}")
@@ -118,7 +127,7 @@ public class ManageCampaignsPageObject extends PageObject {
     }
 
     public void addCampaignValidationCheck(CampaignModel campaignModel) {
-        Selenide.sleep(2000);
+        waitForLoader();
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.checkAddCampaignValidation(campaignModel);
@@ -138,7 +147,7 @@ public class ManageCampaignsPageObject extends PageObject {
 
     @Step("Add campaign without name")
     public void addCampaignWithEmptyName(CampaignModel campaignModel) {
-        Selenide.sleep(2000);
+        waitForLoader();
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.addBadCampaign(campaignModel);
@@ -146,9 +155,25 @@ public class ManageCampaignsPageObject extends PageObject {
 
     @Step("Add campaign without discounts")
     public void addCampaignWithNoDiscounts(CampaignModel campaignModel) {
-        Selenide.sleep(2000);
+        waitForLoader();
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.addBadCampaign(campaignModel);
+    }
+
+    @Step("Delete all test campaigns")
+    public void deleteTestCampaigns() {
+        CampaignPageObject testCampaign = findTestCampaign();
+        while(!(testCampaign==null)){
+            testCampaign.delete();
+            testCampaign = findTestCampaign();
+        }
+    }
+
+    private CampaignPageObject findTestCampaign() {
+        if(root.$(byXpath("//*[contains(text(), 'at_')]")).exists()){
+            return new CampaignPageObject(root.$(byXpath("//*[contains(text(), 'at_')]")).parent().parent());
+        }
+        return null;
     }
 }

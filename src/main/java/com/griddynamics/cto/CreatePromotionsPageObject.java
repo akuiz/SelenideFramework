@@ -9,7 +9,9 @@ import io.qameta.allure.Step;
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byPartialLinkText;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static com.griddynamics.cto.assertion.OfferModelAssert.assertThat;
 
@@ -35,17 +37,25 @@ public class CreatePromotionsPageObject extends PageObject {
 
     @Step("Add promotion template")
     public OfferPageObject addPromotion(OfferModel promotion) {
-        Selenide.sleep(2000);
+        waitForLoader();
         addPromotionFirstButton.click();
         NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
         createNewPromotionWindow.addPromotion(promotion);
-        checkPromotionExists(promotion);
+        return new OfferPageObject(root.$(byText(promotion.getName())).parent());
+    }
+
+    @Step("Add promotion template")
+    public OfferPageObject addPromotionSecondButton(OfferModel promotion) {
+        waitForLoader();
+        addPromotionFirstButton.click();
+        NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
+        createNewPromotionWindow.addPromotion(promotion);
         return new OfferPageObject(root.$(byText(promotion.getName())).parent());
     }
 
     @Step("Add promotion without brands")
     public void addPromotionWithoutBrands(OfferModel promotion) {
-        Selenide.sleep(2000);
+        waitForLoader();
         addPromotionFirstButton.click();
         NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
         createNewPromotionWindow.addBadPromotion(promotion);
@@ -53,7 +63,7 @@ public class CreatePromotionsPageObject extends PageObject {
 
     @Step("Add promotion without name")
     public void addPromotionWithoutName(OfferModel promotion) {
-        Selenide.sleep(2000);
+        waitForLoader();
         addPromotionFirstButton.click();
         NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
         createNewPromotionWindow.addBadPromotion(promotion);
@@ -81,7 +91,6 @@ public class CreatePromotionsPageObject extends PageObject {
     public void deletePromotion(String name) {
         OfferPageObject promotionPageObject = findOfferPageObjectByName(name);
         promotionPageObject.deletePromotion();
-        checkPromotionNotExistsByName(name);
     }
 
     private OfferPageObject findOfferPageObjectByName(String name) {
@@ -89,7 +98,7 @@ public class CreatePromotionsPageObject extends PageObject {
     }
 
     @Step("Make sure there is no promotion with name: {name}")
-    public void checkPromotionNotExistsByName(String name) {
+    public void checkPromotionNotExists(String name) {
         $(byText(name)).shouldNot(exist);
     }
 
@@ -139,5 +148,27 @@ public class CreatePromotionsPageObject extends PageObject {
     public void updatePromotionName(OfferModel actualPromotion, String name) {
         OfferPageObject promotionPageObject = findOfferPageObjectByName(actualPromotion.getName());
         promotionPageObject.updatePromotionName(name);
+    }
+
+    @Step("Update promotion value to {value}")
+    public void updatedPromotionValue(OfferModel promotion, String value) {
+        OfferPageObject promotionPageObject = findOfferPageObjectByName(promotion.getName());
+        promotionPageObject.updatePromotionValue(value);
+    }
+
+    @Step("Delete all test promotions")
+    public void deleteTestPromotions() {
+        OfferPageObject testPromotion = findTestPromotion();
+        while(!(testPromotion==null)){
+            testPromotion.deletePromotion();
+            testPromotion = findTestPromotion();
+        }
+    }
+
+    private OfferPageObject findTestPromotion() {
+        if(root.$(byXpath("//*[contains(text(), 'at_')]")).exists()){
+            return new OfferPageObject(root.$(byXpath("//*[contains(text(), 'at_')]")).parent());
+        }
+        return null;
     }
 }

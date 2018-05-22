@@ -33,23 +33,23 @@ public class EditPromotionPageObject extends PageObject {
 
     SelenideElement updatePromotionButton = root.$(SELECTOR_UPDATE_PROMOTION);
 
-    SelenideElement offerNameInput = root.$(SELECTOR_PROMOTION_NAME);
-    SelenideElement offerRuleInput = root.$(SELECTOR_OFFER_RULE);
-    SelenideElement offerTypeInput = root.$(SELECTOR_OFFER_TYPE);
-    SelenideElement offerValueInput = root.$(SELECTOR_OFFER_VALUE);
+    SelenideElement promotionNameInput = root.$(SELECTOR_PROMOTION_NAME);
+    SelenideElement promotionRuleInput = root.$(SELECTOR_OFFER_RULE);
+    SelenideElement promotionTypeInput = root.$(SELECTOR_OFFER_TYPE);
+    SelenideElement promotionValueInput = root.$(SELECTOR_OFFER_VALUE);
 
     SelenideElement closeWindowButton = root.$(SELECTOR_CLOSE_WINDOW);
 
     public void setOfferName(String name) {
-        offerNameInput.setValue(name);
+        promotionNameInput.setValue(name);
     }
 
     public String getOfferName() {
-        return offerNameInput.getValue();
+        return promotionNameInput.getValue();
     }
 
     public void setOfferType(OfferType type) {
-        offerTypeInput.click();
+        promotionTypeInput.click();
         switch (type) {
             case PERCENT_OFF:
                 $$(SELECTOR_OPTIONS).get(0).click();
@@ -67,16 +67,16 @@ public class EditPromotionPageObject extends PageObject {
     }
 
     public String getOfferType() {
-        return offerTypeInput.getValue();
+        return promotionTypeInput.getValue();
     }
 
     public void setOfferValue(String value) {
-        if (value != null) offerValueInput.setValue(value);
+        if (value != null) promotionValueInput.setValue(value);
         else return;
     }
 
     public String getOfferValue() {
-        return offerValueInput.getValue();
+        return promotionValueInput.getValue();
     }
 
     @Step("Close add promotion dialog")
@@ -85,14 +85,14 @@ public class EditPromotionPageObject extends PageObject {
     }
 
     public void setPromotionValues(OfferModel promotion) {
-        offerNameInput.setValue(promotion.getName());
+        promotionNameInput.setValue(promotion.getName());
         setOfferBrands(promotion.getBrands());
         setOfferType(promotion.getType());
         if (!promotion.isBOGO()) setOfferValue(promotion.getValue());
     }
 
     public void setOfferBrands(ArrayList<String> promotionBrands) {
-        offerRuleInput.click();
+        promotionRuleInput.click();
         ElementsCollection brandsSelection = $$(SELECTOR_OPTIONS);
         for (String brand : promotionBrands) {
             int indexOfBrand = brandsSelection.texts().indexOf(brand);
@@ -104,7 +104,7 @@ public class EditPromotionPageObject extends PageObject {
 
     @Step("Update promotion name")
     public void updatePromotionName(String name) {
-        offerNameInput.setValue(name);
+        promotionNameInput.setValue(name);
         updatePromotionButton.click();
     }
 
@@ -118,5 +118,8 @@ public class EditPromotionPageObject extends PageObject {
         root.shouldBe(visible);
     }
 
-
+    public void updatePromotionValue(String value) {
+        promotionValueInput.setValue(value);
+        updatePromotionButton.click();
+    }
 }

@@ -22,8 +22,10 @@ public class PageObject {
     }
 
     protected void waitForLoader() {
-        $(SELECTOR_LOADER_SPINNER).shouldBe(visible);
+        if($(SELECTOR_LOADER_SPINNER).isDisplayed()){
+            $(SELECTOR_LOADER_SPINNER).waitUntil(not(visible), timeout);
+
+        }
         $(SELECTOR_LOADER_SPINNER).waitUntil(not(visible), timeout);
     }
-
 }
