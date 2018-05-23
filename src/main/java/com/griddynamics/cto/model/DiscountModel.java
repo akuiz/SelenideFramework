@@ -60,4 +60,40 @@ public class DiscountModel {
                 .name("Smoke promotion %OFF")
                 .build();
     }
+
+    public static DiscountModel CalvinKleinOFF5() {
+        return new DiscountModel().toBuilder()
+                .name("Calvin Klein Special Offer 5%")
+                .build();
+    }
+
+    public static DiscountModel CalvinKleinOFF7() {
+        return new DiscountModel().toBuilder()
+                .name("Calvin Klein Special Offer 7%")
+                .build();
+    }
+
+    public static DiscountModel CalvinKleinOFF10() {
+        return new DiscountModel().toBuilder()
+                .name("Calvin Klein Special Offer 10%")
+                .build();
+    }
+
+    public static DiscountModel AdriannaPapellOFF5() {
+        return new DiscountModel().toBuilder()
+                .name("Adrianna Papell 5% Off")
+                .build();
+    }
+
+    public static DiscountModel FreePeopleOFF10() {
+        return new DiscountModel().toBuilder()
+                .name("Free People 10% Off")
+                .build();
+    }
+
+    public static DiscountModel FreePeopleBOGO() {
+        return new DiscountModel().toBuilder()
+                .name("Free People 10% Off")
+                .build();
+    }
 }

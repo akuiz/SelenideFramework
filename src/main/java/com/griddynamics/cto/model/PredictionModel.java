@@ -29,15 +29,55 @@ public class PredictionModel {
                 .build();
     }
 
-    public static PredictionModel SmokeForecast() {
+    public static PredictionModel ProductionAdriannaForecast() {
         return new PredictionModel().toBuilder()
-                .revenue(new Pair("$344,755.34", "$343,961.61"))
-                .profit(new Pair("$112,967.34", "$112,849.91"))
-                .quantity(new Pair("2065", "2057"))
+                .revenue(new Pair("$739,372.45", "$920,667.55"))
+                .profit(new Pair("$301,282.04", "$352,228"))
+                .quantity(new Pair("3741", "4873"))
                 .build();
     }
 
-    public static PredictionModel ProductionAdriannaForecast() {
+    public static PredictionModel CalvinKleinJune2018Dresses5() {
+        return new PredictionModel().toBuilder()
+                .revenue(new Pair("$739,372.45", "$920,667.55"))
+                .profit(new Pair("$301,282.04", "$352,228"))
+                .quantity(new Pair("3741", "4873"))
+                .build();
+    }
+
+    public static PredictionModel CalvinKleinJune2018Dresses7() {
+        return new PredictionModel().toBuilder()
+                .revenue(new Pair("$739,372.45", "$920,667.55"))
+                .profit(new Pair("$301,282.04", "$352,228"))
+                .quantity(new Pair("3741", "4873"))
+                .build();
+    }
+
+    public static PredictionModel CalvinKleinJune2018Dresses10() {
+        return new PredictionModel().toBuilder()
+                .revenue(new Pair("$739,372.45", "$920,667.55"))
+                .profit(new Pair("$301,282.04", "$352,228"))
+                .quantity(new Pair("3741", "4873"))
+                .build();
+    }
+
+    public static PredictionModel AdriannaPapellSpring2018() {
+        return new PredictionModel().toBuilder()
+                .revenue(new Pair("$739,372.45", "$920,667.55"))
+                .profit(new Pair("$301,282.04", "$352,228"))
+                .quantity(new Pair("3741", "4873"))
+                .build();
+    }
+
+    public static PredictionModel FreePeopleJuly2018() {
+        return new PredictionModel().toBuilder()
+                .revenue(new Pair("$739,372.45", "$920,667.55"))
+                .profit(new Pair("$301,282.04", "$352,228"))
+                .quantity(new Pair("3741", "4873"))
+                .build();
+    }
+
+    public static PredictionModel FreePeopleJuly2018BOGO() {
         return new PredictionModel().toBuilder()
                 .revenue(new Pair("$739,372.45", "$920,667.55"))
                 .profit(new Pair("$301,282.04", "$352,228"))

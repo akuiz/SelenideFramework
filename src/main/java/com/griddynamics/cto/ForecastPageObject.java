@@ -2,6 +2,7 @@ package com.griddynamics.cto;
 
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.CampaignModel;
+import com.griddynamics.cto.model.ForecastModel;
 import com.griddynamics.cto.model.PredictionModel;
 import io.qameta.allure.Step;
 import org.joda.time.DateTime;
@@ -48,7 +49,7 @@ public class ForecastPageObject extends PageObject {
     }
 
     @Step("Check values of the forecast")
-    public void checkForecast(PredictionModel predictionModel) {
+    public void checkForecast(ForecastModel predictionModel) {
         PredictionPageObject predictionPart = new PredictionPageObject($(SELECTOR_FORDECAST_CHARTS));
         predictionPart.checkRevenue(predictionModel.getRevenue().getKey(), predictionModel.getRevenue().getValue());
         predictionPart.checkProfit(predictionModel.getProfit().getKey(), predictionModel.getProfit().getValue());

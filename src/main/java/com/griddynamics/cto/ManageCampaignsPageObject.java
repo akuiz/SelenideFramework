@@ -121,7 +121,7 @@ public class ManageCampaignsPageObject extends PageObject {
     }
 
     @Step("Find campaign with name {name}")
-    public CampaignPageObject getCampaignByName(String name) {
+    public CampaignPageObject getCampaign(String name) {
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(name)).parent().parent());
         return campaignPageObject;
     }

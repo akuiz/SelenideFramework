@@ -261,6 +261,7 @@ public class CampaignModel {
                 }})
                 .build();
     }
+
     public static CampaignModel ProductionAdriannaExtended() {
         return new CampaignModel().toBuilder()
                 .name("at_Adrianna Papell Spring 2018 Extended")
@@ -268,6 +269,83 @@ public class CampaignModel {
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
                     add(DiscountModel.AdriannaPappell5PercentOFF());
+                }})
+                .build();
+    }
+
+    public static CampaignModel CalvinKleinJune2018Dresses5() {
+        return new CampaignModel().toBuilder()
+                .name("Calvin Klein June 2018 Special Offer 5% All Dresses")
+                .startDate(new DateTime(2018, 6, 1, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 6, 30, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.CalvinKleinOFF5());
+                }})
+                .build();
+    }
+
+    public static CampaignModel CalvinKleinJune2018Dresses7() {
+        return new CampaignModel().toBuilder()
+                .name("Calvin Klein June 2018 Special Offer 7% All Dresses")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.CalvinKleinOFF7());
+                }})
+                .build();
+    }
+
+    public static CampaignModel CalvinKleinJune2018Dresses10() {
+        return new CampaignModel().toBuilder()
+                .name("Calvin Klein June 2018 Special Offer 10% All Dresses")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.CalvinKleinOFF10());
+                }})
+                .build();
+    }
+
+    public static CampaignModel AdriannaPapellSpring2018() {
+        return new CampaignModel().toBuilder()
+                .name("Adrianna Papell Spring 2018")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.AdriannaPapellOFF5());
+                }})
+                .build();
+    }
+
+    public static CampaignModel AdriannaPapellSpringExtended2018() {
+        return new CampaignModel().toBuilder()
+                .name("Adrianna Papell Spring 2018 Extended")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.AdriannaPapellOFF5());
+                }})
+                .build();
+    }
+
+    public static CampaignModel FreePeopleJuly2018() {
+        return new CampaignModel().toBuilder()
+                .name("Free People 4th July 2018")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.FreePeopleOFF10());
+                }})
+                .build();
+    }
+
+    public static CampaignModel FreePeopleJuly2018BOGO() {
+        return new CampaignModel().toBuilder()
+                .name("Free People 4th July 2018 BOGO")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.FreePeopleBOGO());
                 }})
                 .build();
     }

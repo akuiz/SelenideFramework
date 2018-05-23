@@ -62,7 +62,7 @@ public class CampaignTest {
     public void checkPrediction() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        CampaignPageObject campaign = campaignsPage.getCampaignByName(CampaignModel.CampaignOFFBOGOSmoke().getName());
+        CampaignPageObject campaign = campaignsPage.getCampaign(CampaignModel.CampaignOFFBOGOSmoke().getName());
         campaign.checkPrediction(PredictionModel.Test2PromotPrediction());
     }
 
@@ -104,5 +104,66 @@ public class CampaignTest {
         campaignsPage.editCampaign(CampaignModel.EditCampaignOrigin(), CampaignModel.EditCampaignEdited());
         campaignsPage.checkCampaignExists(CampaignModel.EditCampaignEdited());
         campaignsPage.deleteCampaignByName(CampaignModel.EditCampaignEdited().getName());
+    }
+
+    @Test(description = "Check pre-created campaigns", groups = {"production"},priority = 1)
+    public void precreatedCampaignsCheck() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        campaignsPage.checkCampaignExists(CampaignModel.CalvinKleinJune2018Dresses5());
+        campaignsPage.checkCampaignExists(CampaignModel.CalvinKleinJune2018Dresses7());
+        campaignsPage.checkCampaignExists(CampaignModel.CalvinKleinJune2018Dresses10());
+        campaignsPage.checkCampaignExists(CampaignModel.AdriannaPapellSpring2018());
+        campaignsPage.checkCampaignExists(CampaignModel.AdriannaPapellSpringExtended2018());
+        campaignsPage.checkCampaignExists(CampaignModel.FreePeopleJuly2018());
+        campaignsPage.checkCampaignExists(CampaignModel.FreePeopleJuly2018BOGO());
+    }
+
+    @Test(description = "Check prediction of Calvin Klein 5% campaign", groups = {"production"}, priority = 2)
+    public void checkPredictionKlein5() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        CampaignPageObject campaign = campaignsPage.getCampaign(CampaignModel.CalvinKleinJune2018Dresses5().getName());
+        campaign.checkPrediction(PredictionModel.CalvinKleinJune2018Dresses5());
+    }
+
+    @Test(description = "Check prediction of Calvin Klein 7% campaign", groups = {"production"}, priority = 2)
+    public void checkCampaignPredictionKlein7() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        CampaignPageObject campaign = campaignsPage.getCampaign(CampaignModel.CalvinKleinJune2018Dresses7().getName());
+        campaign.checkPrediction(PredictionModel.CalvinKleinJune2018Dresses7());
+    }
+
+    @Test(description = "Check prediction of Calvin Klein 10% campaign", groups = {"production"}, priority = 2)
+    public void checkCampaignPredictionKlein10() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        CampaignPageObject campaign = campaignsPage.getCampaign(CampaignModel.CalvinKleinJune2018Dresses10().getName());
+        campaign.checkPrediction(PredictionModel.CalvinKleinJune2018Dresses10());
+    }
+
+    @Test(description = "Check prediction of Calvin Klein 5% campaign", groups = {"production"}, priority = 2)
+    public void checkCampaignPredictionAdrianna() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        CampaignPageObject campaign = campaignsPage.getCampaign(CampaignModel.AdriannaPapellSpring2018().getName());
+        campaign.checkPrediction(PredictionModel.AdriannaPapellSpring2018());
+    }
+
+    @Test(description = "Check prediction of Calvin Klein 5% campaign", groups = {"production"}, priority = 2)
+    public void checkCampaignPredictionFreePeople() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        CampaignPageObject campaign = campaignsPage.getCampaign(CampaignModel.FreePeopleJuly2018().getName());
+        campaign.checkPrediction(PredictionModel.FreePeopleJuly2018());
+    }
+
+    @Test(description = "Check prediction of Calvin Klein 5% campaign", groups = {"production"}, priority = 2)
+    public void checkCampaignPredictionFreePeopleBOGO() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        CampaignPageObject campaign = campaignsPage.getCampaign(CampaignModel.FreePeopleJuly2018BOGO().getName());
+        campaign.checkPrediction(PredictionModel.FreePeopleJuly2018BOGO());
     }
 }

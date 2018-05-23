@@ -239,4 +239,69 @@ public class OfferModel {
         return this.getType().equals(BOGO);
     }
 
+    public static OfferModel CalvinKleinOFF5() {
+        return new OfferModel().toBuilder()
+                .name("Calvin Klein Special Offer 5%")
+                .brands(new ArrayList<String>() {{
+                    add("Calvin Klein");
+                }})
+                .type(PERCENT_OFF)
+                .value("5%")
+                .build();
+    }
+
+    public static OfferModel CalvinKleinOFF7() {
+        return new OfferModel().toBuilder()
+                .name("Calvin Klein Special Offer 7%")
+                .brands(new ArrayList<String>() {{
+                    add("Calvin Klein");
+                }})
+                .type(PERCENT_OFF)
+                .value("7%")
+                .build();
+    }
+
+    public static OfferModel CalvinKleinOFF10() {
+        return new OfferModel().toBuilder()
+                .name("Calvin Klein Special Offer 10%")
+                .brands(new ArrayList<String>() {{
+                    add("Calvin Klein");
+                }})
+                .type(PERCENT_OFF)
+                .value("10%")
+                .build();
+    }
+
+    public static OfferModel AdriannaPapellOFF5() {
+        return new OfferModel().toBuilder()
+                .name("Adrianna Papell 5% Off")
+                .brands(new ArrayList<String>() {{
+                    add("Adrianna Papell");
+                }})
+                .type(PERCENT_OFF)
+                .value("5%")
+                .build();
+    }
+
+    public static OfferModel FreePeopleOFF10() {
+        return new OfferModel().toBuilder()
+                .name("Free People 10% Off")
+                .brands(new ArrayList<String>() {{
+                    add("Free People");
+                }})
+                .type(PERCENT_OFF)
+                .value("10%")
+                .build();
+    }
+
+    public static OfferModel FreePeopleBOGO() {
+        return new OfferModel().toBuilder()
+                .name("Free People 10% Off")
+                .brands(new ArrayList<String>() {{
+                    add("Free People");
+                }})
+                .type(BOGO)
+                .value("")
+                .build();
+    }
 }
