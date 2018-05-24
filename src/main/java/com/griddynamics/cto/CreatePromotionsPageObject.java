@@ -9,9 +9,7 @@ import io.qameta.allure.Step;
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byPartialLinkText;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.griddynamics.cto.assertion.OfferModelAssert.assertThat;
 
@@ -170,5 +168,9 @@ public class CreatePromotionsPageObject extends PageObject {
             return new OfferPageObject(root.$(byXpath("//*[contains(text(), 'at_')]")).parent());
         }
         return null;
+    }
+
+    public void checkNUmberOfPromotions(int numberOfPromotions) {
+        root.$$(byAttribute("mattooltipclass","rule-tooltip")).shouldHaveSize(numberOfPromotions);
     }
 }

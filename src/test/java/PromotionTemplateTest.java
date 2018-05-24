@@ -110,10 +110,11 @@ public class PromotionTemplateTest {
         createPromotionPage.addPromotion(OfferModel.CalvinKleinFixDiscount());
     }
 
-    @Test(description = "Check pre-created promotions", groups = {"production"})
+    @Test(description = "Check pre-created promotions", groups = {"production_read_only", "production"})
     public void precreatedPromotionsTest(){
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
+        createPromotionPage.checkNUmberOfPromotions(6);
         createPromotionPage.checkPromotionExists(OfferModel.CalvinKleinOFF5());
         createPromotionPage.checkPromotionExists(OfferModel.CalvinKleinOFF7());
         createPromotionPage.checkPromotionExists(OfferModel.CalvinKleinOFF10());
