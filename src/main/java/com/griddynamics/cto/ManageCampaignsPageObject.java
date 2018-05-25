@@ -178,7 +178,7 @@ public class ManageCampaignsPageObject extends PageObject {
     }
 
     public void checkNumberOfCampaigns(int numberOfCampaigns) {
-        root.$$(".name-column__titile").shouldHaveSize(numberOfCampaigns);
+        root.$$(".name-column__title").shouldHaveSize(numberOfCampaigns);
 
     }
 }

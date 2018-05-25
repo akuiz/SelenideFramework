@@ -11,7 +11,7 @@ public class CampaignTest {
 
     private static final EnvironmentConfig environmentConfig = Configuration.INSTANCE.getEnvironmentConfig();
 
-    @Test(description = "Add campaign with BOGO promotion", dependsOnGroups = {"promotion_smoke"}, groups = {"create_promotion","add_campaign"})
+    @Test(description = "Add campaign with BOGO promotion", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke", "add_campaign"})
     public void addCamapaignWithBOGOPromotion() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
@@ -19,7 +19,7 @@ public class CampaignTest {
         campaignsPage.checkCampaignExists(CampaignModel.CampaignBOGOSmoke());
     }
 
-    @Test(description = "Add campaign with OFF promotion", dependsOnGroups = {"promotion_smoke"}, groups = {"create_promotion","add_campaign"})
+    @Test(description = "Add campaign with OFF promotion", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke","add_campaign"})
     public void addCamapaignWithOFFPromotion() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
@@ -33,6 +33,30 @@ public class CampaignTest {
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
         campaignsPage.addCampaign(CampaignModel.CampaignOFFBOGOSmoke());
         campaignsPage.checkCampaignExists(CampaignModel.CampaignOFFBOGOSmoke());
+    }
+
+    @Test(description = "Add campaign with future dates", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke"})
+    public void addFutureCampaign() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        campaignsPage.addCampaign(CampaignModel.CampaignFuture());
+        campaignsPage.checkCampaignExists(CampaignModel.CampaignFuture());
+    }
+
+    @Test(description = "Add campaign with past dates", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke"})
+    public void addPastCampaignTest() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        campaignsPage.addCampaign(CampaignModel.CampaignPast());
+        campaignsPage.checkCampaignExists(CampaignModel.CampaignPast());
+    }
+
+    @Test(description = "Add campaign with past dates", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke"})
+    public void addOneDayCampaign() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        campaignsPage.addCampaign(CampaignModel.CampaignPast());
+        campaignsPage.checkCampaignExists(CampaignModel.CampaignPast());
     }
 
     @Test(description = "Remove campaign test", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke"}, dependsOnMethods = {"addCampaign"})
@@ -62,8 +86,9 @@ public class CampaignTest {
     public void checkPrediction() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        campaignsPage.addCampaign(CampaignModel.CampaignOFFBOGOSmoke());
         CampaignPageObject campaign = campaignsPage.getCampaign(CampaignModel.CampaignOFFBOGOSmoke().getName());
-        campaign.checkPrediction(PredictionModel.Test2PromotPrediction());
+        campaign.checkPrediction(PredictionModel.CampaignOFFBOGOSmoke());
     }
 
     @Test(description = "Edit campaign name test", dependsOnGroups = {"create_promotion"}, dependsOnMethods = {"addCampaign"}, groups = {"campaign_smoke"})
@@ -76,7 +101,7 @@ public class CampaignTest {
         campaignsPage.deleteCampaignByName(CampaignModel.EditNameCampaignRenamed().getName());
     }
 
-    @Test(description = "Edit campaign dates test", dependsOnGroups = {"create_promotion"}, dependsOnMethods = {"addCampaign"}, groups = {"campaign_smoke"})
+    @Test(description = "Edit campaign dates test", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke"})
     public void editCampaignDatesTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
@@ -86,7 +111,7 @@ public class CampaignTest {
         campaignsPage.deleteCampaignByName(CampaignModel.EditDatesCampaignChanged().getName());
     }
 
-    @Test(description = "Edit campaign discounts test", dependsOnGroups = {"create_promotion"}, dependsOnMethods = {"addCampaign"}, groups = {"campaign_smoke"})
+    @Test(description = "Edit campaign discounts test", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke"})
     public void editCampaignDiscountsTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
@@ -96,7 +121,7 @@ public class CampaignTest {
         campaignsPage.deleteCampaignByName(CampaignModel.EditDiscountsCampaignEdited().getName());
     }
 
-    @Test(description = "Edit campaign's name,dates,discounts", dependsOnGroups = {"create_promotion"}, dependsOnMethods = {"addCampaign"}, groups = {"campaign_smoke"})
+    @Test(description = "Edit campaign's name,dates,discounts", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke"})
     public void editCampaignTest() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();

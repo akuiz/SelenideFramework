@@ -95,6 +95,42 @@ public class CampaignModel {
                 .build();
     }
 
+    public static CampaignModel CampaignFuture() {
+        return new CampaignModel().toBuilder()
+                .name("at_Campaign with future dates")
+                .startDate(new DateTime(2018, 10, 23, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 11, 26, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
+                    add(DiscountModel.DiscountBOGOSmoke());
+                }})
+                .build();
+    }
+
+    public static CampaignModel CampaignPast() {
+        return new CampaignModel().toBuilder()
+                .name("at_Campaign with past dates")
+                .startDate(new DateTime(2018, 2, 23, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 3, 26, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
+                    add(DiscountModel.DiscountBOGOSmoke());
+                }})
+                .build();
+    }
+
+    public static CampaignModel CampaignOneDay() {
+        return new CampaignModel().toBuilder()
+                .name("at_Campaign one day duration")
+                .startDate(new DateTime(2018, 6, 23, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 6, 23, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
+                    add(DiscountModel.DiscountBOGOSmoke());
+                }})
+                .build();
+    }
+
     public static CampaignModel CampaignDateTimeTest() {
         return new CampaignModel().toBuilder()
                 .name("at_Campaign with time")
@@ -110,6 +146,18 @@ public class CampaignModel {
     public static CampaignModel CampaignDeleteSmoke() {
         return new CampaignModel().toBuilder()
                 .name("at_This campaign should be deleted")
+                .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountOFFSmoke());
+                    add(DiscountModel.DiscountBOGOSmoke());
+                }})
+                .build();
+    }
+
+    public static CampaignModel CampaignSimplePrediction() {
+        return new CampaignModel().toBuilder()
+                .name("at_This campaign is for checkign campaign prediction")
                 .startDate(new DateTime(2018, 5, 11, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 16, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{

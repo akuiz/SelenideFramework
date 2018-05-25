@@ -13,7 +13,7 @@ public class DatePickerPageObject extends PageObject{
     final static String SELECTOR_PREVIOUS_MONTH = ".mat-calendar-previous-button";
     final static String SELECTOR_NEXT_MONTH = ".mat-calendar-next-button";
     final static int defaultYear = 2018;
-    final static int defaultMonth = 5;
+     int defaultMonth = 5;
 
     private int yearToPick;
     private String month;
@@ -27,6 +27,16 @@ public class DatePickerPageObject extends PageObject{
     }
 
     public void pickDate(DateTime date){
+        yearToPick = date.getYear();
+        month = date.monthOfYear().getAsText();
+        dayToPick = date.getDayOfMonth();
+        pickYear(date.getYear());
+        pickMonth(date.getMonthOfYear());
+        pickDay(date.getDayOfMonth());
+    }
+
+    public void pickDate(DateTime date, int defaultMonth){
+        this.defaultMonth = defaultMonth;
         yearToPick = date.getYear();
         month = date.monthOfYear().getAsText();
         dayToPick = date.getDayOfMonth();

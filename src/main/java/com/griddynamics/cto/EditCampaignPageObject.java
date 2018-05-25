@@ -104,8 +104,7 @@ public class EditCampaignPageObject extends PageObject {
 
     public void setValues(CampaignModel campaignModel) {
         nameInput.setValue(campaignModel.getName());
-        setEndDate(campaignModel.getStartDate());
-        setStartDate(campaignModel.getEndDate());
+        setDates(campaignModel.getStartDate(), campaignModel.getEndDate());
         setDiscounts(campaignModel.getDiscounts());
         updateCampaignButton.click();
     }

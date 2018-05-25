@@ -20,7 +20,7 @@ public class PromotionTemplateTest {
 
     @Test(description = "Add promotion with empty name", groups = {"promotion_smoke"})
     public void addPromotionWithEmptyName() {
-        MainPage mainPage = open("http://35.196.70.251:4200/promo", MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
         createPromotionPage.addPromotionWithoutName(OfferModel.PromotionWithEmptyName());
     }
@@ -69,10 +69,9 @@ public class PromotionTemplateTest {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
         createPromotionPage.addPromotion(OfferModel.EditValueOriginPromotion());
-        createPromotionPage.updatedPromotionValue(OfferModel.EditValueOriginPromotion(), OfferModel.EditValueChangedPromotion().getValue());
+        createPromotionPage.updatePromotionValue(OfferModel.EditValueOriginPromotion(), OfferModel.EditValueChangedPromotion().getValue());
         createPromotionPage.checkPromotionExists(OfferModel.EditValueChangedPromotion());
         createPromotionPage.deletePromotion(OfferModel.EditValueChangedPromotion().getName());
-        createPromotionPage.checkPromotionNotExists(OfferModel.EditValueChangedPromotion().getName());
     }
 
     @Test(description = "Update promotion type test", groups = {"promotion_smoke"})

@@ -23,7 +23,7 @@ public class OfferModel {
 
     public static OfferModel PromotionOFFSmoke() {
         return new OfferModel().toBuilder()
-                .name("at-Smoke promotion %OFF")
+                .name("at_Smoke promotion %OFF")
                 .brands(new ArrayList<String>() {{
                     add("Calvin Klein");
                     add("Free People");
@@ -35,7 +35,7 @@ public class OfferModel {
 
     public static OfferModel SmokePromotionBOGO() {
         return new OfferModel().toBuilder()
-                .name("at-Smoke promotion BOGO")
+                .name("at_Smoke promotion BOGO")
                 .brands(new ArrayList<String>() {{
                     add("adidas");
                     add("Diesel");
@@ -47,7 +47,7 @@ public class OfferModel {
 
     public static OfferModel SmokeDeletePromotionBOGO() {
         return new OfferModel().toBuilder()
-                .name("at-This BOGO promotion should be deleted")
+                .name("at_This BOGO promotion should be deleted")
                 .brands(new ArrayList<String>() {{
                     add("Free People");
                 }})
@@ -58,7 +58,7 @@ public class OfferModel {
 
     public static OfferModel SmokeDeletePromotionOFF() {
         return new OfferModel().toBuilder()
-                .name("at-This %OFF promotion should be deleted")
+                .name("at_This %OFF promotion should be deleted")
                 .brands(new ArrayList<String>() {{
                     add("Diesel");
                 }})
@@ -69,7 +69,7 @@ public class OfferModel {
 
     public static OfferModel CalvinKleinFixDiscount() {
         return new OfferModel().toBuilder()
-                .name("at-AT-promo-fix")
+                .name("at_AT-promo-fix")
                 .brands(new ArrayList<String>() {{
                     add("Calvin Klein");
                 }})
@@ -80,7 +80,7 @@ public class OfferModel {
 
     public static OfferModel CalvinKleinPercentOfAmoutDiscount() {
         return new OfferModel().toBuilder()
-                .name("at-Calvin Klein Jeans 7 % of amount discount")
+                .name("at_Calvin Klein Jeans 7 % of amount discount")
                 .brands(new ArrayList<String>() {{
                     add("Calvin Klein");
                 }})
@@ -91,7 +91,7 @@ public class OfferModel {
 
     public static OfferModel PromotionWithNoBrands() {
         return new OfferModel().toBuilder()
-                .name("at-Promotion with no brands")
+                .name("at_Promotion with no brands")
                 .brands(new ArrayList<String>() {{
                 }})
                 .type(PERCENT_OFF)
@@ -112,7 +112,7 @@ public class OfferModel {
 
     public static OfferModel EditTestOriginPromotion() {
         return new OfferModel().toBuilder()
-                .name("at-This is initial edit promotion test name")
+                .name("at_This is initial edit promotion test name")
                 .brands(new ArrayList<String>() {{
                     add("Calvin Klein");
                     add("Free People");
@@ -125,7 +125,7 @@ public class OfferModel {
 
     public static OfferModel EditNameOriginPromotion() {
         return new OfferModel().toBuilder()
-                .name("at-This promotion should be renamed after test completion")
+                .name("at_This promotion should be renamed after test completion")
                 .brands(new ArrayList<String>() {{
                     add("Calvin Klein");
                     add("Free People");
@@ -138,7 +138,7 @@ public class OfferModel {
 
     public static OfferModel EditNameRenamedPromotion() {
         return new OfferModel().toBuilder()
-                .name("at-This promotion was renamed during the test")
+                .name("at_This promotion was renamed during the test")
                 .brands(new ArrayList<String>() {{
                     add("Calvin Klein");
                     add("Free People");
@@ -151,7 +151,7 @@ public class OfferModel {
 
     public static OfferModel EditValueOriginPromotion() {
         return new OfferModel().toBuilder()
-                .name("at-Value should be changed after test completion")
+                .name("at_Value should be changed after test completion")
                 .brands(new ArrayList<String>() {{
                     add("Calvin Klein");
                     add("Free People");
@@ -164,7 +164,7 @@ public class OfferModel {
 
     public static OfferModel EditValueChangedPromotion() {
         return new OfferModel().toBuilder()
-                .name("at-Value has been changed during the test")
+                .name("at_Value should be changed after test completion")
                 .brands(new ArrayList<String>() {{
                     add("Calvin Klein");
                     add("Free People");
@@ -177,7 +177,7 @@ public class OfferModel {
 
     public static OfferModel EditTypeOriginPromotionOFF() {
         return new OfferModel().toBuilder()
-                .name("at-Type of this promotion should be changed to BOGO")
+                .name("at_Type of this promotion should be changed to BOGO")
                 .brands(new ArrayList<String>() {{
                     add("Calvin Klein");
                     add("Free People");
@@ -190,7 +190,7 @@ public class OfferModel {
 
     public static OfferModel EditTypeChangedPromotionBOGO() {
         return new OfferModel().toBuilder()
-                .name("at-The type of this promotion has been changed to BOGO")
+                .name("at_The type of this promotion has been changed to BOGO")
                 .brands(new ArrayList<String>() {{
                     add("Calvin Klein");
                     add("Free People");
@@ -202,7 +202,7 @@ public class OfferModel {
 
     public static OfferModel DuplicatePromotion() {
         return new OfferModel().toBuilder()
-                .name("at-This promotion should exists twice")
+                .name("at_This promotion should exists twice")
                 .brands(new ArrayList<String>() {{
                     add("Calvin Klein");
                     add("Free People");
@@ -214,7 +214,7 @@ public class OfferModel {
 
     public static OfferModel TestForecastOFFPromotion() {
         return new OfferModel().toBuilder()
-                .name("at-ForecastTestPromotionOFF")
+                .name("at_ForecastTestPromotionOFF")
                 .brands(new ArrayList<String>() {{
                     add("Calvin Klein");
                 }})
@@ -225,7 +225,7 @@ public class OfferModel {
 
     public static OfferModel TestForecastBOGOPromotion() {
         return new OfferModel().toBuilder()
-                .name("at-ForecastTestPromotionBOGO")
+                .name("at_ForecastTestPromotionBOGO")
                 .brands(new ArrayList<String>() {{
                     add("Free People");
                 }})
@@ -274,7 +274,7 @@ public class OfferModel {
 
     public static OfferModel AdriannaPapellOFF5() {
         return new OfferModel().toBuilder()
-                .name("Adrianna Papell 5% Off")
+                .name("Adrianna Papell 5% OFF")
                 .brands(new ArrayList<String>() {{
                     add("Adrianna Papell");
                 }})
@@ -285,7 +285,7 @@ public class OfferModel {
 
     public static OfferModel FreePeopleOFF10() {
         return new OfferModel().toBuilder()
-                .name("Free People 10% Off")
+                .name("Free People 10% OFF")
                 .brands(new ArrayList<String>() {{
                     add("Free People");
                 }})
@@ -296,7 +296,7 @@ public class OfferModel {
 
     public static OfferModel FreePeopleBOGO() {
         return new OfferModel().toBuilder()
-                .name("Free People 10% Off")
+                .name("Free People BOGO")
                 .brands(new ArrayList<String>() {{
                     add("Free People");
                 }})

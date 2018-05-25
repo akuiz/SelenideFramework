@@ -92,4 +92,12 @@ public class PredictionModel {
                 .quantity(new Pair("7", "1924"))
                 .build();
     }
+
+    public static PredictionModel CampaignOFFBOGOSmoke() {
+        return new PredictionModel().toBuilder()
+                .revenue(new Pair("$94,668.55", "$199,273"))
+                .profit(new Pair("$39,990.46", "$68,156.33"))
+                .quantity(new Pair("543", "1142"))
+                .build();
+    }
 }

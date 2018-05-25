@@ -36,7 +36,7 @@ public class ForecastPageObject extends PageObject {
     public void setCampaigns(CampaignModel... campaigns) {
         for (CampaignModel campaign : campaigns) {
             SelenideElement campaignElement = root.$(byText(campaign.getName())).scrollTo();
-            campaignElement.scrollIntoView("{behavior: \"smooth\", block: \"center\", inline: \"center\"}");
+            campaignElement.scrollIntoView("{ block: \"center\", inline: \"center\"}");
             CampaignForecastPageObject campaignForecast = new CampaignForecastPageObject($(byText(campaign.getName())).parent().parent());
             campaignForecast.toggleCampaign();
         }
@@ -69,14 +69,16 @@ public class ForecastPageObject extends PageObject {
     }
 
     private void setStartDate(DateTime startDate) {
+        int defaultMonth =  Integer.valueOf($(".start-date__input").getValue().split("/")[0]);
         startDateInput.scrollIntoView(false).click();
         DatePickerPageObject datePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
-        datePickerPageObject.pickDate(startDate);
+        datePickerPageObject.pickDate(startDate, defaultMonth);
     }
 
-    private void setEndDate(DateTime startDate) {
+    private void setEndDate(DateTime endDate) {
+        int defaultMonth =  Integer.valueOf($(".end-date__input").getValue().split("/")[0]);
         endDateInput.scrollIntoView(false).click();
         DatePickerPageObject datePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
-        datePickerPageObject.pickDate(startDate);
+        datePickerPageObject.pickDate(endDate, defaultMonth);
     }
 }

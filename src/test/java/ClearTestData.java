@@ -14,16 +14,16 @@ import static com.codeborne.selenide.Selenide.open;
 public class ClearTestData {
     private static final EnvironmentConfig environmentConfig = Configuration.INSTANCE.getEnvironmentConfig();
 
-    @Test(description = "Delete all test promotions")
+   @Test(description = "Delete all test promotions")
     public void deleteAllPromotions(){
-        MainPage mainPage = open("http://35.196.70.251:4200", MainPage.class);
+        MainPage mainPage = open("http://35.196.70.251:4200/", MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
         createPromotionPage.deleteTestPromotions();
     }
 
     @Test(description = "Delete all test campaigns")
     public void deleteAllDiscounts(){
-        MainPage mainPage = open("http://35.196.70.251:4200", MainPage.class);
+        MainPage mainPage = open("http://35.196.70.251:4200/", MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
         campaignsPage.deleteTestCampaigns();
     }

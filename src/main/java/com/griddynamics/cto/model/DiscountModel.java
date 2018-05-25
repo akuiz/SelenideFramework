@@ -15,31 +15,31 @@ public class DiscountModel {
 
     public static DiscountModel TestCampaignBOGODiscount() {
         return new DiscountModel().toBuilder()
-                .name("CreateCampaignTestPromotionBOGO")
+                .name("at_CreateCampaignTestPromotionBOGO")
                 .build();
     }
 
     public static DiscountModel TestCampaignOFFPromotion() {
         return new DiscountModel().toBuilder()
-                .name("CreateCampaignTestPromotionOFF")
+                .name("at_CreateCampaignTestPromotionOFF")
                 .build();
     }
 
     public static DiscountModel DiscountBOGOOnlyCampaign() {
         return new DiscountModel().toBuilder()
-                .name("CreateCampaignTestWithBOGOPromotion")
+                .name("at_CreateCampaignTestWithBOGOPromotion")
                 .build();
     }
 
     public static DiscountModel ForecastOFFDiscount() {
         return new DiscountModel().toBuilder()
-                .name("ForecastTestPromotionOFF")
+                .name("at_ForecastTestPromotionOFF")
                 .build();
     }
 
     public static DiscountModel ForecastBOGODiscount() {
         return new DiscountModel().toBuilder()
-                .name("ForecastTestPromotionBOGO")
+                .name("at_ForecastTestPromotionBOGO")
                 .build();
     }
 
@@ -51,13 +51,13 @@ public class DiscountModel {
 
     public static DiscountModel DiscountBOGOSmoke() {
         return new DiscountModel().toBuilder()
-                .name("Smoke promotion BOGO")
+                .name("at_Smoke promotion BOGO")
                 .build();
     }
 
     public static DiscountModel DiscountOFFSmoke() {
         return new DiscountModel().toBuilder()
-                .name("Smoke promotion %OFF")
+                .name("at_Smoke promotion %OFF")
                 .build();
     }
 
@@ -81,19 +81,19 @@ public class DiscountModel {
 
     public static DiscountModel AdriannaPapellOFF5() {
         return new DiscountModel().toBuilder()
-                .name("Adrianna Papell 5% Off")
+                .name("Adrianna Papell 5% OFF")
                 .build();
     }
 
     public static DiscountModel FreePeopleOFF10() {
         return new DiscountModel().toBuilder()
-                .name("Free People 10% Off")
+                .name("Free People 10% OFF")
                 .build();
     }
 
     public static DiscountModel FreePeopleBOGO() {
         return new DiscountModel().toBuilder()
-                .name("Free People 10% Off")
+                .name("Free People BOGO")
                 .build();
     }
 }
