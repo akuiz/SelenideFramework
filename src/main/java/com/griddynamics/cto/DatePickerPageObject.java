@@ -1,8 +1,12 @@
 package com.griddynamics.cto;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.joda.time.DateTime;
 
+import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byValue;
@@ -82,4 +86,24 @@ public class DatePickerPageObject extends PageObject{
         }
     }
 
+    @Step("Pick {i}th day of current month")
+    public void pickCurrentMonthDay(int i) {
+        month = DateTime.now().monthOfYear().getAsText();
+        yearToPick = DateTime.now().getYear();
+        dayToPick = i;
+        pickDay(i);
+    }
+
+    @Step("Make sure that {i}th of current month is disabled")
+    public void impossibleToPickCurrentMonthDay(int i) {
+        month = DateTime.now().monthOfYear().getAsText();
+        yearToPick = DateTime.now().getYear();
+        dayToPick = i;
+        checkDayIsNotClickable(i);
+    }
+
+    private void checkDayIsNotClickable(int i) {
+        String label = month + " " + dayToPick + ", "+yearToPick;
+        $(byAttribute("aria-label",label)).shouldHave(attribute("aria-disabled","true"));
+    }
 }

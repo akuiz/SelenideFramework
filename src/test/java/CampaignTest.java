@@ -19,7 +19,7 @@ public class CampaignTest {
         campaignsPage.checkCampaignExists(CampaignModel.CampaignBOGOSmoke());
     }
 
-    @Test(description = "Add campaign with OFF promotion", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke","add_campaign"})
+    @Test(description = "Add campaign with OFF promotion", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke", "add_campaign"})
     public void addCamapaignWithOFFPromotion() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
@@ -27,7 +27,7 @@ public class CampaignTest {
         campaignsPage.checkCampaignExists(CampaignModel.CampaignOFFSmoke());
     }
 
-    @Test(description = "Add campaign with BOGO and %OFF promotions", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke","add_campaign"})
+    @Test(description = "Add campaign with BOGO and %OFF promotions", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke", "add_campaign"})
     public void addCampaign() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
@@ -131,7 +131,14 @@ public class CampaignTest {
         campaignsPage.deleteCampaignByName(CampaignModel.EditCampaignEdited().getName());
     }
 
-    @Test(description = "Check pre-created campaigns", groups = {"production", "production_read_only"},priority = 1)
+    @Test(description = "Check startDate/endDate datePicker validation", groups={"campaign_smoke"})
+    public void campaignDatePickerTest() {
+        MainPage mainPage = open("http://35.196.70.251:4200", MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        campaignsPage.checkCampaignDatePicker();
+    }
+
+    @Test(description = "Check pre-created campaigns", groups = {"production", "production_read_only"}, priority = 1)
     public void precreatedCampaignsCheck() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();

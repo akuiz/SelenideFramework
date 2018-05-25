@@ -1,11 +1,9 @@
 package com.griddynamics.cto;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.DiscountModel;
-import com.griddynamics.cto.model.OfferModel;
 import io.qameta.allure.Step;
 import org.joda.time.DateTime;
 
@@ -26,6 +24,9 @@ public class ManageCampaignsPageObject extends PageObject {
     SelenideElement addCampaignSecondButton = root.$$(SELECTOR_ADD_CAMPAIGN).last();
 
     String SELECTOR_ADD_NEW_CAMPAIGN_WINDOW = ".mat-dialog-container";
+    String SELECTOR_CAMPAIGN_NAME_COLUMN = ".name-column__title";
+
+    String XPATH_TEST_CAMPAIGN = "//*[contains(text(), 'at_')]";
 
     static final String SELECTOR_CAMPAIGNS = "";
 
@@ -171,14 +172,20 @@ public class ManageCampaignsPageObject extends PageObject {
     }
 
     private CampaignPageObject findTestCampaign() {
-        if(root.$(byXpath("//*[contains(text(), 'at_')]")).exists()){
-            return new CampaignPageObject(root.$(byXpath("//*[contains(text(), 'at_')]")).parent().parent());
+        if(root.$(byXpath(XPATH_TEST_CAMPAIGN)).exists()){
+            return new CampaignPageObject(root.$(byXpath(XPATH_TEST_CAMPAIGN)).parent().parent());
         }
         return null;
     }
 
     public void checkNumberOfCampaigns(int numberOfCampaigns) {
-        root.$$(".name-column__title").shouldHaveSize(numberOfCampaigns);
+        root.$$(SELECTOR_CAMPAIGN_NAME_COLUMN).shouldHaveSize(numberOfCampaigns);
+    }
 
+    public void checkCampaignDatePicker() {
+        waitForLoader();
+        addCampaignFirstButton.click();
+        NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
+        createNewCampaignWindow.validateDatePicker();
     }
 }

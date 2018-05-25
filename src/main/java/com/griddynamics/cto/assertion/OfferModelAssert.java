@@ -1,19 +1,19 @@
 package com.griddynamics.cto.assertion;
 
-import com.griddynamics.cto.model.OfferModel;
+import com.griddynamics.cto.model.PromotionModel;
 import org.assertj.core.api.AbstractAssert;
 
-public class OfferModelAssert extends AbstractAssert<OfferModelAssert, OfferModel> {
+public class OfferModelAssert extends AbstractAssert<OfferModelAssert, PromotionModel> {
 
-    public OfferModelAssert(OfferModel actualOffer) {
+    public OfferModelAssert(PromotionModel actualOffer) {
         super(actualOffer, OfferModelAssert.class);
     }
 
-    public static OfferModelAssert assertThat(OfferModel actualOffer) {
+    public static OfferModelAssert assertThat(PromotionModel actualOffer) {
         return new OfferModelAssert(actualOffer);
     }
 
-    public AbstractAssert hasSameNameAs(OfferModel expectedOffer) {
+    public AbstractAssert hasSameNameAs(PromotionModel expectedOffer) {
         isNotNull();
         if (!actual.getName().equals(expectedOffer.getName())) {
             failWithMessage("Expected offer's name to be <%s> but was <%s>", expectedOffer.getName(), actual.getName());
@@ -21,7 +21,7 @@ public class OfferModelAssert extends AbstractAssert<OfferModelAssert, OfferMode
         return this;
     }
 
-    public AbstractAssert isSameDiscountAs(OfferModel expectedOffer) {
+    public AbstractAssert isSameDiscountAs(PromotionModel expectedOffer) {
         isNotNull();
         assertThat(actual).hasSameNameAs(expectedOffer);
         assertThat(actual).hasSameTypeAs(expectedOffer);
@@ -30,7 +30,7 @@ public class OfferModelAssert extends AbstractAssert<OfferModelAssert, OfferMode
         return this;
     }
 
-    public AbstractAssert hasSameTypeAs(OfferModel expectedOffer) {
+    public AbstractAssert hasSameTypeAs(PromotionModel expectedOffer) {
         isNotNull();
         if (!actual.getType().equals(expectedOffer.getType())) {
             failWithMessage("Expected offer's type to be <%s> but was <%s>", expectedOffer.getType(), actual.getType());
@@ -38,7 +38,7 @@ public class OfferModelAssert extends AbstractAssert<OfferModelAssert, OfferMode
         return this;
     }
 
-    public AbstractAssert hasSameBrandsAs(OfferModel expectedOffer) {
+    public AbstractAssert hasSameBrandsAs(PromotionModel expectedOffer) {
         isNotNull();
         for (int i = 0; i < actual.getBrands().size(); i++) {
             if (!actual.getBrands().get(i).equals(expectedOffer.getBrands().get(i))) {
@@ -48,7 +48,7 @@ public class OfferModelAssert extends AbstractAssert<OfferModelAssert, OfferMode
         return this;
     }
 
-    public AbstractAssert hasSameValueAs(OfferModel expectedOffer) {
+    public AbstractAssert hasSameValueAs(PromotionModel expectedOffer) {
         isNotNull();
         if (!actual.getValue().equals(expectedOffer.getValue())) {
             failWithMessage("Expected offer's value to be <%s> but was <%s>", expectedOffer.getValue(), actual.getValue());

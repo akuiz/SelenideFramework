@@ -48,6 +48,13 @@ public class ForecastTest {
         forecastPage.checkForecast(ForecastModel.CampaignOFFBOGOSmokeSecondDate());
     }
 
+    @Test(description = "Check startDate/endDate datePicker validation", groups={"forecast_smoke"})
+    public void forecastDatePickerTest() {
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ForecastPageObject forecastPage = mainPage.navigateToForecastPage();
+        forecastPage.checkForecastDatePicker();
+    }
+
     @Test(description = "Check Calvin Klein 7%, Adrianna Papell and Free People forecast", groups = {"production", "production_read_only"})
     public void forecastCalvin7Test(){
         MainPage mainPage = open("http://predictive-pricing-prod.griddynamics.net/campaigns", MainPage.class);

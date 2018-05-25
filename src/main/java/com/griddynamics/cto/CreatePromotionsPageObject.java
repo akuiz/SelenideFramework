@@ -3,7 +3,7 @@ package com.griddynamics.cto;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.griddynamics.cto.model.OfferModel;
+import com.griddynamics.cto.model.PromotionModel;
 import io.qameta.allure.Step;
 
 import java.util.ArrayList;
@@ -16,12 +16,11 @@ import static com.griddynamics.cto.assertion.OfferModelAssert.assertThat;
 public class CreatePromotionsPageObject extends PageObject {
 
     String SELECTOR_ADD_PROMOTION = ".btn-add-promo";
-
     String SELECTOR_PROMOTIONS = ".at-promotion";
-
     String SELECTOR_ADD_NEW_PROMOTION_WINDOW = ".mat-dialog-container";
-
     String SELECTOR_MANAGE_CAMPAIGNS_BUTTON = ".manage-campaigns-button";
+
+    String XPATH_TEST_PROMOTION = "//*[contains(text(), 'at_')]";
 
     SelenideElement manageCampaignsButtong = root.$(SELECTOR_MANAGE_CAMPAIGNS_BUTTON);
     SelenideElement addPromotionFirstButton = root.$$(SELECTOR_ADD_PROMOTION).first();
@@ -34,7 +33,7 @@ public class CreatePromotionsPageObject extends PageObject {
     }
 
     @Step("Add promotion template")
-    public OfferPageObject addPromotion(OfferModel promotion) {
+    public OfferPageObject addPromotion(PromotionModel promotion) {
         waitForLoader();
         addPromotionFirstButton.click();
         NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
@@ -43,7 +42,7 @@ public class CreatePromotionsPageObject extends PageObject {
     }
 
     @Step("Add promotion template")
-    public OfferPageObject addPromotionSecondButton(OfferModel promotion) {
+    public OfferPageObject addPromotionSecondButton(PromotionModel promotion) {
         waitForLoader();
         addPromotionFirstButton.click();
         NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
@@ -52,7 +51,7 @@ public class CreatePromotionsPageObject extends PageObject {
     }
 
     @Step("Add promotion without brands")
-    public void addPromotionWithoutBrands(OfferModel promotion) {
+    public void addPromotionWithoutBrands(PromotionModel promotion) {
         waitForLoader();
         addPromotionFirstButton.click();
         NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
@@ -60,7 +59,7 @@ public class CreatePromotionsPageObject extends PageObject {
     }
 
     @Step("Add promotion without name")
-    public void addPromotionWithoutName(OfferModel promotion) {
+    public void addPromotionWithoutName(PromotionModel promotion) {
         waitForLoader();
         addPromotionFirstButton.click();
         NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
@@ -68,15 +67,15 @@ public class CreatePromotionsPageObject extends PageObject {
     }
 
     @Step("Make sure that promotion was successully created/updated")
-    public void checkPromotionExists(OfferModel offerModel) {
-        OfferModel promotion = findOfferByName(offerModel.getName());
+    public void checkPromotionExists(PromotionModel offerModel) {
+        PromotionModel promotion = findOfferByName(offerModel.getName());
         assertThat(promotion).isSameDiscountAs(offerModel);
     }
 
     @Step("Find promotion with name: {name}")
-    private OfferModel findOfferByName(String name) {
+    private PromotionModel findOfferByName(String name) {
         OfferPageObject promotionPageObject = new OfferPageObject(root.$(byText(name)).parent());
-        OfferModel promotion = new OfferModel().toBuilder()
+        PromotionModel promotion = new PromotionModel().toBuilder()
                 .name(promotionPageObject.getName())
                 .value(promotionPageObject.getValue())
                 .type(promotionPageObject.getType())
@@ -100,7 +99,7 @@ public class CreatePromotionsPageObject extends PageObject {
         $(byText(name)).shouldNot(exist);
     }
 
-    public void addPromotionWithEmptyName(OfferModel promotion) {
+    public void addPromotionWithEmptyName(PromotionModel promotion) {
         addPromotionFirstButton.scrollTo();
         addPromotionFirstButton.click();
         NewPromotionPageObject createNewPromotionWindow = new NewPromotionPageObject($(SELECTOR_ADD_NEW_PROMOTION_WINDOW));
@@ -114,22 +113,22 @@ public class CreatePromotionsPageObject extends PageObject {
     }
 
     @Step("Update promotion")
-    public void updatePromotion(OfferModel actualPromotion, OfferModel newPromotion) {
+    public void updatePromotion(PromotionModel actualPromotion, PromotionModel newPromotion) {
         OfferPageObject promotionPageObject = findOfferPageObjectByName(actualPromotion.getName());
         promotionPageObject.updatePromotion(newPromotion);
     }
 
     @Step("Duplicate promotion")
-    public void duplicatePromotion(OfferModel actualPromotion) {
+    public void duplicatePromotion(PromotionModel actualPromotion) {
         OfferPageObject promotionPageObject = findOfferPageObjectByName(actualPromotion.getName());
         promotionPageObject.duplicatePromotion();
     }
 
     @Step("Make sure that promotion exist twice")
-    public void checkPromotionExistsTwice(OfferModel originPromotion) {
+    public void checkPromotionExistsTwice(PromotionModel originPromotion) {
         ArrayList<OfferPageObject> promotionsList = findAllPromotionsByName(originPromotion.getName());
         for (int i = 0; i < promotionsList.size(); i++) {
-            OfferModel promotion = promotionsList.get(i).getOfferModel();
+            PromotionModel promotion = promotionsList.get(i).getOfferModel();
             assertThat(promotion).isSameDiscountAs(originPromotion);
         }
     }
@@ -143,13 +142,13 @@ public class CreatePromotionsPageObject extends PageObject {
     }
 
     @Step("Update promotion name to {name}")
-    public void updatePromotionName(OfferModel actualPromotion, String name) {
+    public void updatePromotionName(PromotionModel actualPromotion, String name) {
         OfferPageObject promotionPageObject = findOfferPageObjectByName(actualPromotion.getName());
         promotionPageObject.updatePromotionName(name);
     }
 
     @Step("Update promotion value to {value}")
-    public void updatePromotionValue(OfferModel promotion, String value) {
+    public void updatePromotionValue(PromotionModel promotion, String value) {
         OfferPageObject promotionPageObject = findOfferPageObjectByName(promotion.getName());
         promotionPageObject.updatePromotionValue(value);
         Selenide.sleep(2000);
@@ -165,8 +164,8 @@ public class CreatePromotionsPageObject extends PageObject {
     }
 
     private OfferPageObject findTestPromotion() {
-        if(root.$(byXpath("//*[contains(text(), 'at_')]")).exists()){
-            return new OfferPageObject(root.$(byXpath("//*[contains(text(), 'at_')]")).parent());
+        if(root.$(byXpath(XPATH_TEST_PROMOTION)).exists()){
+            return new OfferPageObject(root.$(byXpath(XPATH_TEST_PROMOTION)).parent());
         }
         return null;
     }

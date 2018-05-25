@@ -2,11 +2,10 @@ package com.griddynamics.cto;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.DiscountModel;
 import com.griddynamics.cto.model.CampaignModel;
-import com.griddynamics.cto.model.OfferModel;
+import com.griddynamics.cto.model.PromotionModel;
 import com.griddynamics.cto.model.PredictionModel;
 import io.qameta.allure.Step;
 import org.joda.time.DateTime;
@@ -71,7 +70,7 @@ public class CampaignPageObject extends PageObject {
     }
 
     public CampaignModel getCampaignModel() {
-        ArrayList<OfferModel> campaingOffers = getOffersFromCampaign();
+        ArrayList<PromotionModel> campaingOffers = getOffersFromCampaign();
         CampaignModel campaign = new CampaignModel().toBuilder()
                 .name(getName())
                 .endDate(getEndDate())
@@ -81,10 +80,10 @@ public class CampaignPageObject extends PageObject {
         return campaign;
     }
 
-    public ArrayList<OfferModel> getOffersFromCampaign() {
-        ArrayList<OfferModel> offers = new ArrayList<OfferModel>();
+    public ArrayList<PromotionModel> getOffersFromCampaign() {
+        ArrayList<PromotionModel> offers = new ArrayList<PromotionModel>();
         for (int offerNumber = 0; offerNumber < offerElements.size(); offerNumber++) {
-            offers.add(new OfferModel().toBuilder()
+            offers.add(new PromotionModel().toBuilder()
                     .name(getOfferName(offerNumber))
                     .value(getOfferValue(offerNumber))
                     .build());

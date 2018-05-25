@@ -1,7 +1,7 @@
 package com.griddynamics.cto.assertion;
 
 import com.griddynamics.cto.model.CampaignModel;
-import com.griddynamics.cto.model.OfferModel;
+import com.griddynamics.cto.model.PromotionModel;
 import org.assertj.core.api.Assertions;
 
 public class CustomAssertions extends Assertions {
@@ -10,7 +10,7 @@ public class CustomAssertions extends Assertions {
         return new CampaignModelAssert(actual);
     }
 
-    public static OfferModelAssert assertThat(OfferModel actual) {
+    public static OfferModelAssert assertThat(PromotionModel actual) {
         return new OfferModelAssert(actual);
     }
 

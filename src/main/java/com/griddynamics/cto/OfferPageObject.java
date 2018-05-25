@@ -1,10 +1,8 @@
 package com.griddynamics.cto;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.griddynamics.cto.model.OfferModel;
-import io.qameta.allure.Step;
+import com.griddynamics.cto.model.PromotionModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,7 +82,7 @@ public class OfferPageObject extends PageObject {
         offerValueField.setValue(value);
     }
 
-    public void setValues(OfferModel offer) {
+    public void setValues(PromotionModel offer) {
         promotionNameField.setValue(offer.getName());
         offerValueField.setValue(offer.getValue());
         offerRuleField.setValue(offer.getBrands().get(0));
@@ -106,7 +104,7 @@ public class OfferPageObject extends PageObject {
         editPromotionWindow.updatePromotionName(newPromotionName);
     }
 
-    public void updatePromotion(OfferModel newPromotion) {
+    public void updatePromotion(PromotionModel newPromotion) {
         actions.first().click();
         EditPromotionPageObject editPromotionWindow = new EditPromotionPageObject($(ELEMENT_UPDATE_PROMOTION_WINDOW));
         editPromotionWindow.updatePromotion(newPromotion);
@@ -118,8 +116,8 @@ public class OfferPageObject extends PageObject {
         duplicatePromotionWindow.duplicatePromotion();
     }
 
-    public OfferModel getOfferModel() {
-        return new OfferModel().toBuilder()
+    public PromotionModel getOfferModel() {
+        return new PromotionModel().toBuilder()
                 .name(this.getName())
                 .value(this.getValue())
                 .type(this.getType())

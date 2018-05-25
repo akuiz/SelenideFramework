@@ -7,9 +7,8 @@ import com.griddynamics.cto.model.PredictionModel;
 import io.qameta.allure.Step;
 import org.joda.time.DateTime;
 
-import static com.codeborne.selenide.Condition.enabled;
-import static com.codeborne.selenide.Condition.not;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -24,6 +23,8 @@ public class ForecastPageObject extends PageObject {
     final static String SELECTOR_BUILD_FORECAST = ".btn__title";
     final static String SELECTOR_FORDECAST_CHARTS = ".content__parts__right";
     final static String SELECTOR_LOADER_SPINNER = ".mat-progress-spinner";
+    final static String SELECTOR_START_DATE_INPUT = ".mat-progress-spinner";
+    final static String SELECTOR_END_DATE_INPUT = ".mat-progress-spinner";
 
     static final String SELECTOR_DATE_PICKER = ".mat-datepicker-popup";
 
@@ -69,16 +70,32 @@ public class ForecastPageObject extends PageObject {
     }
 
     private void setStartDate(DateTime startDate) {
-        int defaultMonth =  Integer.valueOf($(".start-date__input").getValue().split("/")[0]);
+        int defaultMonth =  Integer.valueOf($(SELECTOR_START_DATE_INPUT).getValue().split("/")[0]);
         startDateInput.scrollIntoView(false).click();
         DatePickerPageObject datePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
         datePickerPageObject.pickDate(startDate, defaultMonth);
     }
 
     private void setEndDate(DateTime endDate) {
-        int defaultMonth =  Integer.valueOf($(".end-date__input").getValue().split("/")[0]);
+        int defaultMonth =  Integer.valueOf($("SELECTOR_START_DATE_INPUT").getValue().split("/")[0]);
         endDateInput.scrollIntoView(false).click();
         DatePickerPageObject datePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
         datePickerPageObject.pickDate(endDate, defaultMonth);
     }
+
+        @Step("Can't pick start date after end date and vice versa")
+        public void checkForecastDatePicker() {
+            startDateInput.click();
+            DatePickerPageObject startDatePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
+            startDatePickerPageObject.nextMonthButton.shouldBe(disabled);
+            startDatePickerPageObject.pickCurrentMonthDay(2);
+            endDateInput.click();
+            DatePickerPageObject endDatePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
+            endDatePickerPageObject.previousMonthButton.shouldBe(disabled);
+            endDatePickerPageObject.impossibleToPickCurrentMonthDay(1);
+            endDatePickerPageObject.pickCurrentMonthDay(29);
+            startDateInput.click();
+            startDatePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
+            startDatePickerPageObject.impossibleToPickCurrentMonthDay(30);
+        }
 }

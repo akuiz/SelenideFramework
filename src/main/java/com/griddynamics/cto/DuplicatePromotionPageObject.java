@@ -2,7 +2,7 @@ package com.griddynamics.cto;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.griddynamics.cto.model.OfferModel;
+import com.griddynamics.cto.model.PromotionModel;
 import io.qameta.allure.Step;
 
 import java.util.ArrayList;
@@ -81,7 +81,7 @@ public class DuplicatePromotionPageObject extends PageObject {
         closeWindowButton.click();
     }
 
-    public void setPromotionValues(OfferModel promotion) {
+    public void setPromotionValues(PromotionModel promotion) {
         offerNameInput.setValue(promotion.getName());
         setOfferBrands(promotion.getBrands());
         setOfferType(promotion.getType());
@@ -99,7 +99,7 @@ public class DuplicatePromotionPageObject extends PageObject {
     }
 
     @Step("Add promotion template")
-    public void addPromotion(OfferModel promotion) {
+    public void addPromotion(PromotionModel promotion) {
         setPromotionValues(promotion);
         addPromotionButton.click();
     }

@@ -115,4 +115,20 @@ public class NewCampaignPageObject extends PageObject {
         WebDriverRunner.getWebDriver().findElement(By.cssSelector(SELECTOR_CAMPAIGN_NAME)).sendKeys(Keys.chord(Keys.COMMAND,"a"));
         WebDriverRunner.getWebDriver().findElement(By.cssSelector(SELECTOR_CAMPAIGN_NAME)).sendKeys(Keys.BACK_SPACE);
     }
+
+    @Step("Can't pick start date after end date and vice versa")
+    public void validateDatePicker() {
+        startDateInput.click();
+        DatePickerPageObject startDatePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
+        startDatePickerPageObject.nextMonthButton.shouldBe(disabled);
+        startDatePickerPageObject.pickCurrentMonthDay(2);
+        endDateInput.click();
+        DatePickerPageObject endDatePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
+        endDatePickerPageObject.previousMonthButton.shouldBe(disabled);
+        endDatePickerPageObject.impossibleToPickCurrentMonthDay(1);
+        endDatePickerPageObject.pickCurrentMonthDay(29);
+        startDateInput.click();
+        startDatePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
+        startDatePickerPageObject.impossibleToPickCurrentMonthDay(30);
+    }
 }

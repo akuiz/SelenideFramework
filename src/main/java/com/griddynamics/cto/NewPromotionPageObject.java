@@ -3,7 +3,7 @@ package com.griddynamics.cto;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
-import com.griddynamics.cto.model.OfferModel;
+import com.griddynamics.cto.model.PromotionModel;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -88,7 +88,7 @@ public class NewPromotionPageObject extends PageObject {
         closeWindowButton.click();
     }
 
-    public void setPromotionValues(OfferModel promotion) {
+    public void setPromotionValues(PromotionModel promotion) {
         setOfferName(promotion.getName());
         setOfferBrands(promotion.getBrands());
         setOfferType(promotion.getType());
@@ -106,7 +106,7 @@ public class NewPromotionPageObject extends PageObject {
     }
 
     @Step("Set promotion values and click add promotion button")
-    public void addPromotion(OfferModel promotion) {
+    public void addPromotion(PromotionModel promotion) {
         setPromotionValues(promotion);
         addPromotionButton.click();
     }
@@ -116,7 +116,7 @@ public class NewPromotionPageObject extends PageObject {
     }
 
     @Step("Make sure that button is disabled after filling values")
-    public void addBadPromotion(OfferModel promotion) {
+    public void addBadPromotion(PromotionModel promotion) {
         setPromotionValues(promotion);
         addPromotionButton.shouldBe(disabled);
     }
