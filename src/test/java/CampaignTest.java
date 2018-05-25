@@ -1,8 +1,11 @@
 import com.griddynamics.cto.*;
 import com.griddynamics.cto.configuration.Configuration;
 import com.griddynamics.cto.configuration.EnvironmentConfig;
+import com.griddynamics.cto.data.PromotionDataManager;
 import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.PredictionModel;
+import com.griddynamics.cto.model.PromotionModel;
+import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -10,6 +13,11 @@ import static com.codeborne.selenide.Selenide.open;
 public class CampaignTest {
 
     private static final EnvironmentConfig environmentConfig = Configuration.INSTANCE.getEnvironmentConfig();
+
+    @BeforeGroups(groups = "campaign_smoke")
+    public void setUp(){
+        PromotionDataManager.CreatePromotions(environmentConfig.url(), PromotionModel.DuplicatePromotion());
+    }
 
     @Test(description = "Add campaign with BOGO promotion", dependsOnGroups = {"create_promotion"}, groups = {"campaign_smoke", "add_campaign"})
     public void addCamapaignWithBOGOPromotion() {
