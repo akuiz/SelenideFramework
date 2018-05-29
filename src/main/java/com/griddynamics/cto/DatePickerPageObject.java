@@ -1,15 +1,11 @@
 package com.griddynamics.cto;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.joda.time.DateTime;
 
 import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Selectors.byAttribute;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byValue;
 import static com.codeborne.selenide.Selenide.$;
 
 public class DatePickerPageObject extends PageObject{
@@ -51,7 +47,8 @@ public class DatePickerPageObject extends PageObject{
 
     private void pickDay(int dayOfMonth) {
         String label = month + " " + dayToPick + ", "+yearToPick;
-        $(byAttribute("aria-label",label)).click();
+        System.out.println($(byAttribute("aria-label",label)).exists());
+        $(byAttribute("aria-label",label)).scrollIntoView(true).click();
     }
 
     private void pickMonth(int monthOfYear) {

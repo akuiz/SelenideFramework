@@ -45,6 +45,30 @@ public class PromotionModel {
                 .build();
     }
 
+    public static PromotionModel PromotionOFFCampaign() {
+        return new PromotionModel().toBuilder()
+                .name("at_Promotion for Campaign OFF")
+                .brands(new ArrayList<String>() {{
+                    add("Calvin Klein");
+                    add("Free People");
+                }})
+                .type(PERCENT_OFF)
+                .value("8%")
+                .build();
+    }
+
+    public static PromotionModel PromotionBOGOCampaign() {
+        return new PromotionModel().toBuilder()
+                .name("at_Promotion for Campaign BOGO")
+                .brands(new ArrayList<String>() {{
+                    add("adidas");
+                    add("Diesel");
+                }})
+                .type(BOGO)
+                .value("")
+                .build();
+    }
+
     public static PromotionModel SmokeDeletePromotionBOGO() {
         return new PromotionModel().toBuilder()
                 .name("at_This BOGO promotion should be deleted")

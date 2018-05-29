@@ -51,13 +51,13 @@ public class DiscountModel {
 
     public static DiscountModel DiscountBOGOSmoke() {
         return new DiscountModel().toBuilder()
-                .name("at_Smoke promotion BOGO")
+                .name("at_Promotion for Campaign BOGO")
                 .build();
     }
 
     public static DiscountModel DiscountOFFSmoke() {
         return new DiscountModel().toBuilder()
-                .name("at_Smoke promotion %OFF")
+                .name("at_Promotion for Campaign OFF")
                 .build();
     }
 
@@ -94,6 +94,18 @@ public class DiscountModel {
     public static DiscountModel FreePeopleBOGO() {
         return new DiscountModel().toBuilder()
                 .name("Free People BOGO")
+                .build();
+    }
+
+    public static DiscountModel DiscountCampaignOFF(){
+        return new DiscountModel().toBuilder()
+        .name("at_Promotion for Campaign OFF")
+                .build();
+    }
+
+    public static DiscountModel DiscountCampaignBOGO(){
+        return new DiscountModel().toBuilder()
+        .name("at_Promotion for Campaign BOGO")
                 .build();
     }
 }

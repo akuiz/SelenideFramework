@@ -42,6 +42,7 @@ public class ManageCampaignsPageObject extends PageObject {
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.addCampaign(campaign);
+        waitForLoader();
         CampaignPageObject campaignPageObject = new CampaignPageObject(root.$(byText(campaign.getName())).parent().parent());
         return campaignPageObject;
     }
@@ -187,5 +188,14 @@ public class ManageCampaignsPageObject extends PageObject {
         addCampaignFirstButton.click();
         NewCampaignPageObject createNewCampaignWindow = new NewCampaignPageObject($(SELECTOR_ADD_NEW_CAMPAIGN_WINDOW));
         createNewCampaignWindow.validateDatePicker();
+    }
+
+    public boolean hasCampaign(CampaignModel campaign) {
+        waitForLoader();
+        if(!root.$(byText(campaign.getName())).exists()){
+            return false;
+        }
+        CampaignModel actualCampaign = findCampaignByName(campaign.getName());
+        return actualCampaign.equals(campaign);
     }
 }

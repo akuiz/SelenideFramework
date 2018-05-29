@@ -41,7 +41,7 @@ public class CampaignModel {
 
     public static CampaignModel CampaignBOGOSmoke() {
         return new CampaignModel().toBuilder()
-                .name("at_Smoke campaign with BOGO promotion")
+                .name("at_Smoke campaign with BOGO discount")
                 .startDate(new DateTime(2018, 5, 2, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -74,7 +74,7 @@ public class CampaignModel {
 
     public static CampaignModel CampaignOFFSmoke() {
         return new CampaignModel().toBuilder()
-                .name("at_Smoke campaign with Percent OFF promotion")
+                .name("at_Smoke campaign with Percent OFF discount")
                 .startDate(new DateTime(2018, 5, 3, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 27, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -85,7 +85,7 @@ public class CampaignModel {
 
     public static CampaignModel CampaignOFFBOGOSmoke() {
         return new CampaignModel().toBuilder()
-                .name("at_Smoke campaign with %OFF and BOGO promotions")
+                .name("at_Smoke campaign with %OFF and BOGO discounts")
                 .startDate(new DateTime(2018, 5, 4, 0, 0, 0, 0))
                 .endDate(new DateTime(2018, 5, 17, 0, 0, 0, 0))
                 .discounts(new ArrayList<DiscountModel>() {{
@@ -398,6 +398,39 @@ public class CampaignModel {
                 .build();
     }
 
+    public static CampaignModel CampaignOFFForecast() {
+        return new CampaignModel().toBuilder()
+                .name("at_Campaign for forecast with OFF discount")
+                .startDate(new DateTime(2018, 5, 2, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountCampaignOFF());
+                }})
+                .build();
+    }
+
+    public static CampaignModel CampaignBOGOForecast() {
+        return new CampaignModel().toBuilder()
+                .name("at_Campaign for forecast with BOGO discount")
+                .startDate(new DateTime(2018, 5, 2, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountCampaignBOGO());
+                }})
+                .build();
+    }
+
+    public static CampaignModel CampaignOFFBOGOForecast() {
+        return new CampaignModel().toBuilder()
+                .name("at_Campaign for forecast with BOGO and OFF discount")
+                .startDate(new DateTime(2018, 5, 2, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 5, 29, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountCampaignBOGO());
+                    add(DiscountModel.DiscountCampaignOFF());
+                }})
+                .build();
+    }
 }
 
 

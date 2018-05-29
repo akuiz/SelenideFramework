@@ -3,12 +3,11 @@ package com.griddynamics.cto;
 import com.codeborne.selenide.SelenideElement;
 import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.ForecastModel;
-import com.griddynamics.cto.model.PredictionModel;
 import io.qameta.allure.Step;
 import org.joda.time.DateTime;
 
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -23,8 +22,8 @@ public class ForecastPageObject extends PageObject {
     final static String SELECTOR_BUILD_FORECAST = ".btn__title";
     final static String SELECTOR_FORDECAST_CHARTS = ".content__parts__right";
     final static String SELECTOR_LOADER_SPINNER = ".mat-progress-spinner";
-    final static String SELECTOR_START_DATE_INPUT = ".mat-progress-spinner";
-    final static String SELECTOR_END_DATE_INPUT = ".mat-progress-spinner";
+    final static String SELECTOR_START_DATE_INPUT = ".start-date__input";
+    final static String SELECTOR_END_DATE_INPUT = ".end-date__input";
 
     static final String SELECTOR_DATE_PICKER = ".mat-datepicker-popup";
 
@@ -37,7 +36,7 @@ public class ForecastPageObject extends PageObject {
     public void setCampaigns(CampaignModel... campaigns) {
         for (CampaignModel campaign : campaigns) {
             SelenideElement campaignElement = root.$(byText(campaign.getName())).scrollTo();
-            campaignElement.scrollIntoView("{ block: \"center\", inline: \"center\"}");
+            campaignElement.scrollIntoView("{behavior: \"smooth\", block: \"center\", inline: \"center\"}");
             CampaignForecastPageObject campaignForecast = new CampaignForecastPageObject($(byText(campaign.getName())).parent().parent());
             campaignForecast.toggleCampaign();
         }
@@ -77,7 +76,7 @@ public class ForecastPageObject extends PageObject {
     }
 
     private void setEndDate(DateTime endDate) {
-        int defaultMonth =  Integer.valueOf($("SELECTOR_START_DATE_INPUT").getValue().split("/")[0]);
+        int defaultMonth =  Integer.valueOf($(SELECTOR_END_DATE).getValue().split("/")[0]);
         endDateInput.scrollIntoView(false).click();
         DatePickerPageObject datePickerPageObject = new DatePickerPageObject($(SELECTOR_DATE_PICKER));
         datePickerPageObject.pickDate(endDate, defaultMonth);

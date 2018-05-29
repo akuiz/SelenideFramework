@@ -173,4 +173,13 @@ public class CreatePromotionsPageObject extends PageObject {
     public void checkNUmberOfPromotions(int numberOfPromotions) {
         root.$$(byAttribute("mattooltipclass","rule-tooltip")).shouldHaveSize(numberOfPromotions);
     }
+
+    public boolean hasPromotion(PromotionModel promotion) {
+        waitForLoader();
+        if(!root.$(byText(promotion.getName())).exists()){
+            return false;
+        }
+        PromotionModel actualPromotion = findOfferByName(promotion.getName());
+        return actualPromotion.equals(promotion);
+    }
 }

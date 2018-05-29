@@ -120,7 +120,7 @@ public class ForecastModel {
                 .build();
     }
 
-    public static ForecastModel CampaignOFFBOGOSmokeSecondDate() {
+    public static ForecastModel CampaignOFFBOGOForecastSecondDate() {
         return new ForecastModel().toBuilder()
                 .revenue(new Pair("$68,839.83", "$81,536.64"))
                 .profit(new Pair("$22,328.74", "$27,523.37"))
