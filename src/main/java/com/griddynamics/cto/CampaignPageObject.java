@@ -25,6 +25,7 @@ public class CampaignPageObject extends PageObject {
     static final String SELECTOR_CAMPAIGN_ACTIONS = ".actions-column";
     static final String SELECTOR_CAMPAIGNS_DISCOUNTS = ".name-column__promos";
     static final String SELECTOR_SHOW_PREDITION = ".show-prediction-btn";
+    static final String SELECTOR_CLOSE_DIALOG = ".close-dialog";
 
     static final String XPATH_CAMPAIGN_START_DATE = ".//input[@placeholder='Start Date']";
     static final String XPATH_CAMPAIGN_END_DATE = ".//input[@placeholder='End Date']";
@@ -44,6 +45,8 @@ public class CampaignPageObject extends PageObject {
     SelenideElement predictionButton = root.$(SELECTOR_SHOW_PREDITION);
 
     ElementsCollection offerElements = root.$$(byXpath(XPATH_OFFERS));
+
+    SelenideElement closeButton = $(SELECTOR_CLOSE_DIALOG);
 
     SelenideElement startDateField = root.$(SELECTOR_CAMPAIGN_START_DATE);
     SelenideElement endDateField = root.$(SELECTOR_CAMPAIGN_END_DATE);
@@ -152,6 +155,7 @@ public class CampaignPageObject extends PageObject {
         predictionWindow.checkRevenue(predictionModel.getRevenue().getKey(), predictionModel.getRevenue().getValue());
         predictionWindow.checkProfit(predictionModel.getProfit().getKey(), predictionModel.getProfit().getValue());
         predictionWindow.checkQuantity(predictionModel.getQuantity().getKey(), predictionModel.getQuantity().getValue());
+        closeButton.click();
     }
 
     public void changeCampaignDates(DateTime startDate, DateTime endDate) {

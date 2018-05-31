@@ -335,6 +335,18 @@ public class CampaignModel {
                 }})
                 .build();
     }
+
+    public static CampaignModel ForecastPredictionCampaign() {
+        return new CampaignModel().toBuilder()
+                .name("at_Campaign should have same prediction and forecast for some date")
+                .startDate(new DateTime(2018, 6, 4, 0, 0, 0, 0))
+                .endDate(new DateTime(2018, 6, 15, 0, 0, 0, 0))
+                .discounts(new ArrayList<DiscountModel>() {{
+                    add(DiscountModel.DiscountCampaignBOGO());
+                    add(DiscountModel.DiscountCampaignOFF());
+                }})
+                .build();
+    }
 }
 
 

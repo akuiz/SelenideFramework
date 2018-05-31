@@ -96,6 +96,7 @@ public class ForecastModel {
                 .build();
     }
 
+
     public static ForecastModel ThreeCampaignsForecast() {
         return new ForecastModel().toBuilder()
                 .revenue(new Pair("$365,247.28", "$306,155.91"))
@@ -117,6 +118,14 @@ public class ForecastModel {
                 .revenue(new Pair("$68,839.83", "$81,536.64"))
                 .profit(new Pair("$22,328.74", "$27,523.37"))
                 .quantity(new Pair("410", "471"))
+                .build();
+    }
+
+    public static ForecastModel ForecastPredictionCampaign() {
+        return new ForecastModel().toBuilder()
+                .revenue(new Pair("$79,217.69", "$176,590.23"))
+                .profit(new Pair("$35,975.68", "$63,906.16"))
+                .quantity(new Pair("443", "1000"))
                 .build();
     }
 }

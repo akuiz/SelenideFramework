@@ -7,10 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-
-import static com.griddynamics.cto.OfferType.PERCENT_OFF;
-
 @Data
 @Builder(toBuilder = true)
 @NoArgsConstructor
@@ -98,6 +94,14 @@ public class PredictionModel {
                 .revenue(new Pair("$94,668.55", "$199,273"))
                 .profit(new Pair("$39,990.46", "$68,156.33"))
                 .quantity(new Pair("543", "1142"))
+                .build();
+    }
+
+    public static PredictionModel ForecastPredictionSameCampaign() {
+        return new PredictionModel().toBuilder()
+                .revenue(new Pair("$79,217.69", "$176,590.23"))
+                .profit(new Pair("$35,975.68", "$63,906.16"))
+                .quantity(new Pair("443", "1000"))
                 .build();
     }
 }

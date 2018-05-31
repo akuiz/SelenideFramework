@@ -1,12 +1,14 @@
+import com.griddynamics.cto.CampaignPageObject;
 import com.griddynamics.cto.ForecastPageObject;
 import com.griddynamics.cto.MainPage;
+import com.griddynamics.cto.ManageCampaignsPageObject;
 import com.griddynamics.cto.configuration.Configuration;
 import com.griddynamics.cto.configuration.EnvironmentConfig;
 import com.griddynamics.cto.data.CampaignDataManager;
 import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.ForecastModel;
+import com.griddynamics.cto.model.PredictionModel;
 import org.joda.time.DateTime;
-import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -14,14 +16,27 @@ import static com.codeborne.selenide.Selenide.open;
 public class ForecastTest {
     private static final EnvironmentConfig environmentConfig = Configuration.INSTANCE.getEnvironmentConfig();
 
-    @BeforeGroups(groups = "forecast_smoke")
+    //@BeforeGroups(groups = "forecast_smoke")
     public void setUpCampaigns(){
-        CampaignDataManager.PrepareCampaigns(environmentConfig.url(), CampaignModel.CampaignOFFForecast(), CampaignModel.CampaignBOGOForecast(), CampaignModel.CampaignOFFBOGOForecast());
+        CampaignDataManager.PrepareCampaigns(environmentConfig.url(), CampaignModel.CampaignOFFForecast(), CampaignModel.CampaignBOGOForecast(), CampaignModel.CampaignOFFBOGOForecast(), CampaignModel.ForecastPredictionCampaign());
+    }
+
+    @Test(description = "Check forecast and prediction for the same campaign", groups = "forecast_smoke")
+    public void predictionAndForecastForSameCampaignTest(){
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
+        CampaignPageObject campaign = campaignsPage.getCampaign(CampaignModel.ForecastPredictionCampaign().getName());
+        campaign.checkPrediction(PredictionModel.ForecastPredictionSameCampaign());
+        ForecastPageObject forecastPage = mainPage.navigateToForecastPage();
+        forecastPage.setDates(CampaignModel.ForecastPredictionCampaign().getStartDate(), CampaignModel.ForecastPredictionCampaign().getEndDate());
+        forecastPage.setCampaigns(CampaignModel.ForecastPredictionCampaign());
+        forecastPage.buildForeCast();
+        forecastPage.checkForecast(ForecastModel.ForecastPredictionCampaign());
     }
 
     @Test(description = "Check forecast with one campaign", groups = "forecast_smoke")
     public void forecastSmokeTest(){
-        MainPage mainPage = open("http://35.196.70.251:4200", MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ForecastPageObject forecastPage = mainPage.navigateToForecastPage();
         forecastPage.setCampaigns(CampaignModel.CampaignOFFBOGOForecast());
         forecastPage.setDates(new DateTime(2018, 5, 11, 0, 0, 0, 0), new DateTime(2018, 5, 13, 0, 0, 0, 0));

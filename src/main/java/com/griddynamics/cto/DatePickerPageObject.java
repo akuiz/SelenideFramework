@@ -12,8 +12,8 @@ public class DatePickerPageObject extends PageObject{
 
     final static String SELECTOR_PREVIOUS_MONTH = ".mat-calendar-previous-button";
     final static String SELECTOR_NEXT_MONTH = ".mat-calendar-next-button";
-    final static int defaultYear = 2018;
-     int defaultMonth = 5;
+    final static int defaultYear = DateTime.now().getYear();
+     int defaultMonth = DateTime.now().getMonthOfYear();
 
     private int yearToPick;
     private String month;
