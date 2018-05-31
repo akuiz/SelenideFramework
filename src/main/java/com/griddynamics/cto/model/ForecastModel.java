@@ -96,14 +96,6 @@ public class ForecastModel {
                 .build();
     }
 
-    public static ForecastModel CampaignSimplePrediction() {
-            return new ForecastModel().toBuilder()
-                    .revenue(new Pair("$2,833.45", "$9,234.18"))
-                    .profit(new Pair("$909.41", "$3,650.66"))
-                    .quantity(new Pair("15", "44"))
-                    .build();
-        }
-
     public static ForecastModel ThreeCampaignsForecast() {
         return new ForecastModel().toBuilder()
                 .revenue(new Pair("$365,247.28", "$306,155.91"))

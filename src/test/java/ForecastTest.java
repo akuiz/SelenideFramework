@@ -16,7 +16,7 @@ public class ForecastTest {
 
     @BeforeGroups(groups = "forecast_smoke")
     public void setUpCampaigns(){
-        CampaignDataManager.PrepareCampaigns("http://35.196.70.251:4200", CampaignModel.CampaignOFFForecast(), CampaignModel.CampaignBOGOForecast(), CampaignModel.CampaignOFFBOGOForecast());
+        CampaignDataManager.PrepareCampaigns(environmentConfig.url(), CampaignModel.CampaignOFFForecast(), CampaignModel.CampaignBOGOForecast(), CampaignModel.CampaignOFFBOGOForecast());
     }
 
     @Test(description = "Check forecast with one campaign", groups = "forecast_smoke")
@@ -41,7 +41,7 @@ public class ForecastTest {
 
    @Test(description = "Check forecast for the same campaign but with different dates", groups = "forecast_smoke")
     public void forecastDatesTest(){
-       MainPage mainPage = open(environmentConfig.url(), MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ForecastPageObject forecastPage = mainPage.navigateToForecastPage();
         forecastPage.setCampaigns(CampaignModel.CampaignOFFBOGOForecast());
         forecastPage.setDates(new DateTime(2018, 5, 5, 0, 0, 0, 0), new DateTime(2018, 5, 29, 0, 0, 0, 0));
@@ -61,7 +61,7 @@ public class ForecastTest {
 
     @Test(description = "Check Calvin Klein 7%, Adrianna Papell and Free People forecast", groups = {"production", "production_read_only"})
     public void forecastCalvin7Test(){
-        MainPage mainPage = open("http://predictive-pricing-prod.griddynamics.net/campaigns", MainPage.class);
+        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ForecastPageObject forecastPage = mainPage.navigateToForecastPage();
         forecastPage.setDates(new DateTime(2018, 5, 11, 0, 0, 0, 0), new DateTime(2018, 7, 11, 0, 0, 0, 0));
         forecastPage.setCampaigns(CampaignModel.CalvinKleinJune2018Dresses7(), CampaignModel.AdriannaPapellSpring2018(), CampaignModel.FreePeopleJuly2018());

@@ -65,8 +65,8 @@ public class CampaignTest {
     public void addOneDayCampaign() {
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ManageCampaignsPageObject campaignsPage = mainPage.navigateToManageCampaignsPage();
-        campaignsPage.addCampaign(CampaignModel.CampaignPast());
-        campaignsPage.checkCampaignExists(CampaignModel.CampaignPast());
+        campaignsPage.addCampaign(CampaignModel.CampaignOneDay());
+        campaignsPage.checkCampaignExists(CampaignModel.CampaignOneDay());
     }
 
     @Test(description = "Remove campaign test", groups = {"campaign_smoke"}, dependsOnMethods = {"addCampaign"})
