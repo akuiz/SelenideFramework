@@ -9,6 +9,7 @@ import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.ForecastModel;
 import com.griddynamics.cto.model.PredictionModel;
 import org.joda.time.DateTime;
+import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -16,7 +17,7 @@ import static com.codeborne.selenide.Selenide.open;
 public class ForecastTest {
     private static final EnvironmentConfig environmentConfig = Configuration.INSTANCE.getEnvironmentConfig();
 
-    //@BeforeGroups(groups = "forecast_smoke")
+    @BeforeGroups(groups = "forecast_smoke")
     public void setUpCampaigns(){
         CampaignDataManager.PrepareCampaigns(environmentConfig.url(), CampaignModel.CampaignOFFForecast(), CampaignModel.CampaignBOGOForecast(), CampaignModel.CampaignOFFBOGOForecast(), CampaignModel.ForecastPredictionCampaign());
     }
