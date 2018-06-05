@@ -47,7 +47,6 @@ public class DatePickerPageObject extends PageObject{
 
     private void pickDay(int dayOfMonth) {
         String label = month + " " + dayToPick + ", "+yearToPick;
-        System.out.println($(byAttribute("aria-label",label)).exists());
         $(byAttribute("aria-label",label)).scrollIntoView(true).click();
     }
 

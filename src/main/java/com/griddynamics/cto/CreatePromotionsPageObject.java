@@ -151,7 +151,7 @@ public class CreatePromotionsPageObject extends PageObject {
     public void updatePromotionValue(PromotionModel promotion, String value) {
         OfferPageObject promotionPageObject = findOfferPageObjectByName(promotion.getName());
         promotionPageObject.updatePromotionValue(value);
-        Selenide.sleep(2000);
+        Selenide.sleep(sleepTimeout);
     }
 
     @Step("Delete all test promotions")

@@ -39,8 +39,8 @@ public class ForecastTest {
     public void forecastSmokeTest(){
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ForecastPageObject forecastPage = mainPage.navigateToForecastPage();
-        forecastPage.setCampaigns(CampaignModel.CampaignOFFBOGOForecast());
         forecastPage.setDates(new DateTime(2018, 5, 11, 0, 0, 0, 0), new DateTime(2018, 5, 13, 0, 0, 0, 0));
+        forecastPage.setCampaigns(CampaignModel.CampaignOFFBOGOForecast());
         forecastPage.buildForeCast();
         forecastPage.checkForecast(ForecastModel.CampaignOFFBOGOSmoke());
     }
@@ -49,8 +49,8 @@ public class ForecastTest {
     public void forecastManyCampaignsTest(){
        MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ForecastPageObject forecastPage = mainPage.navigateToForecastPage();
-        forecastPage.setCampaigns(CampaignModel.CampaignOFFBOGOForecast(),CampaignModel.CampaignBOGOForecast(),CampaignModel.CampaignOFFForecast());
-        forecastPage.setDates(new DateTime(2018, 5, 2, 0, 0, 0, 0), new DateTime(2018, 6, 1, 0, 0, 0, 0));
+       forecastPage.setDates(new DateTime(2018, 5, 2, 0, 0, 0, 0), new DateTime(2018, 6, 1, 0, 0, 0, 0));
+       forecastPage.setCampaigns(CampaignModel.CampaignOFFBOGOForecast(),CampaignModel.CampaignBOGOForecast(),CampaignModel.CampaignOFFForecast());
         forecastPage.buildForeCast();
         forecastPage.checkForecast(ForecastModel.ThreeCampaignsForecast());
     }
@@ -59,11 +59,12 @@ public class ForecastTest {
     public void forecastDatesTest(){
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         ForecastPageObject forecastPage = mainPage.navigateToForecastPage();
-        forecastPage.setCampaigns(CampaignModel.CampaignOFFBOGOForecast());
-        forecastPage.setDates(new DateTime(2018, 5, 5, 0, 0, 0, 0), new DateTime(2018, 5, 29, 0, 0, 0, 0));
+       forecastPage.setDates(new DateTime(2018, 5, 5, 0, 0, 0, 0), new DateTime(2018, 5, 29, 0, 0, 0, 0));
+       forecastPage.setCampaigns(CampaignModel.CampaignOFFBOGOForecast());
         forecastPage.buildForeCast();
-        forecastPage.checkForecast(ForecastModel.CampaignOFFBOGOSmokeFirstDate());
-        forecastPage.setDates(new DateTime(2018, 5, 12, 0, 0, 0, 0), new DateTime(2018, 5, 17, 0, 0, 0, 0));
+       forecastPage.checkForecast(ForecastModel.CampaignOFFBOGOSmokeFirstDate());
+       forecastPage.setDates(new DateTime(2018, 5, 12, 0, 0, 0, 0), new DateTime(2018, 5, 17, 0, 0, 0, 0));
+       forecastPage.checkForecast(ForecastModel.CampaignOFFBOGOSmokeFirstDate());
         forecastPage.buildForeCast();
         forecastPage.checkForecast(ForecastModel.CampaignOFFBOGOForecastSecondDate());
     }

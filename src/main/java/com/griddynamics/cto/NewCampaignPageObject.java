@@ -1,22 +1,20 @@
 package com.griddynamics.cto;
 
-import com.codeborne.selenide.*;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import com.griddynamics.cto.model.CampaignModel;
 import com.griddynamics.cto.model.DiscountModel;
 import io.qameta.allure.Step;
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.disabled;
-import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class NewCampaignPageObject extends PageObject {
 
@@ -58,7 +56,7 @@ public class NewCampaignPageObject extends PageObject {
     }
 
     private void setDates(DateTime startDate, DateTime endDate) {
-        if(startDate.isBefore(formatter.parseDateTime("5/1/2018"))){
+        if(startDate.isBefore(DateTime.now())){
             setStartDate(startDate);
             setEndDate(endDate);
         }

@@ -107,9 +107,9 @@ public class ForecastModel {
 
     public static ForecastModel CampaignOFFBOGOSmokeFirstDate() {
         return new ForecastModel().toBuilder()
-                .revenue(new Pair("$289,602.79", "$256,097.83"))
-                .profit(new Pair("$94,205.55", "$92,748.69"))
-                .quantity(new Pair("1725", "1469"))
+                .revenue(new Pair("$289,602.79", "$337,242.01"))
+                .profit(new Pair("$94,205.55", "$113,874.75"))
+                .quantity(new Pair("1725", "1948"))
                 .build();
     }
 
@@ -123,9 +123,9 @@ public class ForecastModel {
 
     public static ForecastModel ForecastPredictionCampaign() {
         return new ForecastModel().toBuilder()
-                .revenue(new Pair("$79,217.69", "$176,590.23"))
-                .profit(new Pair("$35,975.68", "$63,906.16"))
-                .quantity(new Pair("443", "1000"))
+                .revenue(new Pair("$78,076.23", "$176,590.23"))
+                .profit(new Pair("$34,458.37", "$63,906.16"))
+                .quantity(new Pair("445", "1000"))
                 .build();
     }
 }

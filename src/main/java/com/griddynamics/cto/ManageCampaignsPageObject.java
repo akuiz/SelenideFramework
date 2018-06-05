@@ -26,7 +26,7 @@ public class ManageCampaignsPageObject extends PageObject {
     String SELECTOR_ADD_NEW_CAMPAIGN_WINDOW = ".mat-dialog-container";
     String SELECTOR_CAMPAIGN_NAME_COLUMN = ".name-column__title";
 
-    String XPATH_TEST_CAMPAIGN = "//*[contains(text(), 'at_')]";
+    String XPATH_TEST_CAMPAIGN = "//span[contains(text(), 'at_')]";
 
     static final String SELECTOR_CAMPAIGNS = "";
 
@@ -98,6 +98,22 @@ public class ManageCampaignsPageObject extends PageObject {
         campaignPageObject.delete();
     }
 
+    @Step("Delete all test campaigns")
+    public void deleteTestCampaigns() {
+        CampaignPageObject testCampaign = findTestCampaign();
+        while(!(testCampaign==null)){
+            testCampaign.delete();
+            testCampaign = findTestCampaign();
+        }
+    }
+
+    private CampaignPageObject findTestCampaign() {
+        if(root.$(byXpath(XPATH_TEST_CAMPAIGN)).exists()){
+            return new CampaignPageObject(root.$(byXpath(XPATH_TEST_CAMPAIGN)).parent().parent());
+        }
+        return null;
+    }
+
     @Step("Make sure there is no campaign with name: {name}")
     public void checkCampaingNotExists(String name) {
         $(byText(name)).shouldNot(exist);
@@ -163,21 +179,7 @@ public class ManageCampaignsPageObject extends PageObject {
         createNewCampaignWindow.addBadCampaign(campaignModel);
     }
 
-    @Step("Delete all test campaigns")
-    public void deleteTestCampaigns() {
-        CampaignPageObject testCampaign = findTestCampaign();
-        while(!(testCampaign==null)){
-            testCampaign.delete();
-            testCampaign = findTestCampaign();
-        }
-    }
 
-    private CampaignPageObject findTestCampaign() {
-        if(root.$(byXpath(XPATH_TEST_CAMPAIGN)).exists()){
-            return new CampaignPageObject(root.$(byXpath(XPATH_TEST_CAMPAIGN)).parent().parent());
-        }
-        return null;
-    }
 
     public void checkNumberOfCampaigns(int numberOfCampaigns) {
         root.$$(SELECTOR_CAMPAIGN_NAME_COLUMN).shouldHaveSize(numberOfCampaigns);

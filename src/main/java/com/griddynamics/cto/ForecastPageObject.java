@@ -58,7 +58,7 @@ public class ForecastPageObject extends PageObject {
 
     @Step("Set forecast dates")
     public void setDates(DateTime startDate, DateTime endDate) {
-        if(startDate.isBefore(formatter.parseDateTime("5/1/2018"))){
+        if(startDate.isBefore(DateTime.now().withMillisOfDay(0))){
             setStartDate(startDate);
             setEndDate(endDate);
         }

@@ -14,6 +14,7 @@ public class PageObject {
 
     SelenideElement root;
     long timeout = 20000;
+    long sleepTimeout = 2000;
 
     DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
 

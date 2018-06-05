@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.open;
 public class ClearTestData {
     private static final EnvironmentConfig environmentConfig = Configuration.INSTANCE.getEnvironmentConfig();
 
-   @Test(description = "Delete all test promotions")
+    @Test(description = "Delete all test promotions")
     public void deleteAllPromotions(){
         MainPage mainPage = open(environmentConfig.url(), MainPage.class);
         CreatePromotionsPageObject createPromotionPage = mainPage.getPromotionsPageObject();
